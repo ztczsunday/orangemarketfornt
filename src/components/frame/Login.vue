@@ -20,7 +20,7 @@
         <a-button type="link" @click="getVerifyCode">
           {{ verify }}
         </a-button>
-        <a-button class="submit" type="primary">
+        <a-button class="submit" type="primary" @click="prepareLogin">
           登录
         </a-button>
         <a-button class="submit" type="default">
@@ -43,13 +43,13 @@ export default {
       }
     }, 1000);
   },
-  methods: {
-    getVerifyCode() {
-      if (this.coldTime === 0) {
-        this.coldTime = 60;
-      } else {
-        this.antMessage.error("现在还不能重新发送验证码哦");
-      }
+  destroyed() {
+    clearInterval(this.intervalCode);
+  },
+  data() {
+    return {
+      intervalCode: null,
+      coldTime: 0
     }
   },
   computed: {
@@ -61,10 +61,16 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      intervalCode: null,
-      coldTime: 0
+  methods: {
+    prepareLogin() {
+
+    },
+    getVerifyCode() {
+      if (this.coldTime === 0) {
+        this.coldTime = 60;
+      } else {
+        this.antMessage.error("现在还不能重新发送验证码哦");
+      }
     }
   }
 }
