@@ -19,4 +19,4 @@ Vue.component(Row.name, Row);
 Vue.component(Modal.name, Modal);
 
 Vue.prototype.antMessage = message;
-/* ****END**** */
+/* ******END****** */

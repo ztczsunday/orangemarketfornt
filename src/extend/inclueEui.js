@@ -9,7 +9,7 @@ import { MessageBox } from "element-ui";
 /* ******END****** */
 Vue.use(ElementUI);
 
-
+/* Vue中引入Eui的组件 */
 Vue.use(Loading.directive);
 
 Vue.prototype.elLoading = Loading.service;
@@ -19,3 +19,4 @@ Vue.prototype.elConfirm = MessageBox.confirm;
 Vue.prototype.elPrompt = MessageBox.prompt;
 Vue.prototype.elNotify = Notification;
 Vue.prototype.elMessage = Message;
+/* ******END****** */
