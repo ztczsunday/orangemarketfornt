@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <Login></Login>
+    <RouterView/>
   </div>
 </template>
 
 <script>
-import Login from "@/components/frame/Login";
-
 export default {
-  name: 'App',
-  components: {
-    Login
-  }
+  name: 'App'
 }
 </script>
 

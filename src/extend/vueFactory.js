@@ -1,12 +1,7 @@
 import Vue from 'vue';
-
+import "@/extend/inclueEui";
+import "@/extend/includeAnt";
 /* 设置不是生产环境 */
 Vue.config.productionTip = false;
-
-import includeAnt from "@/extend/includeAnt";
-import inclueEleme from "@/extend/inclueEleme";
-
-includeAnt(Vue);
-inclueEleme(Vue);
 
 export default Vue;

@@ -71,6 +71,13 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  max-width: 300px;
+  margin: auto;
+  position: relative;
+  top: 0;
+}
+
 h3 {
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
@@ -80,13 +87,6 @@ h3 {
   margin-block-end: 1em;
   margin-inline-start: 0;
   margin-inline-end: 0;
-}
-
-.login {
-  max-width: 300px;
-  margin: auto;
-  position: relative;
-  top: 62px;
 }
 
 .submit {
