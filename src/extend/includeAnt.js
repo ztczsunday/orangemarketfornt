@@ -7,6 +7,8 @@ import 'ant-design-vue/dist/antd.css';
 import { Form } from "ant-design-vue";
 import { Col } from "ant-design-vue";
 import { Row } from "ant-design-vue";
+import { message } from "ant-design-vue";
+import { Modal } from "ant-design-vue";
 /* ****END**** */
 
 /* Vue中引入Ant的组件 */
@@ -16,5 +18,8 @@ export default function (Vue) {
     Vue.component(Form.name, Form);
     Vue.component(Col.name, Col);
     Vue.component(Row.name, Row);
+    Vue.component(Modal.name, Modal);
+
+    Vue.prototype.antMessage = message;
 }
 /* ****END**** */

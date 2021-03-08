@@ -163,11 +163,11 @@ export default function (Vue) {
 
     Vue.use(Loading.directive);
 
-    Vue.prototype.$loading = Loading.service;
-    Vue.prototype.$msgbox = MessageBox;
-    Vue.prototype.$alert = MessageBox.alert;
-    Vue.prototype.$confirm = MessageBox.confirm;
-    Vue.prototype.$prompt = MessageBox.prompt;
-    Vue.prototype.$notify = Notification;
-    Vue.prototype.$message = Message;
+    Vue.prototype.elLoading = Loading.service;
+    Vue.prototype.elMsgbox = MessageBox;
+    Vue.prototype.elAlert = MessageBox.alert;
+    Vue.prototype.elConfirm = MessageBox.confirm;
+    Vue.prototype.elPrompt = MessageBox.prompt;
+    Vue.prototype.elNotify = Notification;
+    Vue.prototype.elMessage = Message;
 }
