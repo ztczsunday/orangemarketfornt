@@ -3,21 +3,21 @@
     <h3>登录商城</h3>
     <p class="boldYaHei">请使用手机号以及登录凭证登录</p>
     <AFormItem class="a-form-item">
-      <a-input v-model="phone" class="input-phone" placeholder="手机号" @input="checkPhone">
-        <a-icon slot="prefix" style="color:rgba(0,0,0,.25)" type="user"/>
-      </a-input>
+      <AInput v-model="phone" class="input-phone" placeholder="手机号" @input="checkPhone">
+        <AIcon slot="prefix" style="color:rgba(0,0,0,.25)" type="user"/>
+      </AInput>
     </AFormItem>
     <h4 v-if="phoneErrorCode !== null" style="color: red">{{ phoneErrorCode }}</h4>
     <AFormItem class="a-form-item">
-      <a-input-password v-model="password" class="input-password" placeholder="密码或验证码">
-        <a-icon slot="prefix" style="color:rgba(0,0,0,.25)" type="lock"/>
-      </a-input-password>
+      <AInputPassword v-model="password" class="input-password" placeholder="密码或验证码">
+        <AIcon slot="prefix" style="color:rgba(0,0,0,.25)" type="lock"/>
+      </AInputPassword>
     </AFormItem>
     <AFormItem class="a-form-item">
       <ACheckbox>
         10天内自动登录
       </ACheckbox>
-      <a-button style="font-feature-settings: 'tnum';" type="link" @click="getVerifyCode">{{ verify }}</a-button>
+      <AButton style="font-feature-settings: 'tnum';" type="link" @click="getVerifyCode">{{ verify }}</AButton>
     </AFormItem>
     <AButton class="submit" type="primary" @click="handleSubmit">
       登录
@@ -45,11 +45,15 @@ export default {
   },
   data() {
     return {
+      /* 手机号 */
       phone: null,
+      /* 密码 */
       password: null,
+      /* 手机输入出错后显示此码 */
       phoneErrorCode: null,
-      passwordErrorCode: null,
+      /* 用于销毁自动运行函数的intervalCode */
       intervalCode: null,
+      /* 拉取验证码的冷却时间 */
       coldTime: 0
     }
   },

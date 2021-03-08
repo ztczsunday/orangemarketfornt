@@ -4,7 +4,10 @@ import Vue from './vueFactory';
 Vue.use(vuex);
 
 const state = new vuex.Store({
-    state: {}
+    state: {},
+    getters: {},
+    actions: {},
+    mutations: {}
 });
 
 export default state;
