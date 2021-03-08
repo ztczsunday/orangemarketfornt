@@ -43,7 +43,7 @@ export default {
       }
     }, 1000);
   },
-  destroyed() {
+  beforeDestroy() {
     clearInterval(this.intervalCode);
   },
   data() {

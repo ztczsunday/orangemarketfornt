@@ -1,10 +1,9 @@
+/* 引入Vue、子工厂 */
 import Vue from 'vue';
-import Vuex from 'vuex';
-import "@/extend/inclueEui";
-import "@/extend/includeAnt";
+import '@/extend/inclueEui';
+import '@/extend/includeAnt';
 /* 设置不是生产环境 */
 Vue.config.productionTip = false;
-/* 设置引入Vuex */
-Vue.use(Vuex);
 
+/* 将工厂包装好的Vue返回 */
 export default Vue;

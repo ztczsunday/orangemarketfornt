@@ -1,11 +1,7 @@
-/* 引入ElementUI */
-import ElementUI from 'element-ui';
+/* 引入Element的组件 */
+import ElementUI, { Loading, Message, MessageBox } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Vue from 'vue'
-/* 引入Element的组件 */
-import { Loading } from "element-ui";
-import { Message } from "element-ui";
-import { MessageBox } from "element-ui";
 /* ******END****** */
 Vue.use(ElementUI);
 

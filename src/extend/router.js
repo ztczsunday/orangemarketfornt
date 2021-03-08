@@ -1,5 +1,5 @@
-import Login from "@/components/frame/Login";
-import VueRouter from "vue-router";
+import Login from '@/components/frame/Login';
+import VueRouter from 'vue-router';
 import Vue from 'vue';
 
 const routes = [
