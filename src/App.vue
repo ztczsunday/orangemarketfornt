@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <Header/>
+    <PageHeader/>
     <RouterView/>
   </div>
 </template>
 
 <script>
-import Header from "@/components/subcomponents/PageHeader";
+import PageHeader from "@/components/subcomponents/PageHeader";
+
 export default {
   name: 'App',
   components: {
-    Header
+    PageHeader
   }
 }
 </script>

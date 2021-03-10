@@ -9,7 +9,6 @@
 export default {
   name: "Register",
   created() {
-    this.$store.state.title = '快速注册';
   },
   destroyed() {
   },

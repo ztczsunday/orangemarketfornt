@@ -8,3 +8,4 @@ new Vue({
     state,
     router
 }).$mount('#app')
+

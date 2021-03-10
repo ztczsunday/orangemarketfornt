@@ -2,7 +2,8 @@
 import Vue from 'vue';
 import '@/extend/inclueEui';
 import '@/extend/includeAnt';
-import VueCookies from 'vue-cookies'
+import '@/extend/includeVant';
+import VueCookies from 'vue-cookies';
 
 /* 设置不是生产环境 */
 Vue.config.productionTip = false;

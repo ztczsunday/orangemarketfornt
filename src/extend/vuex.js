@@ -5,12 +5,15 @@ Vue.use(vuex);
 
 const state = new vuex.Store({
     state: {
-        title: 'HELLO'
+        title: ''
     },
-    getters: {
-    },
+    getters: {},
     actions: {},
-    mutations: {}
+    mutations: {
+        changeTitle(state, payload) {
+            this.title = payload;
+        }
+    }
 });
 
 Vue.prototype.$store = state;

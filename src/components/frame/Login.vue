@@ -34,7 +34,9 @@ export default {
   created() {
   },
   destroyed() {
-    clearInterval(this.intervalCode);
+    if (this.intervalCode !== 0) {
+      clearInterval(this.intervalCode);
+    }
   },
   data() {
     return {
@@ -72,6 +74,7 @@ export default {
           } else {
             this.coldTime = 0;
             clearInterval(this.intervalCode);
+            this.intervalCode = 0;
           }
         }, 1000);
       } else {
@@ -79,14 +82,16 @@ export default {
       }
     },
     async handleSubmit() {
-      const {$} = await import("@/util/ajax");
+      const { $ } = await import("@/util/ajax");
       const result = await $.get('/js/app.js', {
         username: 'ABC',
         userpassword: 'DEF'
       }).then(result => {
 
         return result.data;
-      }, () => { return null });
+      }, () => {
+        return null
+      });
       console.log(result);
       console.log("HEEE");
     }
