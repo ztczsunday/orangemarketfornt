@@ -18,7 +18,7 @@
     >
       <template #action>
         <div @click="onSearch">
-          <AIcon type="search"/>
+          搜索
         </div>
       </template>
     </VanSearch>
