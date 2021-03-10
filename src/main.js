@@ -1,4 +1,4 @@
-import Vue from '@/extend/vueFactory'
+import Vue from '@/extend/vueFactory';
 import state from '@/extend/vuex';
 import router from "@/extend/router";
 import App from './App'

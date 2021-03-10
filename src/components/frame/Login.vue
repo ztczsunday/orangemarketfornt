@@ -32,13 +32,6 @@
 export default {
   name: "Login",
   created() {
-    this.intervalCode = setInterval(() => {
-      if (this.coldTime - 1 > 0) {
-        this.coldTime -= 1;
-      } else {
-        this.coldTime = 0;
-      }
-    }, 1000);
   },
   destroyed() {
     clearInterval(this.intervalCode);
@@ -70,18 +63,32 @@ export default {
     checkPhone() {
       this.phoneErrorCode = '手机号不符合格式！！！';
     },
-    prepareLogin() {
-      console.log(this.phone, this.password);
-    },
     getVerifyCode() {
       if (this.coldTime === 0) {
         this.coldTime = 60;
+        this.intervalCode = setInterval(() => {
+          if (this.coldTime - 1 > 0) {
+            this.coldTime -= 1;
+          } else {
+            this.coldTime = 0;
+            clearInterval(this.intervalCode);
+          }
+        }, 1000);
       } else {
         this.antMessage.error("现在还不能重新发送验证码哦");
       }
     },
-    handleSubmit() {
+    async handleSubmit() {
+      const {$} = await import("@/util/ajax");
+      const result = await $.get('/js/app.js', {
+        username: 'ABC',
+        userpassword: 'DEF'
+      }).then(result => {
 
+        return result.data;
+      }, () => { return null });
+      console.log(result);
+      console.log("HEEE");
     }
   }
 }
@@ -122,8 +129,9 @@ h4 {
 
 .login {
   max-width: 300px;
-  margin: 60px auto auto;
+  margin: 2rem auto auto;
   position: relative;
+  text-align: center;
   top: 0;
 }
 
