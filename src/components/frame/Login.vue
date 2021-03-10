@@ -86,14 +86,8 @@ export default {
       const result = await $.get('/js/app.js', {
         username: 'ABC',
         userpassword: 'DEF'
-      }).then(result => {
-
-        return result.data;
-      }, () => {
-        return null
-      });
+      }).then(result => result.data);
       console.log(result);
-      console.log("HEEE");
     }
   }
 }
