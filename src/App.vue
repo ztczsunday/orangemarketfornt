@@ -2,15 +2,18 @@
   <div id="app">
     <PageHeader/>
     <RouterView/>
+    <PageFooter/>
   </div>
 </template>
 
 <script>
 import PageHeader from "@/components/subcomponents/PageHeader";
+import PageFooter from "@/components/subcomponents/PageFooter";
 
 export default {
   name: 'App',
   components: {
+    PageFooter,
     PageHeader
   }
 }

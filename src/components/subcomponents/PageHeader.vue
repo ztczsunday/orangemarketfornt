@@ -7,19 +7,21 @@
         @click-left="$router.go(-1)"
         @click-right="() => {}"
     />
-    <van-search
+    <VanSearch
         v-else
         v-model="value"
-        shape="round"
         clearable
-        show-action
         placeholder="请输入搜索关键词"
+        shape="round"
+        show-action
         @search="onSearch"
     >
       <template #action>
-        <div @click="onSearch"><AIcon type="search" /></div>
+        <div @click="onSearch">
+          <AIcon type="search"/>
+        </div>
       </template>
-    </van-search>
+    </VanSearch>
   </div>
 </template>
 
@@ -43,8 +45,7 @@ export default {
       shouldNavbar: false
     }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     onSearch() {
     }
