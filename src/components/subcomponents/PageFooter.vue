@@ -11,13 +11,11 @@ export default {
   name: "PageFoot",
   async created() {
     const { mainRoutes } = await import('@/extend/router');
-    this.$store.subscribe(async mutation => {
+    this.$store.subscribe(mutation => {
       if (mutation.type === 'changeTitle') {
-        this.title = mutation.payload;
         this.shouldTabbar = mainRoutes.includes(this.title);
       }
     });
-
     this.shouldTabbar = mainRoutes.includes(document.title);
   },
   data() {

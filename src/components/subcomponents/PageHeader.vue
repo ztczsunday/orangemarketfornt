@@ -28,15 +28,16 @@
 <script>
 export default {
   name: "PageHeader",
-  created() {
+  async created() {
+    const { mainRoutes } = await import('@/extend/router');
+    const shouldntNavbarRoutes = mainRoutes.slice(0, 2);
     this.$store.subscribe(mutation => {
       if (mutation.type === 'changeTitle') {
         this.title = mutation.payload;
-        this.shouldNavbar = this.title !== '' && this.title !== '商城页面';
+        this.shouldNavbar = !shouldntNavbarRoutes.includes(this.title);
       }
     });
-    this.shouldNavbar = document.title !== '' && document.title !== '商城页面';
-    this.title = document.title;
+    this.shouldNavbar = !shouldntNavbarRoutes.includes(document.title);
   },
   data() {
     return {
