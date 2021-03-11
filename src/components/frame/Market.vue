@@ -4,7 +4,7 @@
       <code>RouterList:</code>
     </div>
     <ARow>
-      <ACol span="6" class="align-center" v-for="(router, index) in routes" :key="index">
+      <ACol v-for="(router, index) in routes" :key="index" class="align-center" span="6">
         <AButton class="fillfull align-center" @click="$router.push(router.path)">{{ router.meta.title }}</AButton>
       </ACol>
     </ARow>
@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import {routes} from "@/extend/router";
+import { routes } from "@/extend/router";
+
 export default {
   name: "Market",
   created() {
