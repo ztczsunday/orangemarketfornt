@@ -7,6 +7,7 @@
       <AButton @click="$router.push('/login')">Login</AButton>
       <AButton @click="$router.push('/register')">Register</AButton>
       <AButton @click="$router.push('/goodsinfo')">GoodsInfo</AButton>
+      <AButton @click="$router.push('/personalinfo')">PersonalInfo</AButton>
     </div>
   </div>
 </template>

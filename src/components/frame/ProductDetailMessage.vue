@@ -3,7 +3,8 @@
     <van-row>
       <img
           height=400px
-          src="https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/2201415902533/O1CN01h1HQc41Ua9tRJo9ly_!!0-item_pic.jpg_580x580Q90.jpg_.webp" width=100%>
+          src="https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/2201415902533/O1CN01h1HQc41Ua9tRJo9ly_!!0-item_pic.jpg_580x580Q90.jpg_.webp"
+          width=100%>
     </van-row>
     <van-row :style="{'height' : '10px'}"></van-row>
     <van-row class="buy">
