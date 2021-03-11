@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RouterLink to="/login">
+    <RouterLink to="/goodsinfo">
       <AButton>HELLO</AButton>
     </RouterLink>
   </div>
