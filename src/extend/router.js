@@ -1,23 +1,23 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import state from "@/extend/vuex";
+import Mails from "@/components/frame/Mails";
 import Login from '@/components/frame/Login';
 import Market from '@/components/frame/Market';
 import Register from '@/components/frame/Register';
 import GoodsInfo from "@/components/frame/GoodsInfo";
-import ProductDetail from "@/components/frame/ProductDetail";
 import PersonalInfo from "@/components/frame/PersonalInfo";
-import Mails from "@/components/frame/Mails";
+import Histories from "@/components/frame/Histories";
 
 /* 设定router的内容 */
 const routes = [
     { path: '/', name: '商城主页', component: Market, meta: { title: '商城页面' } },
-    { path: '/mails', name: '私聊界面', component: Mails, meta: { title: '个人信息' } },
+    { path: '/mails', name: '私聊界面', component: Mails, meta: { title: '站内信' } },
     { path: '/personalinfo', name: '个人信息', component: PersonalInfo, meta: { title: '个人信息' } },
     { path: '/login', name: '登录界面', component: Login, meta: { title: '登录页面' } },
+    { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
     { path: '/goodsinfo', name: '商品详情', component: GoodsInfo, meta: { title: '商品详情' } },
-    { path: '/productdetail', name: '商品详情', component: ProductDetail, meta: { title: '商品详情' } },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */

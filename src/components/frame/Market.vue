@@ -1,21 +1,26 @@
 <template>
   <div>
-    <div class="col-12" style="text-align: center;">
+    <div class="row" style="text-align: center;">
       <code>RouterList:</code>
     </div>
-    <div class="col-12" style="text-align: center;">
-      <AButton @click="$router.push('/login')">Login</AButton>
-      <AButton @click="$router.push('/register')">Register</AButton>
-      <AButton @click="$router.push('/goodsinfo')">GoodsInfo</AButton>
-      <AButton @click="$router.push('/personalinfo')">PersonalInfo</AButton>
+    <div class="row" style="text-align: center;">
+      <div class="col-3" style="text-align: center;" v-for="(router, index) in routes" :key="index">
+        <AButton @click="$router.push(router.path)">{{ router.meta.title }}</AButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import {routes} from "@/extend/router";
 export default {
   name: "Market",
   created() {
+  },
+  data() {
+    return {
+      routes: routes
+    }
   }
 }
 </script>

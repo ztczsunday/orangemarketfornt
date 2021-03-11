@@ -1,7 +1,8 @@
 /* css通用部分 */
 * {box-sizing: border-box;}
-.row:after {content: "";clear: both;display: block;}
+.row:after {content: "";clear: both;display: block;width: 100%;}
 
+[class*="col-"] {display: inline-flex;}
 /* 不根据页面的分辨率做处理 */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
