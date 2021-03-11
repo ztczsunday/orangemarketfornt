@@ -1,10 +1,10 @@
 <template>
   <div>
     <VanGoodsAction>
-      <VanGoodsActionIcon icon="chat-o" text="客服"/>
-      <VanGoodsActionIcon icon="cart-o" text="购物车"/>
-      <VanGoodsActionIcon icon="star-o" text="已收藏"/>
       <VanGoodsActionIcon icon="shop-o" text="店铺"/>
+      <VanGoodsActionIcon icon="chat-o" text="客服"/>
+      <VanGoodsActionIcon :icon="collectIcon" :color="collectColor" :text="collectInfo" @click="collectInfo = 0"/>
+
       <VanGoodsActionButton text="加入购物车" type="warning"/>
       <VanGoodsActionButton text="立即购买" type="danger"/>
     </VanGoodsAction>
@@ -13,7 +13,30 @@
 
 <script>
 export default {
-  name: "GoodsInfo"
+  name: "GoodsInfo",
+  data() {
+    return {
+      collect: false
+    }
+  },
+  computed: {
+    collectInfo: {
+      get() {
+        return (this.collect === false ? '' : '已') + '收藏';
+      },
+      set() {
+        this.collect = !this.collect;
+      }
+    },
+    collectColor() {
+      return this.collect ? '#ff5000' : ''
+    },
+    collectIcon() {
+      return this.collect ? 'star' : 'star-o';
+    }
+  },
+  methods: {
+  }
 }
 </script>
 

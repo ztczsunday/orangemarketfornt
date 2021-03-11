@@ -1,8 +1,13 @@
 <template>
   <div>
-    <RouterLink to="/goodsinfo">
-      <AButton>HELLO</AButton>
-    </RouterLink>
+    <div class="col-12" style="text-align: center;">
+      <code>RouterList:</code>
+    </div>
+    <div class="col-12" style="text-align: center;">
+      <AButton @click="$router.push('/login')">Login</AButton>
+      <AButton @click="$router.push('/register')">Register</AButton>
+      <AButton @click="$router.push('/goodsinfo')">GoodsInfo</AButton>
+    </div>
   </div>
 </template>
 
@@ -14,6 +19,6 @@ export default {
 }
 </script>
 
+<style src="../../assets/css/grid.css" scoped/>
 <style scoped>
-
 </style>
