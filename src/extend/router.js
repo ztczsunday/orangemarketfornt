@@ -5,6 +5,7 @@ import Login from '@/components/frame/Login';
 import Market from '@/components/frame/Market';
 import Register from '@/components/frame/Register';
 import GoodsInfo from "@/components/frame/GoodsInfo";
+import ProductDetail from "@/components/frame/ProductDetail";
 
 /* 设定router的内容 */
 const routes = [
@@ -12,7 +13,7 @@ const routes = [
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
     { path: '/goodsinfo', name: '商品详情', component: GoodsInfo, meta: { title: '商品详情' } },
     { path: '/', name: '商城主页', component: Market, meta: { title: '商城页面' } },
-
+    {path:'/ProductDetail', name: '商品详情', component: ProductDetail, meta: {title:'商品详情'}}
 ];
 
 /* 由router数组，创建router对象 */

@@ -6,5 +6,4 @@ import 'vant/lib/index.css';
 
 /* Vue中引入Vant的组件 */
 Vue.use(Vant);
-
 /* ******END****** */
