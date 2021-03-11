@@ -3,7 +3,7 @@
     <VanGoodsAction>
       <VanGoodsActionIcon icon="shop-o" text="店铺"/>
       <VanGoodsActionIcon icon="chat-o" text="客服"/>
-      <VanGoodsActionIcon :icon="collectIcon" :color="collectColor" :text="collectInfo" @click="collectInfo = 0"/>
+      <VanGoodsActionIcon :color="collectColor" :icon="collectIcon" :text="collectInfo" @click="collectInfo = 0"/>
 
       <VanGoodsActionButton text="加入购物车" type="warning"/>
       <VanGoodsActionButton text="立即购买" type="danger"/>
@@ -35,8 +35,7 @@ export default {
       return this.collect ? 'star' : 'star-o';
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 

@@ -19,6 +19,6 @@ export default {
 }
 </script>
 
-<style src="../../assets/css/grid.css" scoped/>
+<style scoped src="../../assets/css/grid.css"/>
 <style scoped>
 </style>

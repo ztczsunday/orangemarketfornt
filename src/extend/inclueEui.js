@@ -1,5 +1,5 @@
 /* 引入Element的组件 */
-import ElementUI, { Loading, Message, MessageBox,Container, Header, Aside, Main, Footer} from 'element-ui';
+import ElementUI, { Aside, Container, Footer, Header, Loading, Main, Message, MessageBox } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Vue from 'vue'
 /* ******END****** */
