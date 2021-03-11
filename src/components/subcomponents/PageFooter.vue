@@ -9,23 +9,26 @@
 <script>
 export default {
   name: "PageFoot",
-  async created() {
+  async mounted() {
     const { mainRoutes } = await import('@/extend/router');
     this.$store.subscribe(mutation => {
       if (mutation.type === 'changeTitle') {
-        this.shouldTabbar = mainRoutes.includes(this.title);
+        this.active = mainRoutes.indexOf(mutation.payload) - 1;
       }
     });
-    this.shouldTabbar = mainRoutes.includes(document.title);
+    this.active = mainRoutes.indexOf(document.title) - 1;
   },
   data() {
     return {
       title: '',
-      shouldTabbar: false,
       active: 0
     }
   },
-  computed: {},
+  computed: {
+    shouldTabbar() {
+      return this.active >= 0;
+    }
+  },
   methods: {
     onSearch() {
     }

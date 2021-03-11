@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="row" style="text-align: center;">
+    <div class="row align-center">
       <code>RouterList:</code>
     </div>
-    <div class="row" style="text-align: center;">
-      <div class="col-3" style="text-align: center;" v-for="(router, index) in routes" :key="index">
-        <AButton @click="$router.push(router.path)">{{ router.meta.title }}</AButton>
-      </div>
-    </div>
+    <ARow>
+      <ACol span="6" class="align-center" v-for="(router, index) in routes" :key="index">
+        <AButton class="fillfull align-center" @click="$router.push(router.path)">{{ router.meta.title }}</AButton>
+      </ACol>
+    </ARow>
   </div>
 </template>
 
