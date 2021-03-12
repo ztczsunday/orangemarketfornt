@@ -33,7 +33,8 @@ export default {
   name: "Login",
   created() {
   },
-  destroyed() {
+  /* 析构函数，析构时，消除我们指定的定时执行函数 */
+  beforeDestroy() {
     if (this.intervalCode !== 0) {
       clearInterval(this.intervalCode);
     }
@@ -53,6 +54,7 @@ export default {
     }
   },
   computed: {
+    /* 验证码按钮的文字处理逻辑 */
     verify() {
       if (this.coldTime === 0) {
         return "发送验证码";
@@ -62,9 +64,13 @@ export default {
     }
   },
   methods: {
+    /* 手机号不符合格式时，释放一个error */
     checkPhone() {
-      this.phoneErrorCode = '手机号不符合格式！！！';
+      if (!(/^1[34578]\d{9}$/.test(this.phone.value))) {
+        this.phoneErrorCode = "不是完整的11位手机号或者正确的手机号前七位";
+      }
     },
+    /* 获取验证码的函数，同时将设定一个定时执行函数 */
     getVerifyCode() {
       if (this.coldTime === 0) {
         this.coldTime = 60;
@@ -81,6 +87,7 @@ export default {
         this.antMessage.error("现在还不能重新发送验证码哦");
       }
     },
+    /* 上传表单的处理函数 */
     async handleSubmit() {
       const { $ } = await import("@/util/ajax");
       const result = await $.get('/js/app.js', {
