@@ -66,8 +66,10 @@ export default {
   methods: {
     /* 手机号不符合格式时，释放一个error */
     checkPhone() {
-      if (!(/^1[34578]\d{9}$/.test(this.phone.value))) {
-        this.phoneErrorCode = "不是完整的11位手机号或者正确的手机号前七位";
+      if (!(/^1[34578]\d{9}$/.test(this.phone))) {
+        this.phoneErrorCode = "手机号的格式不正确";
+      } else {
+        this.phoneErrorCode = "";
       }
     },
     /* 获取验证码的函数，同时将设定一个定时执行函数 */
