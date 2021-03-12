@@ -5,9 +5,9 @@ import Mails from "@/components/frame/Mails";
 import Login from '@/components/frame/Login';
 import Market from '@/components/frame/Market';
 import Register from '@/components/frame/Register';
-import GoodsInfo from "@/components/frame/GoodsInfo";
 import PersonalInfo from "@/components/frame/PersonalInfo";
 import Histories from "@/components/frame/Histories";
+import ProductDetail from "@/components/frame/ProductDetail";
 
 /* 设定router的内容 */
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
     { path: '/login', name: '登录界面', component: Login, meta: { title: '登录页面' } },
     { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
-    { path: '/goodsinfo', name: '商品详情', component: GoodsInfo, meta: { title: '商品详情' } },
+    { path: '/ProductDetail', name: '商品详情', component: ProductDetail, meta: { title: '商品详情' } },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
