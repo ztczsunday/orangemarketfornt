@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- 输入任意文本 -->
+
     <VanField v-model="text" label="文本"/>
     <!-- 输入手机号，调起手机号键盘 -->
     <VanField v-model="tel" label="手机号" type="tel"/>

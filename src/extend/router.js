@@ -44,6 +44,7 @@ VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
 
+/* 导出Routes和MainRoutes，用于路由判断 */
 export {
     routes,
     mainRoutes

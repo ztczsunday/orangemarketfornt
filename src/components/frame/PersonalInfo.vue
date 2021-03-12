@@ -3,19 +3,21 @@
     <!-- 个人信息区域 -->
 
     <!-- 收藏区域 -->
-    <van-grid :column-num="2">
-      <van-grid-item icon="star-o" text="收藏"/>
-      <van-grid-item icon="clock-o" text="历史"/>
-    </van-grid>
+    <VanGrid :border="false" :column-num="4" style="height: 70px">
+      <VanGridItem icon="star-o" text="收藏" style="height: 70px" @click="$router.push('')"/>
+      <VanGridItem icon="clock-o" text="历史记录" style="height: 70px" @click="$router.push('/history')"/>
+      <VanGridItem icon="logistics" text="待收货" style="height: 70px" @click="$router.push('')"/>
+      <VanGridItem icon="comment-o" text="待评价" style="height: 70px" @click="$router.push('')"/>
+    </VanGrid>
     <!-- 信息区域 -->
-    <van-cell-group>
-      <van-cell is-link title="消息通知"/>
-      <van-cell is-link title="用户反馈"/>
-    </van-cell-group>
+    <VanCellGroup>
+      <VanCell is-link title="用户反馈"/>
+    </VanCellGroup>
   </div>
 </template>
 
 <script>
+import '@/assets/css/grid.css';
 
 export default {
   name: "PersonalInfo",
@@ -30,5 +32,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
