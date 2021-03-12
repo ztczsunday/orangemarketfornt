@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import "@/assets/css/grid.css";
 import { routes } from "@/extend/router";
 
 export default {
@@ -26,6 +27,5 @@ export default {
 }
 </script>
 
-<style scoped src="../../assets/css/grid.css"/>
 <style scoped>
 </style>
