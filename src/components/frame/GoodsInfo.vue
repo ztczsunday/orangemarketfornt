@@ -1,13 +1,15 @@
 <template>
   <div>
-    <VanGoodsAction>
-      <VanGoodsActionIcon icon="shop-o" text="店铺"/>
-      <VanGoodsActionIcon icon="chat-o" text="客服"/>
-      <VanGoodsActionIcon :color="collectColor" :icon="collectIcon" :text="collectInfo" @click="collectInfo = 0"/>
+    <div>
+      <VanGoodsAction class = "bottomBlock">
+        <VanGoodsActionIcon icon="shop-o" text="店铺"/>
+        <VanGoodsActionIcon icon="chat-o" text="客服"/>
+        <VanGoodsActionIcon :color="collectColor" :icon="collectIcon" :text="collectInfo" @click="collectInfo = 0"/>
 
-      <VanGoodsActionButton text="加入购物车" type="warning"/>
-      <VanGoodsActionButton text="立即购买" type="danger"/>
-    </VanGoodsAction>
+        <VanGoodsActionButton text="加入购物车" type="warning"/>
+        <VanGoodsActionButton text="立即购买" type="danger"/>
+      </VanGoodsAction>
+    </div>
   </div>
 </template>
 
@@ -40,5 +42,10 @@ export default {
 </script>
 
 <style scoped>
-
+.bottomBlock{
+  position: fixed;
+  bottom:0px;
+  left:0px;
+  width : 100vw;
+}
 </style>

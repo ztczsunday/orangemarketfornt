@@ -25,21 +25,8 @@
         </ACol>
       </ARow>
       <ARow>
-        <ACol span="12">
-          <ACol span="12" :style="{'text-align':'right'}" class="grades">
-            库存：
-          </ACol>
-          <ACol span="12" :style="{'border-right':'1px solid grey','text-align': 'center'}" class="grades">
-            {{info.stock}}
-          </ACol>
-        </ACol>
-        <ACol span="12">
-          <ACol span="12" :style="{'text-align': 'center'}" class="grades">
-            好评率：
-          </ACol>
-          <ACol span="12" :style="{'text-align': 'left'}" class="grades">
-            {{info.PraiseRate}}
-          </ACol>
+        <ACol span="9" push="14" class="grades">
+          好评率：{{info.PraiseRate}}
         </ACol>
       </ARow>
       <ARow type = "flex" justify="center">
@@ -53,14 +40,36 @@
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ProductDetailBuy></ProductDetailBuy>
+    <ARow :style="{'height' : '10px'}"></ARow>
+    <ARow class="buy">
+      <CommentsBlock></CommentsBlock>
+    </ARow>
+    <ARow :style="{'height' : '10px'}"></ARow>
+    <ARow class="buy">
+      <ShopBlock></ShopBlock>
+    </ARow>
+    <ARow>
+      <div :style="{'width':'100%','text-align':'center'}">
+        -----商品详情-----
+      </div>
+      <div>
+        <img src="https://imgsa.baidu.com/forum/w%3D580/sign=53e4d0b8bede9c82a665f9875c8080d2/a6bd62a98226cffcdfab8b33b4014a90f403eaa2.jpg" class="detailPicture">
+      </div>
+      <div>
+        <img src="https://imgsa.baidu.com/forum/w%3D580/sign=ed67d4d38835e5dd902ca5d746c7a7f5/18dc8a18972bd407975fe77c76899e510db3098a.jpg" class="detailPicture">
+      </div>
+    </ARow>
+    <ARow :style="{height : '50px'}"> </ARow>
   </ARow>
 </template>
 
 <script>
 import ProductDetailBuy from "@/components/subcomponents/ProductDetailBuy";
+import CommentsBlock from "@/components/subcomponents/CommentsBlock";
+import ShopBlock from "@/components/subcomponents/ShopBlock";
 export default {
   name: "ProductDetailMessage",
-  components: {ProductDetailBuy},
+  components: {ShopBlock, CommentsBlock,ProductDetailBuy},
   async mounted() {
     this.info = require('@/assets/GoodsData.json');
     console.log(this.info)
@@ -82,6 +91,7 @@ export default {
   },
 
   methods: {
+
   }
 }
 </script>
@@ -95,14 +105,12 @@ export default {
 }
 .moneyBlock{
   color: red;
-  height: 12vw;
-  display:table-cell;
-  vertical-align:bottom;
+  margin-top: 5vw;
   font-size: 5vw;
+
 }
 .priceBlock{
   color:red;
-  height: 10vw;
   display:table-cell;
   vertical-align:bottom;
   font-size: 10vw;
@@ -115,10 +123,19 @@ export default {
 .grades{
   font-size: 5vw;
   color:grey;
+  text-align: center;
+  display: inline-flex;
 }
 .productPicture{
   height:60vw;
   width: 100vw;
+}
+.detailPicture{
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+
 }
 </style>
 <!--<a-radio-button v-for="(item,key) in info.tags" :key="key" :value="info.tags[key]" class="choice">-->

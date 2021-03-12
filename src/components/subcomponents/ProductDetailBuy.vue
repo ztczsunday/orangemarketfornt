@@ -1,10 +1,10 @@
 <template>
-  <ARow class = "buy" :style="{'height':'20%'}">
+  <ARow class = "buy" :style="{'height':'15%'}">
     <ARow>
       <ACol>
         <div>
           <div></div>
-          <VanCell is-link @click="showPopup" :style="{'border-radius' : '25px'}">
+          <VanCell is-link @click="showPopup" :style="{'border-radius' : '25px','font-size':'3vw'}">
             {{selectTip}}
           </VanCell>
           <van-sku

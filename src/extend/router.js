@@ -8,6 +8,7 @@ import Register from '@/components/frame/Register';
 import PersonalInfo from "@/components/frame/PersonalInfo";
 import Histories from "@/components/frame/Histories";
 import ProductDetail from "@/components/frame/ProductDetail";
+import CommentsDetail from "@/components/frame/CommentsDetail";
 
 /* 设定router的内容 */
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
     { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
     { path: '/ProductDetail', name: '商品详情', component: ProductDetail, meta: { title: '商品详情' } },
+    { path: '/CommentsDetail', name: '评价详情', component: CommentsDetail, meta: { title: '评价详情' } },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
