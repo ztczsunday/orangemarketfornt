@@ -1,17 +1,18 @@
 <template>
-  <van-row>
-    <van-row>
-      <ProductDetailMessage/>
-    </van-row>
-  </van-row>
+  <a-row>
+     <a-row>
+       <ProductDetailMessage/>
+     </a-row>
+    <goods-info></goods-info>
+  </a-row>
 </template>
 
 <script>
-import ProductDetailMessage from "@/components/frame/ProductDetailMessage";
-
+import ProductDetailMessage from "@/components/subcomponents/ProductDetailMessage";
+import GoodsInfo from "@/components/frame/GoodsInfo";
 export default {
   name: "ProductDetail",
-  components: { ProductDetailMessage }
+  components: {GoodsInfo, ProductDetailMessage}
 }
 </script>
 
