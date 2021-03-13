@@ -1,19 +1,18 @@
 <template>
   <ARow>
-    <ARow>
-      <ProductDetailMessage/>
-    </ARow>
+     <ARow>
+       <ProductDetailMessage/>
+     </ARow>
     <goods-info></goods-info>
   </ARow>
 </template>
 
 <script>
 import ProductDetailMessage from "@/components/subcomponents/ProductDetailMessage";
-import GoodsInfo from "@/components/subcomponents/ProductFooter";
-
+import GoodsInfo from "@/components/subcomponents/GoodsInfo";
 export default {
   name: "ProductDetail",
-  components: { GoodsInfo, ProductDetailMessage }
+  components: {GoodsInfo, ProductDetailMessage}
 }
 </script>
 

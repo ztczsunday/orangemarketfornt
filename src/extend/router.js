@@ -20,7 +20,7 @@ const routes = [
     { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
     { path: '/ProductDetail', name: '商品详情', component: ProductDetail, meta: { title: '商品详情' } },
-    { path: '/CommentsDetail', name: '评价详情', component: CommentsDetail, meta: { title: '评价详情' } },
+    { path: '/CommentsDetail', name: '评价', component: CommentsDetail, meta: { title: '评价' } },
     { path: '/Shop', name: '商铺界面', component: Shop, meta: { title: '商铺页面' } },
 ];
 
