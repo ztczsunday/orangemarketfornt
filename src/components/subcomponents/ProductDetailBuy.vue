@@ -1,20 +1,20 @@
 <template>
-  <ARow class = "buy" :style="{'height':'15%'}">
+  <ARow :style="{'height':'15%'}" class="buy">
     <ARow>
       <ACol>
         <div>
           <div></div>
-          <VanCell is-link @click="showPopup" :style="{'border-radius' : '25px','font-size':'3vw'}">
-            {{selectTip}}
+          <VanCell :style="{'border-radius' : '25px','font-size':'3vw'}" is-link @click="showPopup">
+            {{ selectTip }}
           </VanCell>
           <van-sku
               v-model="show"
-              :sku="sku"
               :goods="goods"
               :goods-id="1"
+              :hide-stock="sku.hide_stock"
               :quota="0"
               :quota-used="0"
-              :hide-stock="sku.hide_stock"
+              :sku="sku"
               @sku-selected="onSelectButton($event)"/>
         </div>
       </ACol>
@@ -24,8 +24,8 @@
 
 <script>
 export default {
-name: "ProductDetailBuy",
-  async mounted(){
+  name: "ProductDetailBuy",
+  async mounted() {
     this.getInfo = require('@/assets/ProductDetailBuy.json');
     this.sku.tree[0].k = this.getInfo.typeName;
     this.sku.tree[0].v = this.getInfo.typeDetail;
@@ -34,8 +34,8 @@ name: "ProductDetailBuy",
     this.sku.stock_num = this.getInfo.totalStock;
     this.goods.picture = this.getInfo.goodsPictureSmall;
   },
-  data(){
-    return{
+  data() {
+    return {
       selectTip: "请选择：",
       show: false,
       sku: {
@@ -63,30 +63,28 @@ name: "ProductDetailBuy",
       },
       getInfo: {
         // 种类名
-        typeName: null ,
+        typeName: null,
         // 种类详细信息，格式见json文件
-        typeDetail:[],
+        typeDetail: [],
         //每种组合的价格、库存、id、规格值
-        typeList:[],
+        typeList: [],
         //默认价格，没选种类时写在价格栏上
-        defaultPrice : null,
+        defaultPrice: null,
         // 总库存
-        totalStock:null,
+        totalStock: null,
         // 商品缩略图
         goodsPictureSmall: null
-
 
 
       }
     };
   },
-  methods :{
-    onSelectButton(value){
-      if(this.selectTip==='已选择：'+value.skuValue.name){
+  methods: {
+    onSelectButton(value) {
+      if (this.selectTip === '已选择：' + value.skuValue.name) {
         this.selectTip = '请选择：'
-      }
-      else{
-        this.selectTip = '已选择：'+value.skuValue.name
+      } else {
+        this.selectTip = '已选择：' + value.skuValue.name
       }
     },
     showPopup() {

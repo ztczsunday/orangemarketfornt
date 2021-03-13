@@ -21,7 +21,7 @@
         placeholder="请输入短信验证码"
     >
       <template #button>
-        <van-button size="small" type="primary" @click="submitVerify">{{verifyButtonText}}</van-button>
+        <van-button size="small" type="primary" @click="submitVerify">{{ verifyButtonText }}</van-button>
       </template>
     </van-field>
     <!-- 输入密码 -->
@@ -50,6 +50,7 @@ class FormItem {
     this.value = "";
     this.hide = true;
   }
+
   reset() {
     this.value = "";
     this.hide = true;

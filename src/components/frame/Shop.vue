@@ -1,12 +1,12 @@
 <template>
-<div>
-  这里是商铺页面
-</div>
+  <div>
+    这里是商铺页面
+  </div>
 </template>
 
 <script>
 export default {
-name: "Shop"
+  name: "Shop"
 }
 </script>
 

@@ -1,9 +1,9 @@
 <template>
-<ARow :style="{'margin-top':'10px'}">
-  <ARow>
-    详细评论
+  <ARow :style="{'margin-top':'10px'}">
+    <ARow>
+      详细评论
+    </ARow>
   </ARow>
-</ARow>
 </template>
 
 <script>

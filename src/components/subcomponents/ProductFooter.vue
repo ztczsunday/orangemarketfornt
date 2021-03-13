@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <VanGoodsAction class = "bottomBlock">
+      <VanGoodsAction class="bottomBlock">
         <VanGoodsActionIcon icon="shop-o" text="店铺"/>
         <VanGoodsActionIcon icon="chat-o" text="客服"/>
         <VanGoodsActionIcon :color="collectColor" :icon="collectIcon" :text="collectInfo" @click="collectInfo = 0"/>
@@ -42,10 +42,10 @@ export default {
 </script>
 
 <style scoped>
-.bottomBlock{
+.bottomBlock {
   position: fixed;
-  bottom:0;
-  left:0;
-  width : 100vw;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
 }
 </style>

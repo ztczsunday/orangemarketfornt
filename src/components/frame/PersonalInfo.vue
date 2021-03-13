@@ -1,7 +1,13 @@
 <template>
   <div>
     <!-- 个人信息区域 -->
-
+    <van-card
+        num="2"
+        price="2.00"
+        desc="描述信息"
+        title="商品标题"
+        thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
+    />
     <!-- 收藏区域 -->
     <VanGrid :border="false" :column-num="4" style="height: 70px">
       <VanGridItem icon="star-o" style="height: 70px" text="收藏" @click="$router.push('')"/>
