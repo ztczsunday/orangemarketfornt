@@ -13,33 +13,15 @@
     <ARow class = "buy">
       <ARow>
         <ARow ></ARow>
-        <ACol span="3" push="1">
-          <div class = "moneyBlock">
-            ￥
-          </div>
-        </ACol>
-        <ACol span="10">
-          <div class = "priceBlock">
-            {{info.price}}
+        <ACol span="20">
+          <div class = "priceBlock" push="1">
+            ￥ {{info.price_low}}-{{info.price_high}}
           </div>
         </ACol>
       </ARow>
       <ARow>
-        <ACol span="12">
-          <ACol span="12" :style="{'text-align':'right'}" class="grades">
-            库存：
-          </ACol>
-          <ACol span="12" :style="{'border-right':'1px solid grey','text-align': 'center'}" class="grades">
-            {{info.stock}}
-          </ACol>
-        </ACol>
-        <ACol span="12">
-          <ACol span="12" :style="{'text-align': 'center'}" class="grades">
-            好评率：
-          </ACol>
-          <ACol span="12" :style="{'text-align': 'left'}" class="grades">
-            {{info.PraiseRate}}
-          </ACol>
+        <ACol span="9" push="14" class="grades">
+          好评率：{{info.PraiseRate}}
         </ACol>
       </ARow>
       <ARow type = "flex" justify="center">
@@ -53,14 +35,33 @@
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ProductDetailBuy></ProductDetailBuy>
+    <ARow :style="{'height' : '10px'}"></ARow>
+    <ARow class="buy">
+      <CommentsBlock></CommentsBlock>
+    </ARow>
+    <ARow :style="{'height' : '10px'}"></ARow>
+    <ARow class="buy">
+      <ShopBlock></ShopBlock>
+    </ARow>
+    <ARow>
+      <div :style="{'width':'100%','text-align':'center'}">
+        -----商品详情-----
+      </div>
+      <div v-for="(image,index) in info.goodsDetailPicture" :key="index">
+        <img :src="image" class="detailPicture">
+      </div>
+    </ARow>
+    <ARow :style="{height : '50px'}"> </ARow>
   </ARow>
 </template>
 
 <script>
 import ProductDetailBuy from "@/components/subcomponents/ProductDetailBuy";
+import CommentsBlock from "@/components/subcomponents/CommentsBlock";
+import ShopBlock from "@/components/subcomponents/ShopBlock";
 export default {
   name: "ProductDetailMessage",
-  components: {ProductDetailBuy},
+  components: {ShopBlock, CommentsBlock,ProductDetailBuy},
   async mounted() {
     this.info = require('@/assets/GoodsData.json');
     console.log(this.info)
@@ -70,18 +71,23 @@ export default {
   data() {
     return {
       info: {
+        // 商品名
         name: null,
-        price: null,
+        // 商品最低价格
+        price_low: null,
+        // 商品最高价格
+        price_high:null,
+        // 商品图片
         picture: [],
-        seller: null,
-        stock: null,
+        //好评率
         PraiseRate: null,
-        tags: []
+        // 商品详情图片
+        goodsDetailPicture:[]
       },
     };
   },
-
   methods: {
+
   }
 }
 </script>
@@ -95,17 +101,15 @@ export default {
 }
 .moneyBlock{
   color: red;
-  height: 12vw;
-  display:table-cell;
-  vertical-align:bottom;
-  font-size: 5vw;
+  margin-top: 3vw;
+  font-size: 2vw;
+
 }
 .priceBlock{
   color:red;
-  height: 10vw;
   display:table-cell;
   vertical-align:bottom;
-  font-size: 10vw;
+  font-size: 6vw;
 }
 .introduce{
   font-weight: bold;
@@ -113,12 +117,21 @@ export default {
   color: black;
 }
 .grades{
-  font-size: 5vw;
+  font-size: 4vw;
   color:grey;
+  text-align: center;
+  display: inline-flex;
 }
 .productPicture{
   height:60vw;
   width: 100vw;
+}
+.detailPicture{
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+
 }
 </style>
 <!--<a-radio-button v-for="(item,key) in info.tags" :key="key" :value="info.tags[key]" class="choice">-->

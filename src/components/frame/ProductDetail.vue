@@ -1,10 +1,10 @@
 <template>
-  <a-row>
-     <a-row>
+  <ARow>
+     <ARow>
        <ProductDetailMessage/>
-     </a-row>
+     </ARow>
     <goods-info></goods-info>
-  </a-row>
+  </ARow>
 </template>
 
 <script>
