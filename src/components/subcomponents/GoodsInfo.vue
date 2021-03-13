@@ -44,8 +44,8 @@ export default {
 <style scoped>
 .bottomBlock{
   position: fixed;
-  bottom:0px;
-  left:0px;
+  bottom:0;
+  left:0;
   width : 100vw;
 }
 </style>
