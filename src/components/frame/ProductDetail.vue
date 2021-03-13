@@ -9,7 +9,7 @@
 
 <script>
 import ProductDetailMessage from "@/components/subcomponents/ProductDetailMessage";
-import GoodsInfo from "@/components/subcomponents/GoodsInfo";
+import GoodsInfo from "@/components/subcomponents/ProductFooter";
 export default {
   name: "ProductDetail",
   components: {GoodsInfo, ProductDetailMessage}
