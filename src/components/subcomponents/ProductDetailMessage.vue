@@ -13,14 +13,9 @@
     <ARow class = "buy">
       <ARow>
         <ARow ></ARow>
-        <ACol span="3" push="1">
-          <div class = "moneyBlock">
-            ￥
-          </div>
-        </ACol>
-        <ACol span="10">
-          <div class = "priceBlock">
-            {{info.price}}
+        <ACol span="20">
+          <div class = "priceBlock" push="1">
+            ￥ {{info.price_low}}-{{info.price_high}}
           </div>
         </ACol>
       </ARow>
@@ -52,11 +47,8 @@
       <div :style="{'width':'100%','text-align':'center'}">
         -----商品详情-----
       </div>
-      <div>
-        <img src="https://imgsa.baidu.com/forum/w%3D580/sign=53e4d0b8bede9c82a665f9875c8080d2/a6bd62a98226cffcdfab8b33b4014a90f403eaa2.jpg" class="detailPicture">
-      </div>
-      <div>
-        <img src="https://imgsa.baidu.com/forum/w%3D580/sign=ed67d4d38835e5dd902ca5d746c7a7f5/18dc8a18972bd407975fe77c76899e510db3098a.jpg" class="detailPicture">
+      <div v-for="(image,index) in info.goodsDetailPicture" :key="index">
+        <img :src="image" class="detailPicture">
       </div>
     </ARow>
     <ARow :style="{height : '50px'}"> </ARow>
@@ -79,17 +71,21 @@ export default {
   data() {
     return {
       info: {
+        // 商品名
         name: null,
-        price: null,
+        // 商品最低价格
+        price_low: null,
+        // 商品最高价格
+        price_high:null,
+        // 商品图片
         picture: [],
-        seller: null,
-        stock: null,
+        //好评率
         PraiseRate: null,
-        tags: []
+        // 商品详情图片
+        goodsDetailPicture:[]
       },
     };
   },
-
   methods: {
 
   }
@@ -105,15 +101,15 @@ export default {
 }
 .moneyBlock{
   color: red;
-  margin-top: 5vw;
-  font-size: 5vw;
+  margin-top: 3vw;
+  font-size: 2vw;
 
 }
 .priceBlock{
   color:red;
   display:table-cell;
   vertical-align:bottom;
-  font-size: 10vw;
+  font-size: 6vw;
 }
 .introduce{
   font-weight: bold;
@@ -121,7 +117,7 @@ export default {
   color: black;
 }
 .grades{
-  font-size: 5vw;
+  font-size: 4vw;
   color:grey;
   text-align: center;
   display: inline-flex;

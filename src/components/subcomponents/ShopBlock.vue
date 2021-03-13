@@ -16,13 +16,23 @@
         主营：精品红茶、高山红茶、批发红茶、阿萨姆红茶、适合泡奶茶，多买多送
       </ACol>
     </ARow>
+    <van-cell is-link @click="toShop" :style="{'border-radius' : '25px'}">
+      <div class="CommentsDetail">
+        点击进入商店
+      </div>
+    </van-cell>
   </ARow>
 
 </template>
 
 <script>
 export default {
-name: "ShopBlock"
+name: "ShopBlock",
+  methods:{
+   toShop(){
+     this.$router.push({path:'/Shop'})
+   }
+  }
 }
 </script>
 

@@ -8,19 +8,20 @@
     </van-cell>
 
   </ARow>
-  <ARow :style="{'margin-left':'10px'}">
+  <ARow :style="{'margin-left':'10px'}" v-for="(item,i) in getCommentsInfo.Comments" :key="i">
     <ARow>
       <ARow>
         <ACol span="3" >
-          <a-avatar src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2263347095,3965097865&fm=26&gp=0.jpg" />
+          <a-avatar :src="item.face" />
         </ACol>
         <ACol span="4" :style="{'height':'8.3vw','font-size': '3vw'}">
-          可莉
+          {{item.name}}
         </ACol>
       </ARow>
       <ARow :style="{'font-size':'4vw'}">
-        实在是太好喝了，下次还来flkjahufhahgnaoehgsahlfhagvnhnlsn
+        {{item.Comment}}
       </ARow>
+      <ARow :style="{height : '5px'}"></ARow>
     </ARow>
   </ARow>
 </ARow>
@@ -33,6 +34,9 @@ export default {
   data() {
     return {
       show: false,
+      getCommentsInfo:{
+        Comments : []
+      },
     };
   },
   methods: {
@@ -40,6 +44,9 @@ export default {
       this.$router.push({path:'/CommentsDetail'})
     }
   },
+  mounted() {
+    this.getCommentsInfo = require("@/assets/CommentsBlock.json")
+  }
 }
 </script>
 
