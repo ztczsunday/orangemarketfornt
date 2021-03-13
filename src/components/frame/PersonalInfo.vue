@@ -2,11 +2,11 @@
   <div>
     <!-- 个人信息区域 -->
     <van-card
+        desc="描述信息"
         num="2"
         price="2.00"
-        desc="描述信息"
-        title="商品标题"
         thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
+        title="商品标题"
     />
     <!-- 收藏区域 -->
     <VanGrid :border="false" :column-num="4" style="height: 70px">
