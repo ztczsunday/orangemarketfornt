@@ -3,7 +3,7 @@
     <h3>登录商城</h3>
     <p class="boldYaHei">请使用手机号以及登录凭证登录</p>
     <AFormItem class="a-form-item">
-      <AInput v-model="phone" class="input-phone" placeholder="手机号" @input="checkPhone">
+      <AInput v-model="phone" class="input-phone" placeholder="手机号" @change="checkPhone">
         <AIcon slot="prefix" style="color:rgba(0,0,0,.25)" type="user"/>
       </AInput>
     </AFormItem>
@@ -92,11 +92,16 @@ export default {
     /* 上传表单的处理函数 */
     async handleSubmit() {
       const { $ } = await import("@/util/ajax");
-      const result = await $.get('/js/app.js', {
-        username: 'ABC',
-        userpassword: 'DEF'
-      }).then(result => result.data);
+      const params = new FormData();
+      params.append("username", this.phone);
+      params.append("password", this.password);
+      const result = await $.post('/login', params).then(result => result.data);
       console.log(result);
+      const mmap = await $.post('/order').then(result => result.data);
+      console.log(mmap);
+      if (result !== undefined && result.success === true) {
+        await this.$router.push("/");
+      }
     }
   }
 }

@@ -1,10 +1,20 @@
 <template>
-  <div></div>
+  <div>
+
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Histories"
+  name: "Histories",
+  data() {
+    return {
+      histories: []
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 

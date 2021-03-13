@@ -2,8 +2,9 @@
 import axios from 'axios'
 
 const $ = axios.create({
-    baseURL: "http://localhost:8080",
-    timeout: 1000
+    baseURL: "/api",
+    timeout: 1000,
+    withCredentials: false
 });
 
 export { $ };
