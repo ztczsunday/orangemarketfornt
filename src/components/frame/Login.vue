@@ -97,11 +97,6 @@ export default {
       params.append("password", this.password);
       const result = await $.post('/login', params).then(result => result.data);
       console.log(result);
-      const mmap = await $.post('/order').then(result => result.data);
-      console.log(mmap);
-      if (result !== undefined && result.success === true) {
-        await this.$router.push("/");
-      }
     }
   }
 }

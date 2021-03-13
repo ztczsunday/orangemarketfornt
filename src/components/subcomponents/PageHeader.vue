@@ -18,7 +18,7 @@
     >
       <template #action>
         <div @click="onSearch">
-          搜索
+          搜索商品
         </div>
       </template>
     </VanSearch>
