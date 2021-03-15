@@ -5,10 +5,23 @@ Vue.use(vuex);
 
 const state = new vuex.Store({
     state: {
-        title: ''
+        title: '',
+        user: {
+            tel: 15770742170,
+            password: 114514
+        }
     },
     getters: {},
-    actions: {},
+    actions: {
+        async doLogin() {
+            const { $ } = await import("@/util/ajax");
+            const params = new FormData();
+            params.append("username", this.state.user.tel);
+            params.append("password", this.state.user.password);
+            console.log(await $.post('/login', params)) ;
+
+        }
+    },
     mutations: {
         changeTitle(state, payload) {
             this.title = payload;

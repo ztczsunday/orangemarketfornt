@@ -1,7 +1,7 @@
 <template>
-  <div class = "card">
-    <van-cell is-link @click="toShop" :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}">
-      <van-icon name="shop-o" />
+  <div class="card">
+    <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}" is-link @click="toShop">
+      <van-icon name="shop-o"/>
       <slot name="shopName"></slot>
     </van-cell>
     <ARow>
@@ -21,20 +21,23 @@
           </span>
         </div>
       </ACol>
-      <ACol span="4" :style="{'font-size':'2vw','color': 'grey'}">
-        ￥<slot name="price"></slot>
-        *<slot name="amount"></slot>
+      <ACol :style="{'font-size':'2vw','color': 'grey'}" span="4">
+        ￥
+        <slot name="price"></slot>
+        *
+        <slot name="amount"></slot>
       </ACol>
     </ARow>
-    <ARow type="flex" justify="end">
-      <ACol span="5" :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}">
-        总价：￥<slot name="totalPrice"></slot>
+    <ARow justify="end" type="flex">
+      <ACol :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}" span="5">
+        总价：￥
+        <slot name="totalPrice"></slot>
       </ACol>
     </ARow>
-    <ARow type="flex" justify="end">
+    <ARow justify="end" type="flex">
       <ACol>
-        <van-button round type="info" :style="{height : '35px','margin-right':'10px'}" color="red">删除订单</van-button>
-        <van-button round type="info" :style="{height : '35px'}" @click="toOrderDetail">查看详情</van-button>
+        <van-button :style="{height : '35px','margin-right':'10px'}" color="red" round type="info">删除订单</van-button>
+        <van-button :style="{height : '35px'}" round type="info" @click="toOrderDetail">查看详情</van-button>
       </ACol>
     </ARow>
   </div>
@@ -44,11 +47,11 @@
 <script>
 export default {
   name: "Card",
-  methods:{
+  methods: {
     toShop() {
       this.$router.push({ path: '/Shop' })
     },
-    toOrderDetail(){
+    toOrderDetail() {
       this.$router.push({ path: '/OrderDetail' })
     }
   }
@@ -56,7 +59,7 @@ export default {
 </script>
 
 <style scoped>
-.card{
+.card {
   background-color: white;
   margin-left: auto;
   margin-right: auto;

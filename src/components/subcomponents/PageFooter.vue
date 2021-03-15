@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "PageFoot",
-  async mounted() {
+  async created() {
     const { mainRoutes } = await import('@/extend/router');
     this.$store.subscribe(mutation => {
       if (mutation.type === 'changeTitle') {

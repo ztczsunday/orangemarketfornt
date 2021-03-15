@@ -95,7 +95,7 @@ export default {
       const params = new FormData();
       params.append("username", this.phone);
       params.append("password", this.password);
-      const result = await $.post('/login', params).then(result => result.data);
+      const result = await $.post('/login', params);
       console.log(result);
     }
   }
