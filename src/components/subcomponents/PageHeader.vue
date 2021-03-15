@@ -1,28 +1,28 @@
 <template>
-  <div>
-    <VanNavBar
-        v-if="shouldNavbar"
-        :title="title"
-        left-arrow
-        @click-left="$router.go(-1)"
-        @click-right="() => {}"
-    />
-    <VanSearch
-        v-else
-        v-model="value"
-        clearable
-        placeholder="请输入搜索关键词"
-        shape="round"
-        show-action
-        @search="onSearch"
-    >
-      <template #action>
-        <div @click="onSearch">
-          搜索商品
-        </div>
-      </template>
-    </VanSearch>
-  </div>
+    <VanSticky>
+      <VanNavBar
+          v-if="shouldNavbar"
+          :title="title"
+          left-arrow
+          @click-left="$router.go(-1)"
+          @click-right="() => {}"
+      />
+      <VanSearch
+          v-else
+          v-model="value"
+          clearable
+          placeholder="请输入搜索关键词"
+          shape="round"
+          show-action
+          @search="onSearch"
+      >
+        <template #action>
+          <div @click="onSearch">
+            搜索商品
+          </div>
+        </template>
+      </VanSearch>
+    </VanSticky>
 </template>
 
 <script>
