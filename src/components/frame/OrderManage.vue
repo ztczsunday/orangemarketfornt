@@ -28,7 +28,6 @@ export default {
   name: "OrderManage",
   async created() {
     const { $ } = await import("@/util/ajax");
-    await this.$store.dispatch('doLogin');
     const result = await $.post('/order');
     this.orderData.information = result.data;
     console.log(result.data);
