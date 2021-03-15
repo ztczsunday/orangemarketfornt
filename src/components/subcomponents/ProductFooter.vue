@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "GoodsInfo",
+  name: "ProductDetail",
   data() {
     return {
       collect: false
