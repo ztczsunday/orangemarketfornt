@@ -4,8 +4,11 @@
       <van-icon name="shop-o"/>
       <slot name="shopName"></slot>
     </van-cell>
-    <ARow>
-      <ACol span="7">
+    <div :style="{'font-weight':'bold','font-size':'20px','color': 'red','text-align':'right','margin-right':'2vw'}">
+      <slot name="status"></slot>
+    </div>
+    <ARow type="flex" justify="end">
+      <ACol span="10">
         <div>
           <slot name="goodsPicture"></slot>
         </div>
@@ -22,7 +25,7 @@
           </span>
         </div>
       </ACol>
-      <ACol :style="{'font-size':'2vw','color': 'grey'}" span="5">
+      <ACol :style="{'font-size':'2vw','color': 'grey'}">
         ￥
         <slot name="price"></slot>
         *<slot name="amount"></slot>
@@ -36,7 +39,7 @@
     </ARow>
     <ARow justify="end" type="flex">
       <ACol>
-        <van-button :style="{height : '35px','margin-right':'10px'}" color="red" round type="info">删除订单</van-button>
+        <van-button :style="{height : '35px','margin-right':'5px'}" color="red" round type="info">删除订单</van-button>
         <van-button :style="{height : '35px'}" round type="info" @click="toOrderDetail">查看详情</van-button>
       </ACol>
     </ARow>
