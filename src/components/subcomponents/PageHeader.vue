@@ -28,7 +28,7 @@
 <script>
 export default {
   name: "PageHeader",
-  async cretad() {
+  async created() {
     const { mainRoutes } = await import('@/extend/router');
     this.shouldntNavbarRoutes = mainRoutes.slice(0, 2);
     this.$store.subscribe(mutation => {
