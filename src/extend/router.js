@@ -10,6 +10,8 @@ import Histories from "@/components/frame/Histories";
 import ProductDetail from "@/components/frame/ProductDetail";
 import CommentsDetail from "@/components/frame/CommentsDetail";
 import Shop from "@/components/frame/Shop";
+import OrderManage from "@/components/frame/OrderManage";
+import OrderDetail from "@/components/frame/OrderDetail";
 
 /* 设定router的内容 */
 const routes = [
@@ -22,6 +24,8 @@ const routes = [
     { path: '/ProductDetail', name: '商品详情', component: ProductDetail, meta: { title: '商品详情' } },
     { path: '/CommentsDetail', name: '评价', component: CommentsDetail, meta: { title: '评价' } },
     { path: '/Shop', name: '商铺界面', component: Shop, meta: { title: '商铺页面' } },
+    { path: '/OrderManage', name: '订单管理', component: OrderManage, meta: { title: '订单管理' } },
+    { path: '/OrderDetail', name: '订单详情', component: OrderDetail, meta: { title: '订单详情' } },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
