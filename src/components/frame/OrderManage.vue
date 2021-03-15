@@ -2,16 +2,23 @@
   <div>
     <VanTabs v-model="active">
       <VanTab title="全部">
-        <OrderCard>
-          <span slot="shopName">先辈红茶铺</span>
-          <img slot="goodsPicture"
-               alt="" class="goodsPicture" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3772363621,630429607&fm=26&gp=0.jpg">
-          <span slot="amount">1</span>
-          <span slot="goodsName">昏睡红茶急速昏睡效力持久仙贝自用多种口味68包包邮</span>
-          <span slot="goodsSKU">精品</span>
-          <span slot="price">12</span>
-          <span slot="totalPrice">12</span>
-        </OrderCard>
+        <ARow v-if="orderData.information.length === 0">
+          无订单记录
+        </ARow>
+        <ARow v-else>
+          <ARow  v-for="(item,i) in orderData.information" :key="i">
+            <OrderCard>
+              <span slot="shopName">{{item.shopName}}</span>
+              <img slot="goodsPicture"
+                   alt="" class="goodsPicture" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3772363621,630429607&fm=26&gp=0.jpg">
+              <span slot="amount">{{item.countCommodity}}</span>
+              <span slot="goodsName">{{item.commodityName}}</span>
+              <span slot="goodsSKU">{{item.subName}}</span>
+              <span slot="price">{{item.price}}</span>
+              <span slot="totalPrice">{{item.price * item.countCommodity}}</span>
+            </OrderCard>
+          </ARow>
+        </ARow>
       </VanTab>
       <VanTab title="待付款">内容 2</VanTab>
       <VanTab title="待发货">内容 3</VanTab>
@@ -29,21 +36,27 @@ export default {
   async created() {
     const { $ } = await import("@/util/ajax");
     const result = await $.post('/order');
-    this.orderData.information = result.data;
+    this.orderData.information = result.data.information;
     console.log(result.data);
   },
   data() {
     return {
       active: 0,
       orderData: {
-        information: [/* 对象的数组，存储图片的数组 */]
+        information: [{
+          shopName : "先辈红茶铺",
+          countCommodity : 2,
+          commodityName : " 昏睡红茶急速昏睡效力持久仙贝自用多种口味68包包邮 ",
+          subName : "精品",
+          price : 1145141919810
+        }]
       }
     };
   },
   components: { OrderCard },
   methods: {
 
-  }
+  },
 }
 </script>
 

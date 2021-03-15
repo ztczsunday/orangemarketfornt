@@ -5,11 +5,12 @@
       <slot name="shopName"></slot>
     </van-cell>
     <ARow>
-      <ACol span="8">
+      <ACol span="7">
         <div>
           <slot name="goodsPicture"></slot>
         </div>
       </ACol>
+      <ACol span="1"></ACol>
       <ACol span="12">
         <div :style="{'font-weight':'bold','font-size':'3vw','color': 'black'}">
           <span>
@@ -21,15 +22,14 @@
           </span>
         </div>
       </ACol>
-      <ACol :style="{'font-size':'2vw','color': 'grey'}" span="4">
+      <ACol :style="{'font-size':'2vw','color': 'grey'}" span="5">
         ￥
         <slot name="price"></slot>
-        *
-        <slot name="amount"></slot>
+        *<slot name="amount"></slot>
       </ACol>
     </ARow>
     <ARow justify="end" type="flex">
-      <ACol :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}" span="5">
+      <ACol :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}">
         总价：￥
         <slot name="totalPrice"></slot>
       </ACol>
