@@ -13,7 +13,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.information" :key="i">
-            <OrderCard :type="item.itemName">
+            <OrderCard :type="item.itemName" :id="item.orderId">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -40,7 +40,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.payList" :key="i">
-            <OrderCard :type="item.itemName">
+            <OrderCard :type="item.itemName" :id="item.orderId">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -67,7 +67,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.postList" :key="i">
-            <OrderCard>
+            <OrderCard :type="item.itemName" :id="item.orderId">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -94,7 +94,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.reciveeList" :key="i">
-            <OrderCard :type="item.itemName">
+            <OrderCard :type="item.itemName" :id="item.orderId">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -121,7 +121,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.commentList" :key="i">
-            <OrderCard :type="item.itemName">
+            <OrderCard :type="item.itemName" :id="item.orderId">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -165,6 +165,7 @@ export default {
         needComment:0,
         commentList : [],
         information: [{
+          orderId :114514,
           shopName : "先辈红茶铺",
           countCommodity : 2,
           commodityName : " 昏睡红茶急速昏睡效力持久仙贝自用多种口味68包包邮 ",

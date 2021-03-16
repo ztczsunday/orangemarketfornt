@@ -41,7 +41,8 @@
       <ACol>
         <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
                     color="red"
-                    round type="info">删除订单</van-button>
+                    round type="info"
+        @click="deleteOrder(id)">删除订单</van-button>
         <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
                     round type="info"
                     @click="toOrderDetail">查看详情</van-button>
@@ -57,7 +58,7 @@
 
 <script>
 export default {
-  props : ['type'],
+  props : ['type','id'],
   name: "Card",
   data(){
     return{
@@ -84,6 +85,14 @@ export default {
       else if(this.type === "待评价"){
         this.$router.push({ path: '/OrderDetail' })
       }
+    },
+    async deleteOrder(orderId){
+      let formData=new FormData();
+      formData.append('orderId',orderId);
+      const { $ } = await import("@/util/ajax");
+      const result =await $.post('/deleteOrder',formData);
+      console.log(result.data);
+      this.$router.go(0);
     }
   },
   mounted() {
