@@ -37,18 +37,16 @@
         <slot name="totalPrice"></slot>
       </ACol>
     </ARow>
-    <ARow justify="end" type="flex">
+    <ARow justify="end" type="flex" v-if="place === 'OrderManage'">
       <ACol>
         <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
-                    color="red"
                     round type="info"
-        @click="deleteOrder(id)">删除订单</van-button>
-        <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
-                    round type="info"
+                    color="orange"
                     @click="toOrderDetail">查看详情</van-button>
         <van-button v-if="type != null"
                     :style="{height : '35px','width':'25vw'}"
                     round type="info"
+                    color="orange"
                     @click="toOderFunction" >{{buttonType}}</van-button>
       </ACol>
     </ARow>
@@ -58,7 +56,7 @@
 
 <script>
 export default {
-  props : ['type','id'],
+  props : ['type','id','place'],
   name: "Card",
   data(){
     return{
@@ -86,14 +84,6 @@ export default {
         this.$router.push({ path: '/OrderDetail' })
       }
     },
-    async deleteOrder(orderId){
-      let formData=new FormData();
-      formData.append('orderId',orderId);
-      const { $ } = await import("@/util/ajax");
-      const result =await $.post('/deleteOrder',formData);
-      console.log(result.data);
-      this.$router.go(0);
-    }
   },
   mounted() {
     if(this.type === '待发货'){
@@ -108,7 +98,6 @@ export default {
     else if(this.type === "待评价"){
       this.buttonType = "立即评价"
     }
-
   }
 
 }

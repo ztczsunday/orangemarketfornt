@@ -13,7 +13,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.information" :key="i">
-            <OrderCard :type="item.itemName" :id="item.orderId">
+            <OrderCard :type="item.itemName" :id="item.orderId" :place="orderData.place">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -40,7 +40,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.payList" :key="i">
-            <OrderCard :type="item.itemName" :id="item.orderId">
+            <OrderCard :type="item.itemName" :id="item.orderId" :place="orderData.place">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -67,7 +67,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.postList" :key="i">
-            <OrderCard :type="item.itemName" :id="item.orderId">
+            <OrderCard :type="item.itemName" :id="item.orderId" :place="orderData.place">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -94,7 +94,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.reciveeList" :key="i">
-            <OrderCard :type="item.itemName" :id="item.orderId">
+            <OrderCard :type="item.itemName" :id="item.orderId" :place="orderData.place">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -121,7 +121,7 @@
         </ARow>
         <ARow v-else-if="showCard === true">
           <ARow  v-for="(item,i) in orderData.commentList" :key="i">
-            <OrderCard :type="item.itemName" :id="item.orderId">
+            <OrderCard :type="item.itemName" :id="item.orderId" :place="orderData.place">
               <span slot="shopName">{{item.shopName}}</span>
               <img slot="goodsPicture"
                    class="goodsPicture"
@@ -164,6 +164,7 @@ export default {
         reciveeList : [],
         needComment:0,
         commentList : [],
+        place : "OrderManage",
         information: [{
           orderId :114514,
           shopName : "先辈红茶铺",
