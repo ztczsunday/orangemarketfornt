@@ -39,8 +39,16 @@
     </ARow>
     <ARow justify="end" type="flex">
       <ACol>
-        <van-button :style="{height : '35px','margin-right':'5px'}" color="red" round type="info">删除订单</van-button>
-        <van-button :style="{height : '35px'}" round type="info" @click="toOrderDetail">查看详情</van-button>
+        <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
+                    color="red"
+                    round type="info">删除订单</van-button>
+        <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
+                    round type="info"
+                    @click="toOrderDetail">查看详情</van-button>
+        <van-button v-if="type != null"
+                    :style="{height : '35px','width':'25vw'}"
+                    round type="info"
+                    @click="toOderFunction" >{{buttonType}}</van-button>
       </ACol>
     </ARow>
   </div>
@@ -49,15 +57,51 @@
 
 <script>
 export default {
+  props : ['type'],
   name: "Card",
+  data(){
+    return{
+      buttonType : null
+    }
+  },
   methods: {
     toShop() {
       this.$router.push({ path: '/Shop' })
     },
     toOrderDetail() {
       this.$router.push({ path: '/OrderDetail' })
+    },
+    toOderFunction(){
+      if(this.type === '待发货'){
+        this.$router.push({ path: '/Mails' })
+      }
+      else if(this.type === "待付款"){
+        this.$router.push({ path: '/OrderDetail' })
+      }
+      else if(this.type === "待收货"){
+        this.$router.push({ path: '/OrderDetail' })
+      }
+      else if(this.type === "待评价"){
+        this.$router.push({ path: '/OrderDetail' })
+      }
     }
+  },
+  mounted() {
+    if(this.type === '待发货'){
+       this.buttonType = "催促发货"
+    }
+    else if(this.type === "待付款"){
+      this.buttonType = "立即付款"
+    }
+    else if(this.type === "待收货"){
+      this.buttonType = "立即收货"
+    }
+    else if(this.type === "待评价"){
+      this.buttonType = "立即评价"
+    }
+
   }
+
 }
 </script>
 

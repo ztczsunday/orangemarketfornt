@@ -1,5 +1,5 @@
 <template>
-  <ARow :style="{'margin-top':'10px'}">
+  <ARow>
     <van-list
         v-model="loading"
         :finished="finished"
