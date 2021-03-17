@@ -86,7 +86,6 @@
       </ALayout>
     </ALayoutContent>
     <ALayoutFooter style="text-align: center">
-
     </ALayoutFooter>
   </ALayout>
 </template>
