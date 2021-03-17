@@ -44,10 +44,14 @@ export default {
   components: { SubComments },
   data() {
     return {
+      //弹窗是否弹出
       show: false,
       allLoaded: false,
+      //评论列表
       list: [],
+      //是否在加载
       loading: false,
+      //是否全部加载完毕
       finished: false,
     }
   },

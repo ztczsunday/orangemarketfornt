@@ -153,9 +153,13 @@ export default {
   },
   data() {
     return {
+      //强制加载完成再展示订单
       showCard : false,
+      //激活的标签位置，默认为0
       active: 0,
+      //订单数据
       orderData: {
+        //开始时遍历一遍数组，把四种标签下的订单分配到四个数组里
         needPay : 0,
         payList : [],
         needPost : 0,
@@ -164,7 +168,9 @@ export default {
         reciveeList : [],
         needComment:0,
         commentList : [],
+        //商品卡片位置
         place : "OrderManage",
+        //订单内容
         information: [{
           orderId :114514,
           shopName : "先辈红茶铺",

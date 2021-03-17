@@ -56,10 +56,12 @@
 
 <script>
 export default {
+  //type: 商品状态 id：商品id place：标记这个商品卡片放在哪
   props : ['type','id','place'],
   name: "Card",
   data(){
     return{
+      //按键类型
       buttonType : null
     }
   },

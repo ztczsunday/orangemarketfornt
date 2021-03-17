@@ -123,7 +123,7 @@
           v-model="message"
           rows="2"
           autosize
-          label="留言"
+          label="评论"
           type="textarea"
           maxlength="100"
           placeholder="请输入留言"
@@ -149,18 +149,30 @@ export default {
   name: "OrderDetail",
   data() {
     return {
+      //进度条激活位置
       active: 1,
+      //商品卡片放在订单详情里
       place:"OrderDetail",
+      //评论区内容
       message: "",
       information: {
+        //订单号
         orderId :114514,
+        //店名
         shopName : "先辈红茶铺",
+        //商品数目
         countCommodity : 2,
+        //商品名
         commodityName : " 昏睡红茶急速昏睡效力持久仙贝自用多种口味68包包邮 ",
+        //种类名
         subName : "精品",
+        //单价
         price : 1145141919810,
+        //订单状态
         itemName : "待评价",
+        //商品图标
         subIcon :"https://imgsa.baidu.com/forum/w%3D580/sign=53e4d0b8bede9c82a665f9875c8080d2/a6bd62a98226cffcdfab8b33b4014a90f403eaa2.jpg",
+        //状态变化日期表，id对应状态
         statusDate : [
           {id : 1, date : "2020.1.2"},
           {id : 2, date : "2020.1.3"},
@@ -169,6 +181,7 @@ export default {
           {id : 5, date : "2020.1.6"},
           {id : 6, date : "2020.1.7"}
         ],
+        //收货地址
         addressDetails : "北京市朝阳区下北泽大学医学院",
       }
     };
