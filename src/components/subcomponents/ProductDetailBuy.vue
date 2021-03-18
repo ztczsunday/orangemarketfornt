@@ -27,7 +27,6 @@ export default {
   name: "ProductDetailBuy",
   async mounted() {
     this.getInfo = require('@/assets/ProductDetailBuy.json');
-    this.sku.tree[0].k = this.getInfo.typeName;
     this.sku.tree[0].v = this.getInfo.typeDetail;
     this.sku.list = this.getInfo.typeList;
     this.sku.price = this.getInfo.defaultPrice;
@@ -43,7 +42,7 @@ export default {
         // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
         tree: [
           {
-            k: null, // skuKeyName：规格类目名称
+            k: "请选择", // skuKeyName：规格类目名称
             k_s: 's1', // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
             v: [],
             largeImageMode: false, //  是否展示大图模式

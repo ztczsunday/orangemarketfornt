@@ -30,9 +30,14 @@
         <VanUploader v-model="uploader" multiple :max-count="5" :before-read="beforeRead"/>
       </template>
     </VanField>
-    <VanField name="uploader" label="商品默认小图标上传">
+    <VanField name="uploaderSubDefault" label="商品默认小图标上传">
       <template #input>
         <VanUploader v-model="uploaderSubDefault" multiple :max-count="1" :before-read="beforeRead"/>
+      </template>
+    </VanField>
+    <VanField name="uploaderDetail" label="商品详情">
+      <template #input>
+        <VanUploader v-model="uploaderDetail" multiple :max-count="10" :before-read="beforeRead"/>
       </template>
     </VanField>
 
@@ -129,7 +134,8 @@ export default {
     return {
       uploader: [],
       uploaderSub:[],
-      uploaderSubDefault:[],
+      uploaderSubDefault : [],
+      uploaderDetail: [],
       goodsName : null,
       show: false,
       fieldValue: '',
