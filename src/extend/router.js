@@ -14,6 +14,7 @@ import OrderManage from "@/components/frame/OrderManage";
 import OrderDetail from "@/components/frame/OrderDetail";
 import ManageCenter from "@/components/frame/ManageCenter";
 import BuildGoods from "@/components/frame/BuildGoods";
+import BuildShop from "@/components/frame/BuildShop";
 
 /* 设定router的内容 */
 const routes = [
@@ -30,6 +31,7 @@ const routes = [
     { path: '/OrderDetail', name: '订单详情', component: OrderDetail, meta: { title: '订单详情' } },
     { path: '/ManageCenter', name: '管理中心', component: ManageCenter, meta: { title: '管理中心' } },
     { path: '/BuildGoods', name: '新建商品', component: BuildGoods, meta: { title: '新建商品' } },
+    { path: '/BuildShop', name: '新建商铺', component: BuildShop, meta: { title: '新建商铺' } },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
