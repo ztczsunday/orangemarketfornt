@@ -27,7 +27,10 @@
     </VanPopup>
     <VanField name="uploader" label="商品图片上传">
       <template #input>
-        <VanUploader v-model="uploader" multiple :max-count="5" :before-read="beforeRead"/>
+        <VanUploader v-model="uploader" multiple :max-count="5"
+                     :before-read="beforeRead"
+                     :after-read="afterReadGoods"
+                     :before-delete = "upLoaderDelete"/>
       </template>
     </VanField>
     <VanField name="uploaderSubDefault" label="商品默认小图标上传">
@@ -136,6 +139,8 @@ export default {
       uploaderSub:[],
       uploaderSubDefault : [],
       uploaderDetail: [],
+      uploaderbackup : [],
+      uploaderName :[],
       goodsName : null,
       show: false,
       fieldValue: '',
@@ -160,6 +165,9 @@ export default {
       typeList:[],
     };
   },
+  // async mounted(){
+  //   const {$} = await import('@/util/ajax');
+  // },
   methods: {
     onSubmit(values) {
       console.log('submit', values);
@@ -206,6 +214,33 @@ export default {
       this.showSub[i] = false
       this.showAdd = true
       this.showAdd = false
+    },
+    async afterReadGoods(file){
+      console.log(file.file.name)
+      this.uploaderbackup.push(file.file.name)
+      const {$} = await  import('@/util/ajax')
+      // console.log(file.content);
+      const formData = new FormData();
+      formData.append(file.file.name, file.content)
+      const result = await $({
+        method : "post",
+        url : "/uploadTest",
+        data: formData,
+        enctype : "multipart/form-data",
+      });
+      console.log(result)
+    },
+    upLoaderDelete(file){
+      let k = 999;
+      for(let i = 0; i < this.uploaderbackup.length ; i++){
+        if(file.file.name === this.uploaderbackup.length[i]){
+          k = i;
+        }
+        this.uploaderName.splice(k,1);
+        this.uploaderbackup.splice(k,1);
+        console.log(this.uploaderName)
+      }
+      return Promise;
     }
   },
 }
