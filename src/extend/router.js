@@ -20,7 +20,7 @@ import BuildShop from "@/components/frame/BuildShop";
 const routes = [
     { path: '/', name: '商城主页', component: Market, meta: { title: '商城页面' } },
     { path: '/mails', name: '私聊界面', component: Mails, meta: { title: '站内信' } },
-    { path: '/personalinfo', name: '个人信息', component: PersonalInfo, meta: { title: '个人信息' } },
+    { path: '/personalInfo', name: '个人信息', component: PersonalInfo, meta: { title: '个人信息' } },
     { path: '/login', name: '登录界面', component: Login, meta: { title: '登录页面' } },
     { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },

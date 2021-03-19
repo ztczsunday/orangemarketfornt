@@ -2,11 +2,9 @@
   <div>
     <!-- 个人信息区域 -->
     <van-card
-        desc="描述信息"
-        num="2"
-        price="2.00"
-        thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-        title="商品标题"
+        :title="userInfo.username"
+        :desc="userInfo.userSignature"
+        :thumb="userInfo.userSelfie"
     />
     <!-- 收藏区域 -->
     <VanGrid :border="false" :column-num="4" style="height: 70px">
@@ -27,11 +25,26 @@ import '@/assets/css/grid.css';
 
 export default {
   name: "PersonalInfo",
+  async created() {
+    const { $ } = await import("@/util/ajax");
+    const result = await $.get('/userInfo');
+    if (result.data.success) {
+      this.userInfo = result.data.information;
+    }
+    console.log(result);
+  },
   data() {
     return {
-      userData: {},
-      userInfo: {},
-      nameshow: false
+      userInfo: {
+        userAlipayAccount: "支付宝",
+        userEmail: "邮箱",
+        userGender: "男",
+        userLicense: "身份证",
+        userSelfie: "头像",
+        userSignature: "いいね！",
+        userTelephone: "15770742170",
+        username: "15770742170"
+      }
     }
   }
 }

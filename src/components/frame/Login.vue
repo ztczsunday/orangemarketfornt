@@ -14,7 +14,7 @@
       </AInputPassword>
     </AFormItem>
     <AFormItem class="a-form-item">
-      <ACheckbox>
+      <ACheckbox v-model="autoCommit">
         10天内自动登录
       </ACheckbox>
       <AButton style="font-feature-settings: 'tnum';" type="link" @click="getVerifyCode">{{ verify }}</AButton>
@@ -31,7 +31,15 @@
 <script>
 export default {
   name: "Login",
+  /* 进入界面时，首先，查看是否有选择过“10日自动登录”，若有，则发生自动登录事件，否则无事发生 */
   created() {
+    if (this.$cookies.isKey("username") && this.$cookies.isKey("password")) {
+      this.$store.state.user = {
+        tel: this.$cookies.get("username"),
+        password: this.$cookies.get("password")
+      }
+      this.doLogin(this.$store.state.user.tel, this.$store.state.user.password);
+    }
   },
   /* 析构函数，析构时，消除我们指定的定时执行函数 */
   beforeDestroy() {
@@ -50,7 +58,9 @@ export default {
       /* 用于销毁自动运行函数的intervalCode */
       intervalCode: null,
       /* 拉取验证码的冷却时间 */
-      coldTime: 0
+      coldTime: 0,
+      /* 设置是否自动登录 */
+      autoCommit: false
     }
   },
   computed: {
@@ -90,13 +100,25 @@ export default {
       }
     },
     /* 上传表单的处理函数 */
-    async handleSubmit() {
+    handleSubmit() {
+      this.doLogin(this.phone, this.password);
+    },
+    async doLogin(username, password) {
       const { $ } = await import("@/util/ajax");
       const params = new FormData();
-      params.append("username", this.phone);
-      params.append("password", this.password);
+      params.append("username", username);
+      params.append("password", password);
       const result = await $.post('/login', params);
-      console.log(result);
+      if (result.data.success !== true) {
+        this.antMessage.error("输入的账号与密码有误，请重新输入");
+      } else {
+        if (this.autoCommit) {
+          this.$cookies.set("username", this.phone, '10d');
+          this.$cookies.set("password", this.password, '10d');
+        }
+        this.antMessage.success("登录成功");
+        await this.$router.push("/");
+      }
     }
   }
 }

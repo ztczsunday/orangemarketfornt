@@ -18,8 +18,7 @@ const state = new vuex.Store({
             const params = new FormData();
             params.append("username", this.state.user.tel);
             params.append("password", this.state.user.password);
-            console.log(await $.post('/login', params)) ;
-
+            return await $.post('/login', params);
         }
     },
     mutations: {
