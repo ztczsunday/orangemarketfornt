@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ARow :style="{'margin-top':'10px'}">
+    <ARow :style="{'margin-top': '10px'}">
       <ARow>
         <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" push="1">
           更多评论

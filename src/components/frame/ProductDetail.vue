@@ -13,7 +13,12 @@ import ProductFooter from "@/components/subcomponents/ProductFooter";
 
 export default {
   name: "ProductDetail",
-  components: { ProductFooter, ProductDetailMessage }
+  components: { ProductFooter, ProductDetailMessage },
+  async created() {
+    const {$} = await import('@/util/ajax');
+    const result = await $.get(`/commodity?commodityId=${1}`);
+    console.log(result);
+  }
 }
 </script>
 

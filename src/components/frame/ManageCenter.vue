@@ -124,7 +124,7 @@ export default{
 #components-layout-demo-top-side .logo {
   width: 60px;
   height: 31px;
-  background: url("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=100620643,4180468632&fm=26&gp=0.jpg")
+  background: url("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2637807814,667894323&fm=26&gp=0.jpg")
   no-repeat;
   background-size: contain ;
   margin: 16px 28px 16px 0;

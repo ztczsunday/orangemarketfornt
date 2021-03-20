@@ -94,6 +94,8 @@
           </VanField>
           <div style="margin: 16px;">
             <VanButton round block type="info" native-type="submit">确认</VanButton>
+            <ARow :style="{'height' : '10px'}"></ARow>
+            <VanButton round block type="danger" @click="deleteSub(i)">删除</VanButton>
           </div>
         </VanForm>
       </VanPopup>
@@ -256,17 +258,17 @@ export default {
       this.showAdd = true;
     },
     async addSub(values){
-      const config = {
-        headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
-      };
-      const {$} = await  import('@/util/ajax');
-      const formData = new FormData();
-      formData.append('file', this.uploaderSub[0].file);
-      const result =await $.post('/upload', formData, config);
       if(this.uploaderSub.length===0){
         Toast("至少上传一个图片")
       }
       else{
+        const config = {
+          headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
+        };
+        const {$} = await  import('@/util/ajax');
+        const formData = new FormData();
+        formData.append('file', this.uploaderSub[0].file);
+        const result =await $.post('/upload', formData, config);
         const sub = {
           subName : values.subTypeName,
           subPrice : parseInt(values.subTypePrice),
@@ -275,8 +277,12 @@ export default {
           subPicName : result.data.information,
         }
         this.showSub.push(false);
-        this.typeList.push(sub)
-        this.showAdd = false
+        this.typeList.push(sub);
+        this.showAdd = false;
+        this.uploaderSub = [];
+        this.subTypeStock = null;
+        this.subTypePrice = null;
+        this.subTypeName = null;
       }
     },
     async upDateSub(i){
@@ -328,6 +334,13 @@ export default {
       console.log(this.uploaderName)
       return Promise;
     },
+    deleteSub(i){
+      this.typeList.splice(i,1);
+      Toast("删除成功");
+      this.showSub[i] = false;
+      this.showAdd = true;
+      this.showAdd = false;
+    }
   },
 }
 </script>
