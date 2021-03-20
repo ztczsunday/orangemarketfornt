@@ -53,7 +53,7 @@ export default {
       formData.append("pageSize", this.pageSize);
       const result = await $.get('/histories');
       const page = result.data.information;
-      [].push.apply(this.histories, page.records.map(
+      Array.prototype.push.apply(this.histories, page.records.map(
           record => new History(
               record.commodityName,
               `${record.lastBrowserDate[0]}年${record.lastBrowserDate[1]}月${record.lastBrowserDate[2]}日`,
