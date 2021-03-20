@@ -27,17 +27,32 @@
     </VanPopup>
     <VanField name="uploader" label="商品图片上传">
       <template #input>
-        <VanUploader v-model="uploader" multiple :max-count="5" :before-read="beforeRead"/>
+        <VanUploader v-model="uploader" multiple
+                     name="Uploader"
+                     :max-count="5"
+                     :before-read="beforeRead"
+                     :after-read="afterReadGoods"
+                     :before-delete = "upLoaderDelete"/>
       </template>
     </VanField>
     <VanField name="uploaderSubDefault" label="商品默认小图标上传">
       <template #input>
-        <VanUploader v-model="uploaderSubDefault" multiple :max-count="1" :before-read="beforeRead"/>
+        <VanUploader v-model="uploaderSubDefault" multiple
+                     name = "uploaderSubDefault"
+                     :max-count="1"
+                     :before-read="beforeRead"
+                     :after-read="afterReadGoods"
+                     :before-delete="upLoaderDelete"/>
       </template>
     </VanField>
     <VanField name="uploaderDetail" label="商品详情">
       <template #input>
-        <VanUploader v-model="uploaderDetail" multiple :max-count="10" :before-read="beforeRead"/>
+        <VanUploader v-model="uploaderDetail" multiple
+                     name="UploaderDetail"
+                     :max-count="10"
+                     :before-read="beforeRead"
+                     :after-read="afterReadGoods"
+                     :before-delete="upLoaderDelete"/>
       </template>
     </VanField>
 
@@ -71,7 +86,10 @@
           />
           <VanField name="uploaderSub" label="种类图标上传">
             <template #input>
-              <VanUploader v-model="typeList[i].subPic" multiple :max-count="1" :before-read="beforeRead"/>
+              <VanUploader v-model="typeList[i].subPic" multiple
+                           name = i
+                           :max-count="1"
+                           :before-read="beforeRead"/>
             </template>
           </VanField>
           <div style="margin: 16px;">
@@ -111,7 +129,8 @@
         />
         <VanField name="uploaderSub" label="种类图标上传">
           <template #input>
-            <VanUploader v-model="uploaderSub" multiple :max-count="1" :before-read="beforeRead"/>
+            <VanUploader v-model="uploaderSub" multiple :max-count="1"
+                         :before-read="beforeRead"/>
           </template>
         </VanField>
         <div style="margin: 16px;">
@@ -130,12 +149,34 @@ import { Toast } from 'vant';
 
 export default {
   name: "BuildGoods",
+  async created() {
+    const {$} = await  import('@/util/ajax');
+    const result = await $.get('/commodity/labels')
+    for(let i = 0; i < result.data.information.length; i++){
+      this.options.push({
+        text : result.data.information[i].itemName,
+        value : result.data.information[i].recordId,
+      })
+    }
+    console.log(this.options)
+
+  },
   data() {
     return {
+      label: [],
+      //存商品图片
       uploader: [],
+      uploaderName :[],
+      //存该种类下的商品图标(临时的)
       uploaderSub:[],
+      uploaderSubName : null,
+      //存默认的商品图标
       uploaderSubDefault : [],
+      uploaderSubDefaultName : null,
+      //商品详情
       uploaderDetail: [],
+      uploaderDetailName:[],
+
       goodsName : null,
       show: false,
       fieldValue: '',
@@ -145,24 +186,55 @@ export default {
       subTypeName : null,
       subTypePrice : null,
       subTypeStock : null,
-
-
-      options: [
-        {
-          text: '食品',
-          value: '330000',
-        },
-        {
-          text: '日用品',
-          value: '320000',
-        },
-      ],
+      options: [],
       typeList:[],
+      postList:[],
     };
   },
   methods: {
-    onSubmit(values) {
-      console.log('submit', values);
+    async onSubmit() {
+      if(this.uploader.length === 0 || this.uploaderDetail.length === 0 || this.uploaderSubDefault.length === 0){
+        Toast("缺少图片");
+      }
+      else if(this.typeList.length === 0){
+        Toast("至少设置一个种类");
+      }
+      else{
+        const config = {
+          headers: { "Content-Type": "application/json;charset=UTF-8" }
+        };
+        const {$} = await  import('@/util/ajax');
+        for(let i = 0; i < this.options.length; i++ ){
+          if(this.options[i].text === this.fieldValue){
+            this.label.push(this.options[i].value)
+          }
+        }
+
+        for(let i = 0; i < this.typeList.length; i++){
+          this.postList.push(
+              {
+                "cid": 0,
+                "price": this.typeList[i].subPrice,
+                "stock": this.typeList[i].subStock,
+                "subCommodityStatus": true,
+                "subIcon": this.typeList[i].subPicName,
+                "subId": 0,
+                "subName": this.typeList[i].subName,
+              }
+          )
+        }
+        const test ={
+          "commodityDetails" : this.uploaderDetailName,
+          "commodityName" : this.goodsName,
+          "labelId" : this.label,
+          "mainIcon":this.uploaderSubDefaultName,
+          "mainIcons":this.uploaderName,
+          "subCommodity":this.postList
+        }
+        console.log(test)
+        const result = await $.post('/commodity', test,config);
+        console.log(result);
+      }
     },
     onFinish({ selectedOptions }) {
       this.show = false;
@@ -183,30 +255,79 @@ export default {
     showPopupAdd(){
       this.showAdd = true;
     },
-    addSub(values){
+    async addSub(values){
+      const config = {
+        headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
+      };
+      const {$} = await  import('@/util/ajax');
+      const formData = new FormData();
+      formData.append('file', this.uploaderSub[0].file);
+      const result =await $.post('/upload', formData, config);
       if(this.uploaderSub.length===0){
         Toast("至少上传一个图片")
       }
       else{
-        let sub = {
+        const sub = {
           subName : values.subTypeName,
-          subPrice : values.subTypePrice,
-          subStock : values.subTypeStock,
+          subPrice : parseInt(values.subTypePrice),
+          subStock : parseInt(values.subTypeStock),
           subPic : this.uploaderSub,
+          subPicName : result.data.information,
         }
         this.showSub.push(false);
         this.typeList.push(sub)
-        console.log(values.subTypeName)
-        console.log(this.uploaderSub)
         this.showAdd = false
       }
     },
-    upDateSub(i){
-      Toast("修改成功")
-      this.showSub[i] = false
-      this.showAdd = true
-      this.showAdd = false
-    }
+    async upDateSub(i){
+      const config = {
+        headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
+      };
+      const {$} = await  import('@/util/ajax');
+      const formData = new FormData();
+      formData.append('file', this.typeList[i].subPic[0].file);
+      console.log(this.typeList[i].subPic[0].file)
+      const result =await $.post('/upload', formData, config);
+      console.log(result);
+      this.typeList[i].subPicName=result.data.information;
+      Toast("修改成功");
+      this.showSub[i] = false;
+      this.showAdd = true;
+      this.showAdd = false;
+      console.log(this.typeList[i].subPicName);
+    },
+    async afterReadGoods(file,detail){
+      const config = {
+        headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
+      };
+      const {$} = await  import('@/util/ajax');
+      const formData = new FormData();
+      formData.append('file', file.file);
+      const result =await $.post('/upload', formData, config);
+      if(detail.name === "Uploader"){
+        this.uploaderName.push(result.data.information);
+      }
+      else if(detail.name === "UploaderDetail"){
+        this.uploaderDetailName.push(result.data.information)
+      }
+      else if(detail.name === "uploaderSubDefault"){
+        this.uploaderSubDefaultName = result.data.information
+      }
+      console.log(this.uploaderName);
+    },
+    upLoaderDelete(detail){
+      if(detail.name === "Uploader"){
+        this.uploaderName.splice(detail.index,1);
+      }
+      else if(detail.name === "UploaderDetail"){
+        this.uploaderDetailName.splice(detail.index,1);
+      }
+      else if(detail.name === "uploaderSubDefault"){
+        this.uploaderSubDefaultName = null;
+      }
+      console.log(this.uploaderName)
+      return Promise;
+    },
   },
 }
 </script>
