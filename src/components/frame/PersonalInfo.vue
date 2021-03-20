@@ -31,7 +31,6 @@ export default {
     if (result.data.success) {
       this.userInfo = result.data.information;
     }
-    console.log(result);
   },
   data() {
     return {
