@@ -2,39 +2,39 @@
   <div class="card">
     <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}" is-link @click="toShop">
       <van-icon name="shop-o"/>
-      <slot name="shopName"></slot>
+      {{order.shopName}}
     </van-cell>
-    <div :style="{'font-weight':'bold','font-size':'20px','color': 'red','text-align':'right','margin-right':'2vw'}">
-      <slot name="status"></slot>
-    </div>
+    <ARow span="12" style="color: red;font-weight: bold;margin-left: 20px" v-if="place==='OrderManage'">
+      订单{{order.itemName}}
+    </ARow>
     <ARow type="flex" justify="end">
       <ACol span="10">
         <div>
-          <slot name="goodsPicture"></slot>
+          <img :src="order.subIcon" class="goodsPicture">
         </div>
       </ACol>
       <ACol span="1"></ACol>
       <ACol span="12">
         <div :style="{'font-weight':'bold','font-size':'3vw','color': 'black'}">
           <span>
-            <slot name="goodsName"></slot>
+            {{order.commodityName}}
           </span>
           <br>
           <span :style="{'font-size':'2vw','color': 'grey'}">
-            <slot name="goodsSKU"></slot>
+            {{order.subName}}
           </span>
         </div>
       </ACol>
       <ACol :style="{'font-size':'2vw','color': 'grey'}">
         ￥
-        <slot name="price"></slot>
-        *<slot name="amount"></slot>
+        {{order.price}}
+        *{{order.countCommodity}}
       </ACol>
     </ARow>
     <ARow justify="end" type="flex">
       <ACol :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}">
         总价：￥
-        <slot name="totalPrice"></slot>
+        {{order.price*order.countCommodity}}
       </ACol>
     </ARow>
     <ARow justify="end" type="flex" v-if="place === 'OrderManage'">
@@ -43,11 +43,6 @@
                     round type="info"
                     color="orange"
                     @click="toOrderDetail">查看详情</van-button>
-        <van-button v-if="type != null"
-                    :style="{height : '35px','width':'25vw'}"
-                    round type="info"
-                    color="orange"
-                    @click="toOderFunction" >{{buttonType}}</van-button>
       </ACol>
     </ARow>
   </div>
@@ -57,7 +52,7 @@
 <script>
 export default {
   //type: 商品状态 id：商品id place：标记这个商品卡片放在哪
-  props : ['type','id','place'],
+  props : ['place','order'],
   name: "Card",
   data(){
     return{
@@ -72,35 +67,7 @@ export default {
     toOrderDetail() {
       this.$router.push({ path: '/OrderDetail' })
     },
-    toOderFunction(){
-      if(this.type === '待发货'){
-        this.$router.push({ path: '/Mails' })
-      }
-      else if(this.type === "待付款"){
-        this.$router.push({ path: '/OrderDetail' })
-      }
-      else if(this.type === "待收货"){
-        this.$router.push({ path: '/OrderDetail' })
-      }
-      else if(this.type === "待评价"){
-        this.$router.push({ path: '/OrderDetail' })
-      }
-    },
   },
-  mounted() {
-    if(this.type === '待发货'){
-       this.buttonType = "催促发货"
-    }
-    else if(this.type === "待付款"){
-      this.buttonType = "立即付款"
-    }
-    else if(this.type === "待收货"){
-      this.buttonType = "立即收货"
-    }
-    else if(this.type === "待评价"){
-      this.buttonType = "立即评价"
-    }
-  }
 
 }
 </script>
@@ -118,6 +85,11 @@ export default {
   padding-bottom: 5px;
 
 }
-
+.goodsPicture {
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}
 
 </style>

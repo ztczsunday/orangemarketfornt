@@ -7,17 +7,10 @@
       <VanStep>买家收货</VanStep>
       <VanStep>交易完成</VanStep>
     </VanSteps>
-    <OrderCard :type="information.itemName" :id="information.orderId" :place="place">
-      <span slot="shopName">{{information.shopName}}</span>
-      <img slot="goodsPicture"
-           class="goodsPicture"
-           :src="information.subIcon">
-      <span slot="amount">{{information.countCommodity}}</span>
-      <span slot="goodsName">{{information.commodityName}}</span>
-      <span slot="goodsSKU">{{information.subName}}</span>
-      <span slot="price">{{information.price}}</span>
-      <span slot="totalPrice">{{information.price * information.countCommodity}}</span>
-      <span slot="status">订单{{information.itemName}}</span>
+    <OrderCard
+        :place="'OrderDetail'"
+        :order="order"
+        v-if="flag">
     </OrderCard>
     <ARow class="messageBlock">
       <ARow :style="{'font-size' : '4vw','font-weight': 'bold'}">
@@ -149,68 +142,73 @@ export default {
   name: "OrderDetail",
   data() {
     return {
+      flag : false,
       //进度条激活位置
       active: 1,
       //商品卡片放在订单详情里
       place:"OrderDetail",
       //评论区内容
       message: "",
+      //传给子组件的订单对象
+      order : null,
       information: {
         //订单号
-        orderId :114514,
+        orderId : Number,
         //店名
-        shopName : "先辈红茶铺",
+        shopName : String,
         //商品数目
-        countCommodity : 2,
+        countCommodity : Number,
         //商品名
-        commodityName : " 昏睡红茶急速昏睡效力持久仙贝自用多种口味68包包邮 ",
+        commodityName : String,
         //种类名
-        subName : "精品",
+        subName : String,
         //单价
-        price : 1145141919810,
+        price : Number,
         //订单状态
-        itemName : "待评价",
+        itemName : String,
         //商品图标
-        subIcon :"https://imgsa.baidu.com/forum/w%3D580/sign=53e4d0b8bede9c82a665f9875c8080d2/a6bd62a98226cffcdfab8b33b4014a90f403eaa2.jpg",
+        subIcon : String,
         //状态变化日期表，id对应状态
-        statusDate : [
-          {id : 1, date : "2020.1.2"},
-          {id : 2, date : "2020.1.3"},
-          {id : 3, date : "2020.1.4"},
-          {id : 4, date : "2020.1.5"},
-          {id : 5, date : "2020.1.6"},
-          {id : 6, date : "2020.1.7"}
-        ],
+        statusDate : [],
         //收货地址
-        addressDetails : "北京市朝阳区下北泽大学医学院",
+        addressDetails : String,
       }
     };
   },
   components: { OrderCard },
-  mounted() {
-    if(this.information.itemName === "待付款"){
-      this.active = 1;
+  async created(){
+    const {$} = await import('@/util/ajax');
+    const result = await $.get(`/orderDetail?orderId=${1}`);
+    this.order = result.data.information.order;
+    this.information.itemName = result.data.information.state[0].recordId;
+    this.information.addressDetails = result.data.information.order.addressDetails;
+    this.information.subIcon = result.data.information.order.subIcon;
+    this.information.orderId = result.data.information.order.orderId;
+    this.information.shopName = result.data.information.order.shopName;
+    this.information.countCommodity =result.data.information.order.countCommodity;
+    this.information.commodityName = result.data.information.order.commodityName;
+    this.information.subName =result.data.information.order.subName;
+    this.information.price = result.data.information.order.price;
+    for(let i = 0; i < result.data.information.state.length; i++){
+      this.information.statusDate.unshift(
+          {
+            "id" : result.data.information.state[i].recordId,
+            "date": result.data.information.state[i].statusDate[0] + "." +
+                result.data.information.state[i].statusDate[1] + "."+
+                result.data.information.state[i].statusDate[2] + " " +
+                result.data.information.state[i].statusDate[3] + ":"+
+                result.data.information.state[i].statusDate[4] + ":" +
+                result.data.information.state[i].statusDate[5]
+          }
+      )
     }
-    else if(this.information.itemName === "待发货"){
-      this.active = 2;
-    }
-    else if(this.information.itemName === "待收货"){
-      this.active = 3;
-    }
-    else{
-      this.active = 4;
-    }
-  }
+    this.active = result.data.information.state[0].recordId;
+    this.flag = true;
+  },
 }
 </script>
 
 <style scoped>
-.goodsPicture {
-  width: auto;
-  height: auto;
-  max-height: 100%;
-  max-width: 100%;
-}
 .messageBlock{
   margin-top:5px;
   background-color: #ffffff;
