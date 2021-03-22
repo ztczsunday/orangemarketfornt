@@ -1,15 +1,17 @@
 <template>
 <div class="outerBlock">
-  <van-cell title="选择地址" is-link @click="showPopup"/>
+  <van-cell title="选择地址" is-link @click="showPopup" style="border-radius: 25px"/>
   <van-popup v-model="show" closeable position="bottom" style="height: 70%">
-    <div style="margin-top: 10px;margin-left: 20px; font-weight: bold">
+    <div style="margin-top: 10px;margin-left: 20px; font-weight: bold;border-radius: 25px">
       选择你的地址
     </div>
-    <div style="margin-top: 20px">
+    <div style="
+    margin-top: 20px;
+    border:1px solid #96c2f1;
+    background:#eff7ff">
       <van-cell title="地址1" value="默认" size="large" label="北京市朝阳区下北泽大学"
                 @click="changeAddress"/>
     </div>
-
   </van-popup>
 </div>
 </template>

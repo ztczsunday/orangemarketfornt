@@ -1,6 +1,13 @@
 <template>
   <div class="card">
-    <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}" is-link @click="toShop">
+    <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}"
+              is-link @click="toShop"
+              v-if="place !== 'SetOrder'">
+      <van-icon name="shop-o"/>
+      {{order.shopName}}
+    </van-cell>
+    <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}"
+              v-else>
       <van-icon name="shop-o"/>
       {{order.shopName}}
     </van-cell>
@@ -75,14 +82,13 @@ export default {
 <style scoped>
 .card {
   background-color: white;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 5px;
+  margin-right: 5px;
   margin-top: 5px;
-  width: 95%;
   border-radius: 25px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 
 }
 .goodsPicture {

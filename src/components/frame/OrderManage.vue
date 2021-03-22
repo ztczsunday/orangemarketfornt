@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VanTabs v-model="active">
+    <VanTabs v-model="active" sticky offset-top="46px">
       <VanTab title="全部">
         <van-list
             v-model="loading"
@@ -111,5 +111,4 @@ export default {
   max-height: 100%;
   max-width: 100%;
 }
-
 </style>
