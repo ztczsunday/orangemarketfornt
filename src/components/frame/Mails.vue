@@ -19,15 +19,15 @@
             {{ item["chatDate"][3] }}:{{ item["chatDate"][4] }}:{{ item["chatDate"][5] }}
           </ACol>
         </ARow>
-        <ARow :style="{'font-size':'4vw','height':'5vw'}">
-          <span style="font-weight: bold; color: blue;">
+        <ARow style="font-size: 4vw; height: 5vw;">
+          <span style="font-weight: bold; color: red;">
             {{ item["senderId"] !== $store.state.user.uid ? item.oppName : "我" }}:
           </span>
           <span>{{ item['newChatContent'] }}</span>
         </ARow>
         <ARow>
           <ACol push="21" span="3">
-            <van-icon :badge="item.isRead ? 1 : ''" name="chat-o" @click="showPopup(index)"/>
+            <van-icon :badge="item['isRead'] ? 1 : ''" name="chat-o" @click="showPopup(index)"/>
           </ACol>
         </ARow>
         <ARow style="height : 5px"></ARow>

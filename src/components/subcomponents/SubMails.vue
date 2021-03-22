@@ -2,7 +2,7 @@
   <div>
     <ARow style="margin-top: 10px">
       <ARow>
-        <ACol style="height:5vw; font-size: 4vw; font-weight: bold;" push="1" span="24">
+        <ACol style="height:5vw; font-size: 4vw; font-weight: bold;" push="1" span="23">
           {{ messages.oppName }}
         </ACol>
       </ARow>
