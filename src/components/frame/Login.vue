@@ -118,7 +118,6 @@ export default {
         }
         this.$store.state.user.uid = result.data.information.uid;
         this.$store.state.user.selfie = result.data.information.userSelfie;
-        console.log(result.data);
         this.antMessage.success(result.data.message);
         await this.$router.push("/");
       }
