@@ -43,11 +43,10 @@
           <ARow :style="{height : '5px'}"></ARow>
         </ARow>
       </van-cell>
-      <van-popup v-model="show" :style="{'height':'70%'}" closeable position="bottom" round>
-        <SubComments :scl="subcomments"></SubComments>
+      <van-popup v-model="show" :style="{'height':'70%'}" closeable position="bottom">
+        <SubComments :scl="subcomments" :fid="this.fid" @reload="reload"></SubComments>
       </van-popup>
     </van-list>
-
   </ARow>
 </template>
 
@@ -71,7 +70,8 @@ export default {
       //是否全部加载完毕
       finished: false,
       pages : 0,
-      subcomments: []
+      subcomments: [],
+      fid : 0,
     }
   },
   methods: {
@@ -89,9 +89,22 @@ export default {
       this.loading = false;
       this.finished=true;
     },
+    reload(){
+      this.list = [];
+      this.subCommentList = [];
+      this.show = false;
+      this.allLoaded =false;
+      this.subShowList = [];
+      this.loading = false;
+      this.finished = false;
+      this.pages = 0;
+      this.subcomments = [];
+      this.fid = 0;
+    },
     showPopup(index) {
       this.show = true;
       this.subcomments = this.subCommentList[index];
+      this.fid = this.list[index].cid;
     },
   },
 }
