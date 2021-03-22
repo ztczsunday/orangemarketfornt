@@ -14,19 +14,26 @@
           <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" span="21">
             {{ item.oppName }}
           </ACol>
+          <ACol>
+            {{ item["chatDate"][0] }}/{{ item["chatDate"][1] }}/{{ item["chatDate"][2] }}
+            {{ item["chatDate"][3] }}:{{ item["chatDate"][4] }}:{{ item["chatDate"][5] }}
+          </ACol>
         </ARow>
-        <ARow :style="{'font-size':'4vw','height':'5vw'}">
-          {{ item.newChatContent }}
+        <ARow style="font-size: 4vw; height: 5vw;">
+          <span style="font-weight: bold; color: red;">
+            {{ item["senderId"] !== $store.state.user.uid ? item.oppName : "我" }}:
+          </span>
+          <span>{{ item['newChatContent'] }}</span>
         </ARow>
         <ARow>
           <ACol push="21" span="3">
-            <van-icon :badge="item.isRead ? 1 : ''" name="chat-o" @click="showPopup(index)"/>
+            <van-icon :badge="item['isRead'] ? 1 : ''" name="chat-o" @click="showPopup(index)"/>
           </ACol>
         </ARow>
         <ARow style="height : 5px"></ARow>
       </ARow>
       <van-popup v-model="show" style="height: 95%" closeable position="bottom">
-        <SubMails :opp-name="subMailMessage.oppName"></SubMails>
+        <SubMails :messages="subMailMessage" @update="showPopup(currPage)"></SubMails>
       </van-popup>
     </van-cell>
   </van-list>
@@ -34,20 +41,6 @@
 
 <script>
 import SubMails from "@/components/subcomponents/SubMails";
-
-class Mail {
-  constructor(chatDate, senderId, senderType, receiverId, receiverType, isRead, newChatContent, oppSelfie, oppName) {
-    this.chatDate = chatDate;
-    this.senderId = senderId;
-    this.senderType = senderType;
-    this.receiverId = receiverId;
-    this.receiverType = receiverType;
-    this.isRead = isRead;
-    this.newChatContent = newChatContent;
-    this.oppSelfie = oppSelfie;
-    this.oppName = oppName;
-  }
-}
 
 export default {
   name: "Mails",
@@ -61,9 +54,24 @@ export default {
       finished: false,
       /* 存储mails */
       mails: [],
-      /*  */
+      /* 当前查看哪个子页面 */
+      currPage: null,
+      /* 子页面的数据传输 */
       subMailMessage: {
-        oppName: null
+        /* 聊天对象ID */
+        oppId: Number,
+        /* 聊天对象名 */
+        oppName: String,
+        /* 聊天对象的头像 */
+        oppSelfie: String,
+        /* 聊天对象的身份 */
+        oppType: String,
+        /* 自己的头像 */
+        mySelfie: String,
+        /* 自己的身份 */
+        myType: String,
+        /* 聊天数据 */
+        messages: Array,
       }
     }
   },
@@ -72,25 +80,30 @@ export default {
       const { $ } = await import("@/util/ajax");
       const result = await $.get('/user/aboutChats');
       const mails = result.data.information;
-      console.log(mails);
-      Array.prototype.push.apply(this.mails, mails.map(
-          record => new Mail(
-              record.chatDate,
-              record.senderId,
-              record.senderType,
-              record.receiverId,
-              record.receiverType,
-              record.isRead,
-              record.newChatContent,
-              record.oppSelfie,
-              record.oppName
-          )
-      ));
+      Array.prototype.push.apply(this.mails, mails);
       this.finished = true;
     },
-    showPopup(index) {
+    async showPopup(index) {
+      const { $ } = await import("@/util/ajax");
+      /* AJAX请求 */
+      const oppUid = this.mails[index]['oppId'];
+      const result = await $.get('/user/receiveChats', {
+        params: {
+          oppUid,
+          oppType: this.mails[index].oppType,
+          selfType: this.mails[index].myType
+        }
+      });
+      /* 数据传输给子组件 */
+      this.subMailMessage.oppId = this.mails[index].oppId;
+      this.subMailMessage.oppName = this.mails[index].oppName;
+      this.subMailMessage.oppSelfie = this.mails[index].oppSelfie;
+      this.subMailMessage.oppType = this.mails[index].oppType;
+      this.subMailMessage.mySelfie = this.mails[index].mySelfie;
+      this.subMailMessage.myType = this.mails[index].myType;
+      this.subMailMessage.messages = result.data.information;
+      this.currPage = index;
       this.show = true;
-      this.subMailMessage = this.mails[index];
     },
   },
   components: {
