@@ -8,6 +8,7 @@ const state = new vuex.Store({
         title: '',
         user: {
             uid: 2,
+            selfie: "http://localhost:8081/download?fileName=default_selfie.jpg",
             tel: 15770742170,
             password: 114514
         }

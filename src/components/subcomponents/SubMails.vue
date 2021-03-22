@@ -3,47 +3,30 @@
     <ARow style="margin-top: 10px">
       <ARow>
         <ACol style="height:5vw; font-size: 4vw; font-weight: bold;" push="1" span="24">
-          {{ oppName }}
+          {{ messages.oppName }}
         </ACol>
       </ARow>
       <ARow :style="{'height':'10px'}"></ARow>
-      <ARow>
-        <ACol push="1" span="3">
-          <a-avatar
-              src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3062702743,253584811&fm=26&gp=0.jpg"/>
-        </ACol>
-        <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" push="1" span="4">
-          dio
-        </ACol>
-      </ARow>
-      <ARow>
-        <ACol :style="{'font-size':'4vw','height':'5vw'}" push="1">
-          wryyyyyyyyyy
-        </ACol>
-      </ARow>
-      <ARow
-          :style="{height : '10px','border-bottomm-width':'0.5px','border-bottom-color':'grey','border-bottom-style':'solid'}">
-      </ARow>
+      <VanCell v-for="(item, index) in messages.messages" :key="index">
+        <ARow>
+          <ACol span="3">
+            <a-avatar :src="item['senderId'] === $store.state.user.uid ? messages.oppSelfie : messages.mySelfie"/>
+          </ACol>
+          <ACol style="height: 5vw; font-size: 4vw; font-weight: bold" span="21">
+            {{ item["senderId"] === $store.state.user.uid ? messages.oppName : "我" }}
+          </ACol>
+          <ACol>
+            {{ item["chatDate"][0] }}/{{ item["chatDate"][1] }}/{{ item["chatDate"][2] }}
+            {{ item["chatDate"][3] }}:{{ item["chatDate"][4] }}:{{ item["chatDate"][5] }}
+          </ACol>
+        </ARow>
+        <ARow>
+          <ACol style="font-size: 4vw; height:5vw" push="1">
+            {{ item["chatDetails"] }}
+          </ACol>
+        </ARow>
+      </VanCell>
     </ARow>
-
-
-    <ARow :style="{'height':'10px'}"></ARow>
-    <ARow>
-      <ACol push="1" span="3">
-        <a-avatar src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3062702743,253584811&fm=26&gp=0.jpg"/>
-      </ACol>
-      <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" push="1" span="4">
-        dio
-      </ACol>
-    </ARow>
-    <ARow>
-      <ACol :style="{'font-size':'4vw','height':'5vw'}" push="1">
-        wryyyyyyyyyy
-      </ACol>
-    </ARow>
-    <ARow
-        :style="{height : '10px','border-bottomm-width':'0.5px','border-bottom-color':'grey','border-bottom-style':'solid'}"></ARow>
-
   </div>
 </template>
 
@@ -51,11 +34,9 @@
 export default {
   name: "SubComments",
   props: {
-    oppName: String
+    messages: Object
   }
 }
 </script>
-
 <style scoped>
-
 </style>

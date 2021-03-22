@@ -9,14 +9,18 @@
       <ARow>
         <ARow>
           <ACol span="3">
-            <a-avatar :src="item.oppSelfie"/>
+            <a-avatar :src="item['senderId'] === item.oppUid ? item.oppSelfie : item.mySelfie"/>
           </ACol>
           <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" span="21">
             {{ item.oppName }}
           </ACol>
+          <ACol>
+            {{ item["chatDate"][0] }}/{{ item["chatDate"][1] }}/{{ item["chatDate"][2] }}
+            {{ item["chatDate"][3] }}:{{ item["chatDate"][4] }}:{{ item["chatDate"][5] }}
+          </ACol>
         </ARow>
         <ARow :style="{'font-size':'4vw','height':'5vw'}">
-          {{ item.newChatContent }}
+          {{ item['newChatContent'] }}
         </ARow>
         <ARow>
           <ACol push="21" span="3">
@@ -26,7 +30,7 @@
         <ARow style="height : 5px"></ARow>
       </ARow>
       <van-popup v-model="show" style="height: 95%" closeable position="bottom">
-        <SubMails :opp-name="subMailMessage.oppName"></SubMails>
+        <SubMails :messages="subMailMessage"></SubMails>
       </van-popup>
     </van-cell>
   </van-list>
@@ -34,20 +38,6 @@
 
 <script>
 import SubMails from "@/components/subcomponents/SubMails";
-
-class Mail {
-  constructor(chatDate, senderId, senderType, receiverId, receiverType, isRead, newChatContent, oppSelfie, oppName) {
-    this.chatDate = chatDate;
-    this.senderId = senderId;
-    this.senderType = senderType;
-    this.receiverId = receiverId;
-    this.receiverType = receiverType;
-    this.isRead = isRead;
-    this.newChatContent = newChatContent;
-    this.oppSelfie = oppSelfie;
-    this.oppName = oppName;
-  }
-}
 
 export default {
   name: "Mails",
@@ -61,9 +51,16 @@ export default {
       finished: false,
       /* 存储mails */
       mails: [],
-      /*  */
+      /* 子页面的数据传输 */
       subMailMessage: {
-        oppName: null
+        /* 聊天对象名 */
+        oppName: null,
+        /* 聊天数据 */
+        messages: [],
+        /* 聊天对象的头像 */
+        oppSelfie: null,
+        /* 自己的头像 */
+        mySelfie: null
       }
     }
   },
@@ -72,25 +69,25 @@ export default {
       const { $ } = await import("@/util/ajax");
       const result = await $.get('/user/aboutChats');
       const mails = result.data.information;
-      console.log(mails);
-      Array.prototype.push.apply(this.mails, mails.map(
-          record => new Mail(
-              record.chatDate,
-              record.senderId,
-              record.senderType,
-              record.receiverId,
-              record.receiverType,
-              record.isRead,
-              record.newChatContent,
-              record.oppSelfie,
-              record.oppName
-          )
-      ));
+      Array.prototype.push.apply(this.mails, mails);
       this.finished = true;
     },
-    showPopup(index) {
+    async showPopup(index) {
+      const { $ } = await import("@/util/ajax");
+
+      const oppUid = this.mails[index]['oppId'];
+      const result = await $.get('/user/receiveChats', {
+        params: {
+          oppUid,
+          oppType: this.mails[index]['oppType'],
+          selfType: this.mails[index]['myType']
+        }
+      });
+      this.subMailMessage.oppName = this.mails[index].oppName;
+      this.subMailMessage.oppSelfie = this.mails[index].oppSelfie;
+      this.subMailMessage.mySelfie = this.mails[index].mySelfie;
+      this.subMailMessage.messages = result.data.information;
       this.show = true;
-      this.subMailMessage = this.mails[index];
     },
   },
   components: {
