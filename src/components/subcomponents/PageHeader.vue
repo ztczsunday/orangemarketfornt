@@ -30,7 +30,7 @@ export default {
   name: "PageHeader",
   async created() {
     const { mainRoutes } = await import('@/extend/router');
-    this.shouldntNavbarRoutes = mainRoutes.slice(0, 2);
+    this.shouldntNavbarRoutes = mainRoutes.slice(0, 3);
     this.$store.subscribe(mutation => {
       if (mutation.type === 'changeTitle') {
         this.title = mutation.payload;
@@ -52,6 +52,11 @@ export default {
   },
   methods: {
     onSearch() {
+      this.$router.push({
+        path: '/searchResult', query: {
+          keyword: this.value
+        }
+      });
     }
   }
 }

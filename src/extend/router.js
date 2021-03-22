@@ -16,12 +16,14 @@ import ManageCenter from "@/components/frame/ManageCenter";
 import BuildGoods from "@/components/frame/BuildGoods";
 import BuildShop from "@/components/frame/BuildShop";
 import SetOrder from "@/components/frame/SetOrder";
+import SearchResult from "@/components/frame/SearchResult";
 
 /* 设定router的内容 */
 const routes = [
     { path: '/', name: '商城主页', component: Market, meta: { title: '商城页面' } },
     { path: '/mails', name: '私聊界面', component: Mails, meta: { title: '站内信' } },
     { path: '/personalInfo', name: '个人信息', component: PersonalInfo, meta: { title: '个人信息' } },
+    { path: '/searchResult', name: '搜索结果', component: SearchResult, meta: { title: '搜索结果' } },
     { path: '/login', name: '登录界面', component: Login, meta: { title: '登录页面' } },
     { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
     { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
@@ -37,7 +39,7 @@ const routes = [
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
-const mainRoutes = [''].concat(routes.slice(0, 3).map(each => each.meta.title));
+const mainRoutes = [''].concat(routes.slice(0, 4).map(each => each.meta.title));
 
 /* 由router数组，创建router对象 */
 const router = new VueRouter({

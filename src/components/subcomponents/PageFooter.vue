@@ -11,12 +11,13 @@ export default {
   name: "PageFoot",
   async created() {
     const { mainRoutes } = await import('@/extend/router');
+    this.mainRoutes = mainRoutes.slice(0, 4);
     this.$store.subscribe(mutation => {
       if (mutation.type === 'changeTitle') {
-        this.active = mainRoutes.indexOf(mutation.payload) - 1;
+        this.active = this.mainRoutes.indexOf(mutation.payload) - 1;
       }
     });
-    this.active = mainRoutes.indexOf(document.title) - 1;
+    this.active = this.mainRoutes.indexOf(document.title) - 1;
   },
   data() {
     return {
