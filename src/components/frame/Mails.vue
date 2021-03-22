@@ -33,7 +33,7 @@
         <ARow style="height : 5px"></ARow>
       </ARow>
       <van-popup v-model="show" style="height: 95%" closeable position="bottom">
-        <SubMails :messages="subMailMessage"></SubMails>
+        <SubMails :messages="subMailMessage" @update="showPopup(currPage)"></SubMails>
       </van-popup>
     </van-cell>
   </van-list>
@@ -54,16 +54,24 @@ export default {
       finished: false,
       /* 存储mails */
       mails: [],
+      /* 当前查看哪个子页面 */
+      currPage: null,
       /* 子页面的数据传输 */
       subMailMessage: {
+        /* 聊天对象ID */
+        oppId: Number,
         /* 聊天对象名 */
-        oppName: null,
-        /* 聊天数据 */
-        messages: [],
+        oppName: String,
         /* 聊天对象的头像 */
-        oppSelfie: null,
+        oppSelfie: String,
+        /* 聊天对象的身份 */
+        oppType: String,
         /* 自己的头像 */
-        mySelfie: null
+        mySelfie: String,
+        /* 自己的身份 */
+        myType: String,
+        /* 聊天数据 */
+        messages: Array,
       }
     }
   },
@@ -73,23 +81,29 @@ export default {
       const result = await $.get('/user/aboutChats');
       const mails = result.data.information;
       Array.prototype.push.apply(this.mails, mails);
+      console.log(mails);
       this.finished = true;
     },
     async showPopup(index) {
       const { $ } = await import("@/util/ajax");
-
+      /* AJAX请求 */
       const oppUid = this.mails[index]['oppId'];
       const result = await $.get('/user/receiveChats', {
         params: {
           oppUid,
-          oppType: this.mails[index]['oppType'],
-          selfType: this.mails[index]['myType']
+          oppType: this.mails[index].oppType,
+          selfType: this.mails[index].myType
         }
       });
+      /* 数据传输给子组件 */
+      this.subMailMessage.oppId = this.mails[index].oppId;
       this.subMailMessage.oppName = this.mails[index].oppName;
       this.subMailMessage.oppSelfie = this.mails[index].oppSelfie;
+      this.subMailMessage.oppType = this.mails[index].oppType;
       this.subMailMessage.mySelfie = this.mails[index].mySelfie;
+      this.subMailMessage.myType = this.mails[index].myType;
       this.subMailMessage.messages = result.data.information;
+      this.currPage = index;
       this.show = true;
     },
   },
