@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ARow :style="{'margin-top': '10px'}">
+    <ARow style="margin-top: 10px">
       <ARow>
-        <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" push="1">
-          更多评论
+        <ACol style="height:5vw; font-size: 4vw; font-weight: bold;" push="1" span="24">
+          {{ oppName }}
         </ACol>
       </ARow>
       <ARow :style="{'height':'10px'}"></ARow>
@@ -22,7 +22,8 @@
         </ACol>
       </ARow>
       <ARow
-          :style="{height : '10px','border-bottomm-width':'0.5px','border-bottom-color':'grey','border-bottom-style':'solid'}"></ARow>
+          :style="{height : '10px','border-bottomm-width':'0.5px','border-bottom-color':'grey','border-bottom-style':'solid'}">
+      </ARow>
     </ARow>
 
 
@@ -48,7 +49,10 @@
 
 <script>
 export default {
-  name: "SubComments"
+  name: "SubComments",
+  props: {
+    oppName: String
+  }
 }
 </script>
 

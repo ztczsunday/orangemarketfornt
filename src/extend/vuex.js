@@ -7,6 +7,7 @@ const state = new vuex.Store({
     state: {
         title: '',
         user: {
+            uid: 2,
             tel: 15770742170,
             password: 114514
         }
