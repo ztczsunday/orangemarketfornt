@@ -9,7 +9,7 @@
       <ARow>
         <ARow>
           <ACol span="3">
-            <a-avatar :src="item['senderId'] === item.oppUid ? item.oppSelfie : item.mySelfie"/>
+            <a-avatar :src="item.oppSelfie"/>
           </ACol>
           <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" span="21">
             {{ item.oppName }}
@@ -20,7 +20,10 @@
           </ACol>
         </ARow>
         <ARow :style="{'font-size':'4vw','height':'5vw'}">
-          {{ item['newChatContent'] }}
+          <span style="font-weight: bold; color: blue;">
+            {{ item["senderId"] !== $store.state.user.uid ? item.oppName : "我" }}:
+          </span>
+          <span>{{ item['newChatContent'] }}</span>
         </ARow>
         <ARow>
           <ACol push="21" span="3">
