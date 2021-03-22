@@ -25,13 +25,34 @@
 <script>
 export default {
   name: "ProductDetailBuy",
+  props:{
+    typeList: Array,
+  },
   async mounted() {
-    this.getInfo = require('@/assets/ProductDetailBuy.json');
-    this.sku.tree[0].v = this.getInfo.typeDetail;
-    this.sku.list = this.getInfo.typeList;
-    this.sku.price = this.getInfo.defaultPrice;
-    this.sku.stock_num = this.getInfo.totalStock;
-    this.goods.picture = this.getInfo.goodsPictureSmall;
+    this.sku.price = this.typeList[0].price;
+    for(let i = 0; i < this.typeList.length; i++){
+      this.sku.tree[0].v.push(
+          {
+            "id": String(i),
+            "name": this.typeList[i].subName,
+            "imgUrl": this.typeList[i].subIcon,
+            "previewImgUrl": this.typeList[i].subIcon,
+          }
+      );
+      this.sku.list.push(
+          {
+            "id": this.typeList[i].subId,
+            "s1": String(i),
+            "price": this.typeList[i].price*100,
+            "stock_num": this.typeList[i].stock
+          }
+      );
+      this.sku.stock_num += this.typeList[i].stock;
+      if(this.typeList[i].price < this.sku.price){
+        this.sku.price = this.typeList[i].price;
+      }
+    }
+    this.goods.picture = this.typeList[0].subIcon;
   },
   data() {
     return {

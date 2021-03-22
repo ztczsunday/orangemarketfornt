@@ -12,7 +12,7 @@
             <ACol span="3">
               <a-avatar :src= "item.userSelfie"/>
             </ACol>
-            <ACol :style="{'height':'5vw','font-size': '4vw','font-weight':'bold'}" span="21">
+            <ACol :style="{'height':'5vw','font-weight':'bold'}" span="21">
               {{item.userName}}
             </ACol>
             <ACol>

@@ -5,7 +5,7 @@
         店铺名
       </ACol>
       <ACol :style="{'font-size': '5vw','font-weight':'bold'}" span="12">
-        仙贝红茶铺
+        {{shopName}}
       </ACol>
     </ARow>
     <ARow :style="{height : '5vw','margin-left':'10px','margin-top':'2px', color : 'grey',fontSize : '3vw'}">
@@ -13,7 +13,7 @@
         简介
       </ACol>
       <ACol :style="{'font-size': '4vw'}" span="18">
-        主营：精品红茶、高山红茶、批发红茶、阿萨姆红茶、适合泡奶茶，多买多送
+        {{shopDescription}}
       </ACol>
     </ARow>
     <van-cell :style="{'border-radius' : '25px'}" is-link @click="toShop">
@@ -27,6 +27,11 @@
 
 <script>
 export default {
+  props:{
+    shopName : String,
+    shopDescription : String,
+    shopId : Number,
+  },
   name: "ShopBlock",
   methods: {
     toShop() {

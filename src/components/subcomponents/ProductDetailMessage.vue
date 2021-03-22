@@ -3,8 +3,8 @@
     <ARow justify="center" type="flex">
       <ACol span="24">
         <van-swipe :autoplay="3000">
-          <van-swipe-item v-for="(image, index) in info.picture" :key="index">
-            <img v-lazy="image" class="productPicture"/>
+          <van-swipe-item v-for="(image, index) in goodsInfo.commodityPictures" :key="index">
+            <img v-lazy="image.pictureUrl" class="productPicture"/>
           </van-swipe-item>
         </van-swipe>
       </ACol>
@@ -13,42 +13,45 @@
     <ARow class="buy">
       <ARow>
         <ARow></ARow>
-        <ACol span="20">
-          <div class="priceBlock" push="1">
-            ￥ {{ info.price_low }}-{{ info.price_high }}
+        <ACol span="15">
+          <div class="priceBlock">
+            ￥ {{priceLow}}
           </div>
+        </ACol>
+        <ACol class="grades" span="9">
+          好评率：{{ praiseRate }}%
         </ACol>
       </ARow>
       <ARow>
-        <ACol class="grades" push="14" span="9">
-          好评率：{{ info.PraiseRate }}
-        </ACol>
       </ARow>
       <ARow justify="center" type="flex">
         <ACol span="22">
           <div class="introduce">
-            {{ info.name }}
+            {{ goodsInfo.commodityName}}
           </div>
         </ACol>
       </ARow>
       <ARow :style="{'height' : '3vw'}"></ARow>
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
-    <ProductDetailBuy></ProductDetailBuy>
+    <ProductDetailBuy :typeList="goodsInfo.subCommodity" v-if="flag"></ProductDetailBuy>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ARow class="buy">
-      <CommentsBlock></CommentsBlock>
+      <CommentsBlock :comments="goodsInfo.hotComments" v-if="flag"></CommentsBlock>
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ARow class="buy">
-      <ShopBlock></ShopBlock>
+      <ShopBlock :shopName="goodsInfo.shopName"
+                 :shopDescription="goodsInfo.shopDescription"
+                 :shopId="goodsInfo.shopId"
+                 v-if="flag"></ShopBlock>
     </ARow>
     <ARow>
       <div :style="{'width':'100%','text-align':'center'}">
         -----商品详情-----
       </div>
-      <div v-for="(image,index) in info.goodsDetailPicture" :key="index">
-        <img :src="image" class="detailPicture">
+      <div v-for="(image,index) in goodsInfo.commodityDetails" :key="index">
+        <img :src="image.detailsUrl" class="detailPicture">
       </div>
     </ARow>
     <ARow :style="{height : '50px'}"></ARow>
@@ -63,11 +66,33 @@ import ShopBlock from "@/components/subcomponents/ShopBlock";
 export default {
   name: "ProductDetailMessage",
   components: { ShopBlock, CommentsBlock, ProductDetailBuy },
+  props:{
+    goodsInfo : {
+      commentCount: Number,
+      commodityDetails: Array,
+      commodityName: String,
+      commodityPictures: Array,
+      hotComments: Array,
+      isCollected: Boolean,
+      praiseCommentCount: Number,
+      shopDescription: String,
+      shopName: String,
+      subCommodity: Array,
+    },
+  },
   async mounted() {
     this.info = require('@/assets/GoodsData.json');
-    console.log(this.info)
-    // const {$} = await import('@/util/ajax');
-    // await $.get('assets/GoodsData.json');
+    this.priceLow = this.goodsInfo.subCommodity[0].price;
+    for(let i = 1; i < this.goodsInfo.subCommodity.length; i++){
+      if(this.goodsInfo.subCommodity[i].price < this.priceLow){
+        this.priceLow = this.goodsInfo;
+      }
+    }
+    if(this.goodsInfo.commentCount !== 0){
+      this.praiseRate = (this.goodsInfo.praiseCommentCount/this.goodsInfo.commentCount)*100;
+    }
+    this.flag = true;
+    console.log(this.goodsInfo.commodityDetails);
   },
   data() {
     return {
@@ -85,6 +110,9 @@ export default {
         // 商品详情图片
         goodsDetailPicture: []
       },
+      priceLow : 0,
+      praiseRate: 0,
+      flag : false
     };
   },
   methods: {}
@@ -109,6 +137,8 @@ export default {
   display: table-cell;
   vertical-align: bottom;
   font-size: 6vw;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 .introduce {
   font-weight: bold;
@@ -120,6 +150,7 @@ export default {
   color: grey;
   text-align: center;
   display: inline-flex;
+  margin-top: 20px;
 }
 .productPicture {
   height: 60vw;

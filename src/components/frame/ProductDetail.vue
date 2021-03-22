@@ -1,7 +1,7 @@
 <template>
   <ARow>
     <ARow>
-      <ProductDetailMessage/>
+      <ProductDetailMessage :goodsInfo="this.goodsInfo" v-if="flag === true"/>
     </ARow>
     <ProductFooter></ProductFooter>
   </ARow>
@@ -14,10 +14,18 @@ import ProductFooter from "@/components/subcomponents/ProductFooter";
 export default {
   name: "ProductDetail",
   components: { ProductFooter, ProductDetailMessage },
+  data(){
+    return{
+      goodsInfo : null,
+      flag : false
+    }
+  },
   async created() {
     const {$} = await import('@/util/ajax');
-    const result = await $.get(`/commodity?commodityId=${1}`);
-    console.log(result);
+    const result = await $.get(`/commodity?commodityId=${7}`);
+    this.goodsInfo = result.data.information;
+    this.flag = true
+    console.log(this.goodsInfo)
   }
 }
 </script>
