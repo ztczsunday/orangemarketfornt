@@ -8,8 +8,8 @@
     />
     <!-- 收藏区域 -->
     <VanGrid :border="false" :column-num="4" style="height: 70px">
-      <VanGridItem icon="star-o" style="height: 70px" text="收藏" @click="$router.push('')"/>
-      <VanGridItem icon="clock-o" style="height: 70px" text="历史记录" @click="$router.push('/history')"/>
+      <VanGridItem icon="star-o" style="height: 70px" text="收藏" @click="$router.push('/Favorite')"/>
+      <VanGridItem icon="clock-o" style="height: 70px" text="历史记录" @click="$router.push('/History')"/>
       <VanGridItem icon="logistics" style="height: 70px" text="待收货" @click="$router.push('')"/>
       <VanGridItem icon="comment-o" style="height: 70px" text="待评价" @click="$router.push('')"/>
     </VanGrid>

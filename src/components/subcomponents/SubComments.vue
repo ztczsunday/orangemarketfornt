@@ -42,10 +42,10 @@
       <ARow class="footer" type="flex" justify="space-between">
         <ACol>
           <VanCellGroup>
-            <VanCard
+            <VanField
                 v-model="message"
                 rows="1"
-                autosize
+                autosize=""
                 label="评论"
                 type="textarea"
                 placeholder="也来说两句吧"

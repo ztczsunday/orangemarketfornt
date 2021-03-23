@@ -18,14 +18,9 @@ export default {
   name: "Market",
   async created() {
     const { $ } = await import("@/util/ajax");
-    const formData = new FormData();
-    formData.append("keyword", '');
-    formData.append("pages", '0');
-    formData.append("pageSize", '10');
-    const result = await $.post('/findCommodityByKey', formData);
-    // const result = await $.get('/recommends');
+    const result = await $.get('/recommends');
     const page = result.data.information;
-    this.commodities = page.records;
+    this.commodities = page;
     console.log(page);
   },
   data() {
