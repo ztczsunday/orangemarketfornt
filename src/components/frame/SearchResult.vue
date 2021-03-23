@@ -30,8 +30,9 @@
                   :thumb="item.mainIcon"
                   :title="item.commodityName"
                   :price="computePrice(item['lowestPrice'])"
-                  style="font-size: 15px"
+                  style="font-size: 15px; background: white"
                   @click="$router.push(`/?cid=${item.cid}`)"
+                  class="bottom"
         />
       </van-cell>
     </van-list>
@@ -108,5 +109,7 @@ export default {
 </script>
 
 <style scoped>
-
+.bottom {
+  border: 1px solid #ebedf0;
+}
 </style>

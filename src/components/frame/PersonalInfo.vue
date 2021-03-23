@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 个人信息区域 -->
-    <van-card
+    <VanCard
         :title="userInfo.username"
         :desc="userInfo.userSignature"
         :thumb="userInfo.userSelfie"
@@ -16,6 +16,8 @@
     <!-- 信息区域 -->
     <VanCellGroup>
       <VanCell is-link title="用户反馈"/>
+      <ARow style="border: 10px solid #F5F5F5;"/>
+      <VanCell title="退出登录" style="text-align: center"/>
     </VanCellGroup>
   </div>
 </template>
