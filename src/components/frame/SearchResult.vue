@@ -68,28 +68,26 @@ export default {
       return price % 1 !== 0 ? price : price + ".00";
     },
     async onSearch() {
-      const { $ } = await import("@/util/ajax");
-      const formData = new FormData();
-      formData.append("keyword", this.keyword);
-      formData.append("pages", this.nowPage);
-      formData.append("pageSize", this.pageSize);
-      if (this.minValue !== null && this.minValue !== "") {
-        formData.append("minValue", this.minValue);
-      }
-      if (this.maxValue !== null && this.maxValue !== "") {
-        formData.append("maxValue", this.maxValue);
-      }
-      const result = await $.post('/findCommodityByKey', formData);
-      const page = result.data.information;
+      this.nowPage = 0;
+      const result = await this.query();
+      const page = result['data']['information'];
       this.commodities = page.records;
-      this.nowPage = 1;
+      this.loading = false;
       this.finished = this.nowPage >= page.total / page.size;
     },
     async onLoad() {
+      this.nowPage++;
+      const result = await this.query();
+      const page = result['data']['information'];
+      Array.prototype.push.apply(this.commodities, page.records);
+      this.loading = false;
+      this.finished = page.current >= page.total / page.size;
+    },
+    async query() {
       const { $ } = await import("@/util/ajax");
       const formData = new FormData();
       formData.append("keyword", this.keyword);
-      formData.append("pages", this.nowPage);
+      formData.append("page", this.nowPage);
       formData.append("pageSize", this.pageSize);
       if (this.minValue !== null && this.minValue !== "") {
         formData.append("minValue", this.minValue);
@@ -97,12 +95,8 @@ export default {
       if (this.maxValue !== null && this.maxValue !== "") {
         formData.append("maxValue", this.maxValue);
       }
-      const result = await $.post('/findCommodityByKey', formData);
-      const page = result.data.information;
-      Array.prototype.push.apply(this.commodities, page.records);
-      this.nowPage++;
-      this.finished = this.nowPage >= page.total / page.size;
-    }
+      return await $.post('/findCommodityByKey', formData);
+    },
   }
 }
 </script>
