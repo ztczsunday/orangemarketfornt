@@ -1,29 +1,40 @@
 <template>
   <div>
-    <div class="row align-center">
-      <code>RouterList:</code>
-    </div>
-    <ARow>
-      <ACol v-for="(router, index) in routes" :key="index" class="align-center" span="6">
-        <AButton class="fillfull align-center" @click="$router.push(router.path)">{{ router.meta.title }}</AButton>
-      </ACol>
-    </ARow>
+    <van-cell>
+      <van-card v-for="(item, index) in commodities"
+                :key="index"
+                :thumb="item.mainIcon"
+                :title="item.commodityName"
+                style="font-size: 15px; background: white; border: 1px solid #ebedf0;"
+                @click="$router.push(`/?cid=${item.cid}`)"
+      />
+    </van-cell>
   </div>
 </template>
 
 <script>
-import "@/assets/css/grid.css";
-import { routes } from "@/extend/router";
 
 export default {
   name: "Market",
-  created() {
+  async created() {
+    const { $ } = await import("@/util/ajax");
+    const formData = new FormData();
+    formData.append("keyword", '');
+    formData.append("pages", '0');
+    formData.append("pageSize", '10');
+    const result = await $.post('/findCommodityByKey', formData);
+    // const result = await $.get('/recommends');
+    const page = result.data.information;
+    this.commodities = page.records;
+    console.log(page);
   },
   data() {
     return {
-      routes: routes
+      /* 存储commodities */
+      commodities: []
     }
-  }
+  },
+  methods: {}
 }
 </script>
 

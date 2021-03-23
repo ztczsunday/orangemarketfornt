@@ -13,29 +13,28 @@
         </div>
       </template>
     </VanSearch>
-    <div style="text-align: center; background: white;">
-      <a-input v-model="minValue" placeholder="请输入最低价" style="width: 45%;" prefix="￥"/>
-      ~
-      <a-input v-model="maxValue" placeholder="请输入最高价" style="width: 45%;" prefix="￥"/>
+    <div style="text-align: center; background: white; padding: 0 10px;">
+      <AInput v-model="minValue" placeholder="请输入最低价" style="width: 47%;" prefix="￥"/>
+      <span style="width: 6%">~</span>
+      <AInput v-model="maxValue" placeholder="请输入最高价" style="width: 47%;" prefix="￥"/>
     </div>
-    <van-list
+    <VanList
         v-model="loading"
         :finished="finished"
         finished-text="没有更多了"
         @load="onLoad"
     >
-      <van-cell>
-        <van-card v-for="(item, index) in commodities"
+      <VanCell>
+        <VanCard v-for="(item, index) in commodities"
                   :key="index"
                   :thumb="item.mainIcon"
                   :title="item.commodityName"
                   :price="computePrice(item['lowestPrice'])"
-                  style="font-size: 15px; background: white"
+                  style="font-size: 15px; background: white; border: 1px solid #ebedf0;"
                   @click="$router.push(`/?cid=${item.cid}`)"
-                  class="bottom"
         />
-      </van-cell>
-    </van-list>
+      </VanCell>
+    </VanList>
   </div>
 </template>
 
@@ -109,7 +108,4 @@ export default {
 </script>
 
 <style scoped>
-.bottom {
-  border: 1px solid #ebedf0;
-}
 </style>

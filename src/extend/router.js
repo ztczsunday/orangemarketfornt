@@ -17,16 +17,17 @@ import BuildGoods from "@/components/frame/BuildGoods";
 import BuildShop from "@/components/frame/BuildShop";
 import SetOrder from "@/components/frame/SetOrder";
 import SearchResult from "@/components/frame/SearchResult";
+import RouterList from "@/components/frame/RouterList";
 
 /* 设定router的内容 */
 const routes = [
     { path: '/', name: '商城主页', component: Market, meta: { title: '商城页面' } },
-    { path: '/mails', name: '私聊界面', component: Mails, meta: { title: '站内信' } },
-    { path: '/personalInfo', name: '个人信息', component: PersonalInfo, meta: { title: '个人信息' } },
-    { path: '/searchResult', name: '搜索结果', component: SearchResult, meta: { title: '搜索结果' } },
-    { path: '/login', name: '登录界面', component: Login, meta: { title: '登录页面' } },
-    { path: '/history', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
-    { path: '/register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
+    { path: '/Mails', name: '私聊界面', component: Mails, meta: { title: '站内信' } },
+    { path: '/PersonalInfo', name: '个人信息', component: PersonalInfo, meta: { title: '个人信息' } },
+    { path: '/SearchResult', name: '搜索结果', component: SearchResult, meta: { title: '搜索结果' } },
+    { path: '/Login', name: '登录界面', component: Login, meta: { title: '登录页面' } },
+    { path: '/History', name: '浏览记录', component: Histories, meta: { title: '浏览记录' } },
+    { path: '/Register', name: '注册页面', component: Register, meta: { title: '注册页面' } },
     { path: '/ProductDetail', name: '商品详情', component: ProductDetail, meta: { title: '商品详情' } },
     { path: '/CommentsDetail', name: '评价', component: CommentsDetail, meta: { title: '评价' } },
     { path: '/Shop', name: '商铺界面', component: Shop, meta: { title: '商铺页面' } },
@@ -36,6 +37,7 @@ const routes = [
     { path: '/BuildGoods', name: '新建商品', component: BuildGoods, meta: { title: '新建商品' } },
     { path: '/BuildShop', name: '新建商铺', component: BuildShop, meta: { title: '新建商铺' } },
     { path: '/SetOrder', name: '下单', component: SetOrder, meta: { title: '下单' } },
+    { path: '/RouterList', name: '页面列表', component: RouterList, meta: { title: '页面列表' } }
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
