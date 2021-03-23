@@ -6,6 +6,7 @@ Vue.use(vuex);
 const state = new vuex.Store({
     state: {
         title: '',
+        loginstate: false,
         user: {
             uid: 2,
             selfie: "http://localhost:8081/download?fileName=default_selfie.jpg",

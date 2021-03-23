@@ -55,9 +55,15 @@ Vue.use(VueRouter);
 
 /* 路由修改时，修改标题 */
 router.beforeEach((to, from, next) => {
-    state.commit('changeTitle', to.meta.title);
-    document.title = to.meta.title;
-    next();
+    if (state.state.loginstate === false && to.fullPath !== '/login') {
+        state.commit('changeTitle', '登录界面');
+        document.title = '登录界面';
+        next('/login');
+    } else {
+        state.commit('changeTitle', to.meta.title);
+        document.title = to.meta.title;
+        next();
+    }
 });
 
 /* 除去路由重定向到自己时，会引发的错误 */
