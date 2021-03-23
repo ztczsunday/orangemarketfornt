@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="text-align: center">
     <van-cell>
       <van-card v-for="(item, index) in commodities"
                 :key="index"
