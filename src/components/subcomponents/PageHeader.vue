@@ -14,7 +14,7 @@
         placeholder="请输入搜索关键词"
         shape="round"
         show-action
-        @search="onSearch"
+        @click="onSearch"
     >
       <template #action>
         <div @click="onSearch">
@@ -52,11 +52,7 @@ export default {
   },
   methods: {
     onSearch() {
-      this.$router.push({
-        path: '/searchResult', query: {
-          keyword: this.value
-        }
-      });
+      this.$router.push('/searchResult');
     }
   }
 }
