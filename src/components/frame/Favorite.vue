@@ -40,6 +40,7 @@ export default {
   },
   data() {
     return {
+      /* 当前活跃页面 */
       active: null,
       shop: {
         /* 表示是否Loading */
