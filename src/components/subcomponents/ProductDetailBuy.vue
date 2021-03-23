@@ -15,7 +15,8 @@
               :quota="0"
               :quota-used="0"
               :sku="sku"
-              @sku-selected="onSelectButton($event)"/>
+              @sku-selected="onSelectButton($event)"
+              @buy-clicked="onBuyClicked"/>
         </div>
       </ACol>
     </ARow>
@@ -27,6 +28,11 @@ export default {
   name: "ProductDetailBuy",
   props:{
     typeList: Array,
+    otherMessage : {
+      shopName : String,
+      commodityName : String,
+      shopId : Number,
+    }
   },
   async mounted() {
     this.sku.price = this.typeList[0].price;
@@ -96,7 +102,19 @@ export default {
         goodsPictureSmall: null
 
 
-      }
+      },
+      order : {
+        shopName: String,
+        subIcon: String,
+        commodityName:String,
+        subName : String,
+        price : Number,
+        countCommodity : Number,
+        subId: Number,
+        cid: Number,
+        shopId:Number,
+        stock:Number,
+      },
     };
   },
   methods: {
@@ -110,6 +128,31 @@ export default {
     showPopup() {
       this.show = true;
     },
+    onBuyClicked(skuData){
+      let tag = 0;
+      this.order.shopName = this.otherMessage.shopName;
+      this.order.subId = skuData.selectedSkuComb.id;
+      for(let i = 0; i < this.typeList.length; i++){
+        if(this.typeList[i].subId === this.order.subId){
+          tag = i;
+        }
+      }
+      this.order.subIcon = this.typeList[tag].subIcon;
+      this.order.commodityName = this.otherMessage.commodityName;
+      this.order.subName = this.typeList[tag].subName;
+      this.order.price = this.typeList[tag].price;
+      this.order.countCommodity = skuData.selectedNum;
+      this.order.cid= this.typeList[tag].cid;
+      this.order.shopId =this.otherMessage.shopId;
+      this.order.stock =this.typeList[tag].stock;
+      console.log(this.order);
+      this.$store.state.order = this.order;
+      this.$router.push(
+          {
+            name:'下单',
+          }
+      )
+    }
   },
 }
 </script>

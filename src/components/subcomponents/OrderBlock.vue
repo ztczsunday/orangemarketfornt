@@ -7,7 +7,7 @@
       选择数量：
     </ACol>
     <ARow>
-      <van-stepper v-model="value" />
+      <van-stepper v-model="value" @change="checkOver"/>
     </ARow>
   </ARow>
   <van-cell is-link @click="showPopup">{{postNow.logisticsName}}</van-cell>
@@ -35,7 +35,7 @@
       show-word-limit
   />
 </div>
-<van-submit-bar :price="value*order.countCommodity*100" button-text="提交订单" @submit="onSubmit" />
+<van-submit-bar :price="value*order.price*100" button-text="提交订单" @submit="onSubmit" />
 </div>
 </template>
 
@@ -55,16 +55,16 @@ export default {
         "logisticsId": Number,
       },
       order : {
-        "shopName": "仙贝红茶铺",
-        "itemName" : "待付款",
-        "subIcon":"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3196440353,380056155&fm=26&gp=0.jpg",
-        "commodityName":"昏睡红茶急速昏睡效力持久仙贝自用多种口味68包包邮",
-        "subName" : "肥宅红茶",
-        "price" : 12,
-        "countCommodity" : 12,
-        "subId": 1,
-        "cid": 1,
-        "shopId":2,
+        shopName: String,
+        subIcon:String,
+        commodityName:String,
+        subName : String,
+        price : Number,
+        countCommodity : Number,
+        subId: Number,
+        cid: Number,
+        shopId:Number,
+        stock:Number
       },
       postList:[],
     }
@@ -85,9 +85,16 @@ export default {
       this.postNow = this.postList[index];
       this.show = false;
       Toast("物流变更")
+    },
+    checkOver(value){
+      if(value > this.order.stock){
+        this.value--;
+        Toast("没有那么多库存");
+      }
     }
   },
   async created() {
+    this.order = this.$store.state.order;
     this.value = this.order.countCommodity;
     const {$} = await import('@/util/ajax');
     const result = await $.get(`/logistic`);

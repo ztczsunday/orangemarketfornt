@@ -34,7 +34,7 @@
       <ARow :style="{'height' : '3vw'}"></ARow>
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
-    <ProductDetailBuy :typeList="goodsInfo.subCommodity" v-if="flag" ref="ProductDetailBuy"></ProductDetailBuy>
+    <ProductDetailBuy :typeList="goodsInfo.subCommodity" :otherMessage="otherMessage" v-if="flag" ref="ProductDetailBuy"></ProductDetailBuy>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ARow class="buy">
       <CommentsBlock :comments="goodsInfo.hotComments" v-if="flag"></CommentsBlock>
@@ -78,10 +78,10 @@ export default {
       shopDescription: String,
       shopName: String,
       subCommodity: Array,
+      shopId : Number,
     },
   },
   async mounted() {
-    this.info = require('@/assets/GoodsData.json');
     this.priceLow = this.goodsInfo.subCommodity[0].price;
     for(let i = 1; i < this.goodsInfo.subCommodity.length; i++){
       if(this.goodsInfo.subCommodity[i].price < this.priceLow){
@@ -91,8 +91,11 @@ export default {
     if(this.goodsInfo.commentCount !== 0){
       this.praiseRate = (this.goodsInfo.praiseCommentCount/this.goodsInfo.commentCount)*100;
     }
+    this.otherMessage.shopName = this.goodsInfo.shopName;
+    this.otherMessage.commodityName = this.goodsInfo.commodityName;
+    this.otherMessage.shopId = this.goodsInfo.shopId;
     this.flag = true;
-    console.log(this.goodsInfo.commodityDetails);
+
   },
   data() {
     return {
@@ -108,7 +111,13 @@ export default {
         //好评率
         PraiseRate: null,
         // 商品详情图片
-        goodsDetailPicture: []
+        goodsDetailPicture: [],
+        //传给子组件生成订单的其他信息
+      },
+      otherMessage: {
+        shopName : String,
+        commodityName : String,
+        shopId : Number,
       },
       priceLow : 0,
       praiseRate: 0,

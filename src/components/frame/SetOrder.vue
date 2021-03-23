@@ -40,7 +40,6 @@ export default {
       formData.append("receiveAddressId", this.address.receiveAddressId);
       formData.append("orderLogisticsId", post.logisticsId);
       const result = await $.post(`/order`, formData);
-      console.log(result);
       if (result.data.success) {
         Toast("下单成功")
       }
@@ -50,10 +49,12 @@ export default {
         formDataMessage.append("oppId", order.shopId);
         formDataMessage.append("oppType", "商家");
         formDataMessage.append("chatContent", message);
-        console.log(order.shopId);
-        const messageResult = await $.post(`/user/sendChat`, formDataMessage);
-        console.log(messageResult);
+        await $.post(`/user/sendChat`, formDataMessage);
       }
+      this.$store.state.orderId = result.data.information;
+      await this.$router.push({
+        name:'订单详情',
+      })
     },
   }
 }

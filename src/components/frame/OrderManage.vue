@@ -21,7 +21,9 @@
             @load="onLoad"
         >
           <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item" v-if="item.itemName ==='待付款'"></OrderCard>
+            <OrderCard :place="'OrderManage'" :order="item"
+                       :value="item.countCommodity"
+                       v-if="item.itemName ==='待付款'"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -33,7 +35,9 @@
             @load="onLoad"
         >
           <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item" v-if="item.itemName ==='待发货'"></OrderCard>
+            <OrderCard :place="'OrderManage'" :order="item"
+                       :value="item.countCommodity"
+                       v-if="item.itemName ==='待发货'"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -45,7 +49,9 @@
             @load="onLoad"
         >
           <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item" v-if="item.itemName ==='待收货'"></OrderCard>
+            <OrderCard :place="'OrderManage'" :order="item"
+                       :value="item.countCommodity"
+                       v-if="item.itemName ==='待收货'"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -57,7 +63,9 @@
             @load="onLoad"
         >
           <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item" v-if="item.itemName ==='待评价'"></OrderCard>
+            <OrderCard :place="'OrderManage'" :order="item"
+                       :value="item.countCommodity"
+                       v-if="item.itemName ==='待评价'"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -98,6 +106,7 @@ export default {
           this.list.push(result.data.information.records[i]);
         }
       }
+      console.log(this.list);
     },
 
   },

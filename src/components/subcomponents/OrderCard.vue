@@ -74,10 +74,11 @@ export default {
   },
   methods: {
     toShop() {
-      this.$router.push({ path: '/Shop' })
+      this.$router.push({ path: '/Shop' });
     },
     toOrderDetail() {
-      this.$router.push({ path: '/OrderDetail' })
+      this.$store.state.orderId = this.order.orderId;
+      this.$router.push({ path: '/OrderDetail' });
     },
   },
 
