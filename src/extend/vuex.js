@@ -12,7 +12,20 @@ const state = new vuex.Store({
             selfie: "http://localhost:8081/download?fileName=default_selfie.jpg",
             tel: 15770742170,
             password: 114514
-        }
+        },
+        order:{
+            shopName: String,
+            subIcon:String,
+            commodityName:String,
+            subName : String,
+            price : Number,
+            countCommodity : Number,
+            subId: Number,
+            cid: Number,
+            shopId:Number,
+            stock:Number
+        },
+        orderId : Number,
     },
     getters: {},
     actions: {

@@ -25,7 +25,6 @@ export default {
     const result = await $.get(`/commodity?commodityId=${7}`);
     this.goodsInfo = result.data.information;
     this.flag = true
-    console.log(this.goodsInfo)
   },
   methods:{
     showBuy(){
