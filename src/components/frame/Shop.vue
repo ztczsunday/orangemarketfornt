@@ -6,8 +6,7 @@
              style="font-size: 15px;"
     >
       <template #footer>
-        <van-button size="mini">按钮</van-button>
-        <van-button size="mini">按钮</van-button>
+        <van-button size="mini" :type="favoriteStyle" @click="doFavorite">{{ favoriteInfo }}</van-button>
       </template>
     </VanCard>
     <VanTabs v-model="active">
@@ -59,7 +58,7 @@ export default {
       /* 商铺的详细信息 */
       shopDetails: {},
       /* 是否被收藏了 */
-      isCollected: {},
+      isCollected: false,
       commodityOpen: {
         /* 表示是否Loading */
         loading: null,
@@ -86,6 +85,22 @@ export default {
       },
     }
   },
+  computed: {
+    favoriteInfo() {
+      if (this.isCollected) {
+        return "已收藏";
+      } else {
+        return "收藏";
+      }
+    },
+    favoriteStyle() {
+      if (this.isCollected) {
+        return "warning";
+      } else {
+        return "default";
+      }
+    }
+  },
   methods: {
     computePrice(price) {
       return price % 1 !== 0 ? price : price + ".00";
@@ -94,11 +109,11 @@ export default {
       const { $ } = await import("@/util/ajax");
       const result = await $.get('/shop/visit', {
         params: {
-          sid: 1
+          sid: this.$route.query.sid
         }
       });
-      console.log(result);
       this.shopDetails = result.data.information.shopDetails;
+      this.isCollected = result.data.information.isCollected;
     },
     async onLoadCommodityOpen() {
       const { $ } = await import("@/util/ajax");
@@ -127,6 +142,24 @@ export default {
       Array.prototype.push.apply(this.commodityClose.items, page.records);
       this.commodityClose.nowPage++;
       this.commodityClose.finished = this.commodityClose.nowPage >= page.total / page.size;
+    },
+    async doFavorite() {
+      const { $ } = await import("@/util/ajax");
+      let result;
+      if (!this.isCollected) {
+        const param = new FormData();
+        param.append("sid", this.$route.query.sid);
+        result = await $.post("/favoritesShop", param);
+      } else {
+        result = await $.delete("/favoritesShop", {
+          params: {
+            sid: this.$route.query.sid
+          }
+        });
+      }
+      if (result.data.success === true) {
+        this.isCollected = !this.isCollected;
+      }
     }
   }
 }

@@ -19,9 +19,7 @@ export default {
   async created() {
     const { $ } = await import("@/util/ajax");
     const result = await $.get('/recommends');
-    const page = result.data.information;
-    this.commodities = page;
-    console.log(page);
+    this.commodities = result.data.information;
   },
   data() {
     return {
