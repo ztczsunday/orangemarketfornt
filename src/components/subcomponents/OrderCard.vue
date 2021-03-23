@@ -35,13 +35,13 @@
       <ACol :style="{'font-size':'2vw','color': 'grey'}">
         ￥
         {{order.price}}
-        *{{order.countCommodity}}
+        *{{value}}
       </ACol>
     </ARow>
     <ARow justify="end" type="flex">
       <ACol :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}">
         总价：￥
-        {{order.price*order.countCommodity}}
+        {{order.price*value}}
       </ACol>
     </ARow>
     <ARow justify="end" type="flex" v-if="place === 'OrderManage'">
@@ -59,12 +59,17 @@
 <script>
 export default {
   //type: 商品状态 id：商品id place：标记这个商品卡片放在哪
-  props : ['place','order'],
+  props : {
+    "place":String,
+    "order":null,
+    "value": Number
+  },
   name: "Card",
   data(){
     return{
       //按键类型
-      buttonType : null
+      buttonType : null,
+      goodAmount : 0
     }
   },
   methods: {

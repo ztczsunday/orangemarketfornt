@@ -5,9 +5,7 @@
         <VanGoodsActionIcon icon="shop-o" text="店铺"/>
         <VanGoodsActionIcon icon="chat-o" text="客服"/>
         <VanGoodsActionIcon :color="collectColor" :icon="collectIcon" :text="collectInfo" @click="collectInfo = 0"/>
-
-        <VanGoodsActionButton text="加入购物车" type="warning"/>
-        <VanGoodsActionButton text="立即购买" type="danger"/>
+        <VanGoodsActionButton text="立即购买" type="danger" @click="popup"/>
       </VanGoodsAction>
     </div>
   </div>
@@ -37,7 +35,11 @@ export default {
       return this.collect ? 'star' : 'star-o';
     }
   },
-  methods: {}
+  methods: {
+    popup(){
+      this.$emit('clickbuy')
+    }
+  }
 }
 </script>
 

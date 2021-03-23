@@ -10,6 +10,7 @@
     <OrderCard
         :place="'OrderDetail'"
         :order="order"
+        :value="order.countCommodity"
         v-if="flag">
     </OrderCard>
     <ARow class="messageBlock">

@@ -88,8 +88,7 @@
             <template #input>
               <VanUploader v-model="typeList[i].subPic" :before-read="beforeRead"
                            :max-count="1"
-                           multiple
-                           name="i"/>
+                           multiple/>
             </template>
           </VanField>
           <div style="margin: 16px;">

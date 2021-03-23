@@ -1,9 +1,9 @@
 <template>
   <ARow>
     <ARow>
-      <ProductDetailMessage :goodsInfo="this.goodsInfo" v-if="flag === true"/>
+      <ProductDetailMessage :goodsInfo="this.goodsInfo" v-if="flag === true" ref="ProductDetailMessage"/>
     </ARow>
-    <ProductFooter></ProductFooter>
+    <ProductFooter @clickbuy="showBuy"></ProductFooter>
   </ARow>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   data(){
     return{
       goodsInfo : null,
-      flag : false
+      flag : false,
     }
   },
   async created() {
@@ -26,6 +26,12 @@ export default {
     this.goodsInfo = result.data.information;
     this.flag = true
     console.log(this.goodsInfo)
+  },
+  methods:{
+    showBuy(){
+      this.$refs.ProductDetailMessage.showBuyBlock();
+
+    }
   }
 }
 </script>

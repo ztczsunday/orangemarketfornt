@@ -34,7 +34,7 @@
       <ARow :style="{'height' : '3vw'}"></ARow>
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
-    <ProductDetailBuy :typeList="goodsInfo.subCommodity" v-if="flag"></ProductDetailBuy>
+    <ProductDetailBuy :typeList="goodsInfo.subCommodity" v-if="flag" ref="ProductDetailBuy"></ProductDetailBuy>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ARow class="buy">
       <CommentsBlock :comments="goodsInfo.hotComments" v-if="flag"></CommentsBlock>
@@ -115,7 +115,11 @@ export default {
       flag : false
     };
   },
-  methods: {}
+  methods: {
+    showBuyBlock(){
+      this.$refs.ProductDetailBuy.showPopup();
+    }
+  }
 }
 </script>
 

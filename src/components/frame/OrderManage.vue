@@ -9,7 +9,7 @@
             @load="onLoad"
         >
           <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item"></OrderCard>
+            <OrderCard :place="'OrderManage'" :order="item" :value="item.countCommodity"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
