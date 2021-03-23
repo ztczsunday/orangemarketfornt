@@ -14,27 +14,26 @@
                    @click="$router.push(`/?cid=${item.cid}`)"
           />
         </VanList>
-        <VanTab title="店铺">
-          <VanList v-model="shop.loading"
-                   :finished="shop.finished"
-                   finished-text="没有更多了"
-                   @load="onLoadShop"
-          >
-            <VanCard v-for="(item, index) in shop.items"
-                     :key="index"
-                     :thumb="item.shopIcon"
-                     :title="item.shopName"
-                     @click="$router.push(`/?sid=${item.cid}`)"
-            />
-          </VanList>
-        </VanTab>
+      </VanTab>
+      <VanTab title="店铺">
+        <VanList v-model="shop.loading"
+                 :finished="shop.finished"
+                 finished-text="没有更多了"
+                 @load="onLoadShop"
+        >
+          <VanCard v-for="(item, index) in shop.items"
+                   :key="index"
+                   :thumb="item.shopIcon"
+                   :title="item.shopName"
+                   @click="$router.push(`/?sid=${item.cid}`)"
+          />
+        </VanList>
       </VanTab>
     </VanTabs>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Favorite",
   created() {
@@ -66,7 +65,6 @@ export default {
         /* 存储items */
         items: []
       },
-
     }
   },
   methods: {
