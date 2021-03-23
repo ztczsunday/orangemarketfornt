@@ -6,16 +6,16 @@
 <script>
 export default {
   name: 'EchartDemo',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  mounted(){
+  mounted() {
     this.drawLine();
   },
   methods: {
-    drawLine(){
+    drawLine() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(this.$refs['myChart'])
       // 绘制图表
@@ -23,7 +23,7 @@ export default {
         title: { text: '在Vue中使用echarts' },
         tooltip: {},
         xAxis: {
-          data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
         },
         yAxis: {},
         series: [{

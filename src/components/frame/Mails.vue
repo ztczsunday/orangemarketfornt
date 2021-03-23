@@ -32,7 +32,7 @@
         </ARow>
         <ARow style="height : 5px"></ARow>
       </ARow>
-      <van-popup v-model="show" style="height: 95%" closeable position="bottom">
+      <van-popup v-model="show" closeable position="bottom" style="height: 95%">
         <SubMails :messages="subMailMessage" @update="showPopup(currPage)"></SubMails>
       </van-popup>
     </van-cell>
