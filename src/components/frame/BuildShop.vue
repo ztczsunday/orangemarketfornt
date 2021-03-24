@@ -4,14 +4,14 @@
         v-model="shopname"
         :rules="[{ required: true, message: '请填写店名' }]"
         label="店名"
-        name="店名"
+        name="shopName"
         placeholder="店名"
     />
     <van-field
         v-model="shopIntroduction"
         :rules="[{ required: true, message: '请填写店铺简介' }]"
         label="店铺简介"
-        name="店铺简介"
+        name="shopDescription"
         placeholder="店铺简介"
     />
     <van-field
@@ -34,9 +34,19 @@
         v-model="shopAddress"
         :rules="[{ required: true, message: '请填写店铺地址' }]"
         label="店铺地址"
-        name="店铺地址"
+        name="shopAddress"
         placeholder="店铺地址"
     />
+    <VanField label="种类图标上传" name="uploaderSub">
+      <template #input>
+        <VanUploader v-model="shopIcon"
+                     :before-read="beforeRead"
+                     :max-count="1"
+                     :after-read="afterRead"
+                     :before-delete="deleteImage"
+                     multiple/>
+      </template>
+    </VanField>
 
     <div style="margin: 16px;">
       <van-button block native-type="submit" round type="info">提交</van-button>
@@ -46,11 +56,11 @@
 
 <script>
 import area from "@/util/area";
+import {Toast} from "vant";
 
 export default {
   created() {
     this.myArea = area;
-    console.log(this.myArea);
   },
   name: "BuildShop",
   data() {
@@ -61,11 +71,35 @@ export default {
       shopname: '',
       shopIntroduction: '',
       shopAddress: null,
+      shopIcon: [],
+      shopIconPost : "",
+      shop:{
+        shopAddress: String,
+        shopDescription: String,
+        shopIcon: String,
+        shopName: String,
+      }
     };
   },
   methods: {
-    onSubmit(values) {
-      console.log('submit', values);
+    async onSubmit(values) {
+      if(this.shopIconPost === ""){
+        Toast("商店总得有图片吧。。。")
+      }
+      else{
+        this.shop.shopName = values.shopName;
+        this.shop.shopDescription = values.shopDescription;
+        this.shop.shopAddress = values.area;
+        this.shop.shopIcon =this.shopIconPost;
+        const {$} = await import('@/util/ajax');
+        const result = await $.post("/shop",this.shop)
+        if(!result.data.success){
+          Toast("你已经有一个商店了")
+        }
+        else{
+          Toast("商店创建成功")
+        }
+      }
     },
     onConfirm(values) {
       this.value = values
@@ -74,6 +108,28 @@ export default {
           .join('/');
       this.showArea = false;
     },
+    beforeRead(file) {
+      if (file.type !== 'image/jpeg') {
+        Toast('请上传 jpg 格式图片');
+        return false;
+      }
+      return true;
+    },
+    async afterRead(file){
+      const config = {
+        headers: { "Content-Type": "multipart/form-data;boundary=" + new Date().getTime() }
+      };
+      const { $ } = await import('@/util/ajax');
+      const formData = new FormData();
+      formData.append('file', file.file);
+      const result = await $.post('/upload', formData, config);
+      this.shopIconPost = result.data.information;
+      console.log(result);
+    },
+    deleteImage(){
+      this.shopIconPost = "";
+      return Promise;
+    }
   },
 }
 </script>

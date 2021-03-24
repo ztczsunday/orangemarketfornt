@@ -3,7 +3,10 @@
     <ARow>
       <ProductDetailMessage :goodsInfo="this.goodsInfo" v-if="flag === true" ref="ProductDetailMessage"/>
     </ARow>
-    <ProductFooter @clickbuy="showBuy"></ProductFooter>
+    <ProductFooter :isCollected="goodsInfo.isCollected"
+                   @clickbuy="showBuy"
+                   @collect="doFavorite"
+                   v-if="flag === true"></ProductFooter>
   </ARow>
 </template>
 
@@ -18,18 +21,37 @@ export default {
     return{
       goodsInfo : null,
       flag : false,
+      sid : Number,
     }
   },
   async created() {
     const {$} = await import('@/util/ajax');
-    const result = await $.get(`/commodity?commodityId=${7}`);
+    const result = await $.get(`/commodity?commodityId=${this.$route.query.cid}`);
+    console.log(result.data.information)
     this.goodsInfo = result.data.information;
-    this.flag = true
+    this.flag = true;
   },
   methods:{
     showBuy(){
       this.$refs.ProductDetailMessage.showBuyBlock();
-
+    },
+    async doFavorite() {
+      const { $ } = await import("@/util/ajax");
+      let result;
+      if (!this.goodsInfo.isCollected) {
+        const param = new FormData();
+        param.append("cid", this.$route.query.cid);
+        result = await $.post("/favoritesCommodity", param);
+      } else {
+        result = await $.delete("/favoritesCommodity", {
+          params: {
+            cid: this.$route.query.cid
+          }
+        });
+      }
+      if (result.data.success === true) {
+        this.goodsInfo.isCollected = !this.goodsInfo.isCollected;
+      }
     }
   }
 }
