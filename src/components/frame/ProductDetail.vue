@@ -29,10 +29,10 @@ export default {
     this.cid = this.$route.query.cid
     const {$} = await import('@/util/ajax');
     const result = await $.get(`/commodity?commodityId=${this.cid}`);
-    // const formData = new FormData;
-    // formData.append("cid",`${this.cid}`);
-    // const HResult = await $.post("/histories",formData);
-    // console.log(HResult.data)
+    const formData = new FormData;
+    formData.append("cid",`${this.cid}`);
+    const HResult = await $.post("/histories",formData);
+    console.log(HResult.data);
     this.goodsInfo = result.data.information;
     this.flag = true;
   },

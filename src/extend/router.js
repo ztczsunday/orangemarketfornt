@@ -113,11 +113,17 @@ const routes = [
         meta: { title: '支付结果' }
     },
     {
+        path: '/ShopManage',
+        name: '商铺管理',
+        component: () => import('@/components/frame/ShopManage'),
+        meta: { title: '商铺管理' }
+    },
+    {
         path: '/RouterList',
         name: '页面列表',
         component: () => import('@/components/frame/RouterList'),
         meta: { title: '页面列表' }
-    }
+    },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */
