@@ -42,6 +42,7 @@ export default {
     return {
       /* 当前活跃页面 */
       active: null,
+      /* 收藏的商店的数据 */
       shop: {
         /* 表示是否Loading */
         loading: null,
@@ -54,6 +55,7 @@ export default {
         /* 存储items */
         items: []
       },
+      /* 收藏的商品的数据 */
       commodities: {
         /* 表示是否Loading */
         loading: null,

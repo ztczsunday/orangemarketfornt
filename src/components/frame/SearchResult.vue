@@ -64,9 +64,11 @@ export default {
     }
   },
   methods: {
+    /* 如果价格是整数，给数字后填.00 */
     computePrice(price) {
       return price % 1 !== 0 ? price : price + ".00";
     },
+    /* 搜索内容 */
     async onSearch() {
       this.nowPage = 0;
       const result = await this.query();
@@ -75,6 +77,7 @@ export default {
       this.loading = false;
       this.finished = this.nowPage >= page.total / page.size;
     },
+    /* 读取下一页数据 */
     async onLoad() {
       this.nowPage++;
       const result = await this.query();
@@ -83,6 +86,7 @@ export default {
       this.loading = false;
       this.finished = page.current >= page.total / page.size;
     },
+    /* 查询的具体操作 */
     async query() {
       const { $ } = await import("@/util/ajax");
       const formData = new FormData();

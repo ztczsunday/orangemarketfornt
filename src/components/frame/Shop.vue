@@ -59,6 +59,7 @@ export default {
       shopDetails: {},
       /* 是否被收藏了 */
       isCollected: false,
+      /* 上架商品的信息 */
       commodityOpen: {
         /* 表示是否Loading */
         loading: null,
@@ -71,6 +72,7 @@ export default {
         /* 存储items */
         items: []
       },
+      /* 下架商品的信息 */
       commodityClose: {
         /* 表示是否Loading */
         loading: null,
