@@ -142,7 +142,7 @@ router.beforeEach((to, from, next) => {
     } else if (state.state.loginstate === false && to.fullPath !== '/Login') {
         state.commit('changeTitle', '登录界面');
         document.title = '登录界面';
-        next('/login');
+        next('/Login');
     } else {
         state.commit('changeTitle', to.meta.title);
         document.title = to.meta.title;

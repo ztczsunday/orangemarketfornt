@@ -34,6 +34,7 @@ const state = new vuex.Store({
             const params = new FormData();
             params.append("username", Vue.$cookies.get("username"));
             params.append("password", Vue.$cookies.get("password"));
+            this.state.loginstate = true;
             return await $.post('/login', params);
         }
     },

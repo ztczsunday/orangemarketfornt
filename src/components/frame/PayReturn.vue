@@ -8,9 +8,6 @@
       <a-button key="console" type="primary" @click="$router.push('/')">
         返回主页
       </a-button>
-      <a-button key="buy">
-        再买一个
-      </a-button>
     </template>
   </a-result>
 </template>
