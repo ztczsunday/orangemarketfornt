@@ -17,7 +17,7 @@
 export default {
   name: "Market",
   async created() {
-    const {$} = await import("@/util/ajax");
+    const { $ } = await import("@/util/ajax");
     const result = await $.get('/recommends');
     this.commodities = result.data.information;
   },
@@ -27,8 +27,7 @@ export default {
       commodities: []
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
