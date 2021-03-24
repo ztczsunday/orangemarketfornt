@@ -188,12 +188,6 @@ export default {
   },
   methods:{
     async pay(){
-      const { $ } = await import("@/util/ajax");
-      const formData = new FormData;
-      formData.append("orderId",this.id);
-      formData.append("recordId",2);
-      const result = await  $.put("/orderStateflow",formData);
-      console.log(result);
       window.location.href = `http://localhost:8081/Alipay?orderId=${this.id}`;
     },
     async recieveConfirm(){

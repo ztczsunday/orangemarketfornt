@@ -1,9 +1,11 @@
 <template>
-  <VanTabbar v-if="shouldTabbar" v-model="active">
-    <VanTabbarItem icon="home-o" @click="$router.push('/')">商城</VanTabbarItem>
-    <VanTabbarItem icon="friends-o" @click="$router.push('/mails')">消息</VanTabbarItem>
-    <VanTabbarItem icon="user-o" @click="$router.push('/personalinfo')">我的</VanTabbarItem>
-  </VanTabbar>
+  <div style="height:50px">
+    <VanTabbar v-if="shouldTabbar" v-model="active">
+      <VanTabbarItem icon="home-o" @click="$router.push('/')">商城</VanTabbarItem>
+      <VanTabbarItem icon="friends-o" @click="$router.push('/mails')">消息</VanTabbarItem>
+      <VanTabbarItem icon="user-o" @click="$router.push('/personalinfo')">我的</VanTabbarItem>
+    </VanTabbar>
+  </div>
 </template>
 
 <script>

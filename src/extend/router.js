@@ -124,6 +124,12 @@ const routes = [
         component: () => import('@/components/frame/RouterList'),
         meta: { title: '页面列表' }
     },
+    {
+        path: '/AddressManage',
+        name: '地址管理',
+        component: () => import('@/components/frame/AddressManage'),
+        meta: { title: '地址管理' }
+    },
 ];
 
 /* 设定MainRoutes，主页中的几个Router */

@@ -45,7 +45,7 @@
     <ARow justify="end" type="flex">
       <ACol :style="{'font-weight':'bold','font-size':'3vw','color': 'grey'}">
         总价：￥
-        {{order.price*value}}
+        {{Math.round(order.price*value * 100) / 100}}
       </ACol>
     </ARow>
     <ARow justify="end" type="flex" v-if="place === 'OrderManage'">

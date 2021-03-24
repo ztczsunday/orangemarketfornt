@@ -35,7 +35,12 @@ export default {
   name: "ShopBlock",
   methods: {
     toShop() {
-      this.$router.push({ path: '/Shop' })
+      this.$router.push({
+        path:"/shop",//这个path就是你在router/index.js里边配置的路径
+        query:{
+          sid:this.shopId,
+        }
+      })
     }
   }
 }

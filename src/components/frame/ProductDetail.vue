@@ -4,6 +4,7 @@
       <ProductDetailMessage :goodsInfo="this.goodsInfo" v-if="flag === true" ref="ProductDetailMessage"/>
     </ARow>
     <ProductFooter :isCollected="goodsInfo.isCollected"
+                   :sid="goodsInfo.shopId"
                    @clickbuy="showBuy"
                    @collect="doFavorite"
                    v-if="flag === true"></ProductFooter>
@@ -21,7 +22,6 @@ export default {
     return{
       goodsInfo : null,
       flag : false,
-      sid : Number,
       cid : Number,
     }
   },
@@ -31,8 +31,7 @@ export default {
     const result = await $.get(`/commodity?commodityId=${this.cid}`);
     const formData = new FormData;
     formData.append("cid",`${this.cid}`);
-    const HResult = await $.post("/histories",formData);
-    console.log(HResult.data);
+    await $.post("/histories",formData);
     this.goodsInfo = result.data.information;
     this.flag = true;
   },

@@ -2,8 +2,8 @@
   <div>
     <div>
       <VanGoodsAction class="bottomBlock">
-        <VanGoodsActionIcon icon="shop-o" text="店铺"/>
-        <VanGoodsActionIcon icon="chat-o" text="客服"/>
+        <VanGoodsActionIcon icon="shop-o" text="店铺" @click="toShop"/>
+        <VanGoodsActionIcon icon="chat-o" text="客服" @click="toMail"/>
         <VanGoodsActionIcon :color="collectColor" :icon="collectIcon" :text="collectInfo"
                             @click="collectInfo = 0;"/>
         <VanGoodsActionButton text="立即购买" type="danger" @click="popup"/>
@@ -45,6 +45,19 @@ export default {
   methods: {
     popup(){
       this.$emit('clickbuy');
+    },
+    toShop() {
+      this.$router.push({
+        path:"/shop",
+        query:{
+          sid:this.sid,
+        }
+      })
+    },
+    toMail(){
+      this.$router.push({
+        path:"/Mails",
+      })
     }
   }
 }

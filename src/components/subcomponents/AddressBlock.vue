@@ -18,7 +18,7 @@
     border:1px solid #96c2f1;
     background:#eff7ff"
     v-for="(item,index) in addressList" :key="index">
-      <VanCell :title="'地址'+index" size="large" :label= "addressList[index].addressDetails"
+      <VanCell :title="'地址'+index" size="large" :label= "item.addressDetails"
                 @click="changeAddress(index)"
                 v-if="index !== 0"/>
     </div>
@@ -43,10 +43,13 @@ export default {
     },
     changeAddress(index){
       this.addressNow = this.addressList[index];
-      this.$emit('postaddress',this.addressNow)
+      this.$emit('postaddress',this.addressNow);
+      this.show = false;
     },
     toAddressManage(){
-     alert("todo");
+     this.$router.push({
+       name:'地址管理'
+     })
     }
   },
   async created() {
