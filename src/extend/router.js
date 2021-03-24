@@ -107,6 +107,12 @@ const routes = [
         meta: { title: '收藏夹' }
     },
     {
+        path: '/PayReturn',
+        name: '支付结果',
+        component: () => import('@/components/frame/PayReturn'),
+        meta: { title: '支付结果' }
+    },
+    {
         path: '/RouterList',
         name: '页面列表',
         component: () => import('@/components/frame/RouterList'),
@@ -129,7 +135,11 @@ Vue.use(VueRouter);
 
 /* 路由修改时，修改标题 */
 router.beforeEach((to, from, next) => {
-    if (state.state.loginstate === false && to.fullPath !== '/login') {
+    if (state.state.loginstate === false && to.fullPath === '/PayReturn') {
+        state.dispatch('doLogin');
+        document.title = to.meta.title;
+        next();
+    } else if (state.state.loginstate === false && to.fullPath !== '/Login') {
         state.commit('changeTitle', '登录界面');
         document.title = '登录界面';
         next('/login');
