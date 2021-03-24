@@ -122,7 +122,6 @@ export default {
         this.antMessage.success(result.data.message);
         await this.$router.push("/");
       }
-      console.log(result)
     }
   }
 }

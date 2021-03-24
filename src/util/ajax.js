@@ -4,7 +4,7 @@ import axios from 'axios'
 const $ = axios.create({
     baseURL: "/",
     timeout: 1000,
-    withCredentials: true
+    withCredentials: false
 });
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 export { $ };

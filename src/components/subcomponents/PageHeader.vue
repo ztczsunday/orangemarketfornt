@@ -3,7 +3,7 @@
     <VanNavBar
         v-if="shouldNavbar"
         :title="title"
-        left-arrow
+        :left-arrow="checkShouldHeader"
         @click-left="$router.go(-1)"
         @click-right="() => {}"
     />
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import {loginRoutes} from '@/extend/router';
+
 export default {
   name: "PageHeader",
   async created() {
@@ -46,6 +48,9 @@ export default {
     }
   },
   computed: {
+    checkShouldHeader() {
+      return this.title !== loginRoutes.meta.title;
+    },
     shouldNavbar() {
       return !this.shouldntNavbarRoutes.includes(this.title);
     }

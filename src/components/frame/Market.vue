@@ -23,6 +23,7 @@ export default {
   },
   data() {
     return {
+      current: null,
       /* 存储commodities */
       commodities: []
     }
