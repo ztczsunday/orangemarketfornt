@@ -127,7 +127,6 @@ export default {
       formData.append('file', file.file);
       const result = await $.post('/upload', formData, config);
       this.shopIconPost = result.data.information;
-      console.log(result);
     },
     deleteImage(){
       this.shopIconPost = "";

@@ -226,7 +226,6 @@ export default {
         formData.append("commentDetails",this.message);
         formData.append("praise",praise);
         const result = await  $.post("/user/comment",formData);
-        console.log(result);
         if(result.data.success){
           Toast("评论成功");
           const formDataComment = new FormData;
@@ -244,7 +243,6 @@ export default {
       this.id = this.$store.state.orderId;
       const {$} = await import('@/util/ajax');
       const result = await $.get(`/orderDetail?orderId=${this.id}`);
-      console.log(result.data.information);
       this.order = result.data.information.order;
       this.information.itemName = result.data.information.state[0].recordId;
       this.information.addressDetails = result.data.information.order.addressDetails;
@@ -286,7 +284,6 @@ export default {
     this.id = this.$store.state.orderId;
     const {$} = await import('@/util/ajax');
     const result = await $.get(`/orderDetail?orderId=${this.id}`);
-    console.log(result.data.information);
     this.order = result.data.information.order;
     this.information.itemName = result.data.information.state[0].recordId;
     this.information.addressDetails = result.data.information.order.addressDetails;

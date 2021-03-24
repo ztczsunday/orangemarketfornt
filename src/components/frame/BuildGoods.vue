@@ -308,15 +308,12 @@ export default {
       const { $ } = await import('@/util/ajax');
       const formData = new FormData();
       formData.append('file', this.typeList[i].subPic[0].file);
-      console.log(this.typeList[i].subPic[0].file)
       const result = await $.post('/upload', formData, config);
-      console.log(result);
       this.typeList[i].subPicName = result.data.information;
       Toast("修改成功");
       this.showSub[i] = false;
       this.showAdd = true;
       this.showAdd = false;
-      console.log(this.typeList[i].subPicName);
     },
     async afterReadGoods(file, detail) {
       const config = {
@@ -333,7 +330,6 @@ export default {
       } else if (detail.name === "uploaderSubDefault") {
         this.uploaderSubDefaultName = result.data.information
       }
-      console.log(this.uploaderName);
     },
     upLoaderDelete(detail) {
       if (detail.name === "Uploader") {
@@ -343,7 +339,6 @@ export default {
       } else if (detail.name === "uploaderSubDefault") {
         this.uploaderSubDefaultName = null;
       }
-      console.log(this.uploaderName)
       return Promise;
     },
     deleteSub(i) {

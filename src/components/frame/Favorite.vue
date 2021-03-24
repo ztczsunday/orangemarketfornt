@@ -25,8 +25,13 @@
                    :key="index"
                    :thumb="item.shopIcon"
                    :title="item.shopName"
-                   @click="$router.push(`/Shop?sid=${item.cid}`)"
-          />
+                   @click="$router.push(`/Shop?sid=${item.sid}`)"
+          >
+            <template #tags>
+              <van-tag plain type="danger">好评数：{{ item.praiseCount }}</van-tag>
+              <van-tag plain type="primary">评论数：{{ item.commentCount }}</van-tag>
+            </template>
+          </VanCard>
         </VanList>
       </VanTab>
     </VanTabs>

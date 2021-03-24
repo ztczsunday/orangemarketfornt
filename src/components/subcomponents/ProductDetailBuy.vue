@@ -145,7 +145,6 @@ export default {
       this.order.cid= this.typeList[tag].cid;
       this.order.shopId =this.otherMessage.shopId;
       this.order.stock =this.typeList[tag].stock;
-      console.log(this.order);
       this.$store.state.order = this.order;
       this.$router.push(
           {

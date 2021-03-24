@@ -1,7 +1,7 @@
 <template>
-  <van-tabs v-model="active" sticky offset-top="46px">
-    <van-tab title="全部订单">
-      <van-list
+  <VanTabs v-model="active" sticky offset-top="46px">
+    <VanTab title="全部订单">
+      <VanList
           v-model="loading"
           :finished="finished"
           finished-text="没有更多了"
@@ -12,10 +12,10 @@
                      :value="item.countCommodity"
                      @postgood="postGoods(i)"></OrderCard>
         </ARow>
-      </van-list>
-    </van-tab>
-    <van-tab title="待发货订单">
-      <van-list
+      </VanList>
+    </VanTab>
+    <VanTab title="待发货订单">
+      <VanList
           v-model="loading"
           :finished="finished"
           finished-text="没有更多了"
@@ -27,10 +27,10 @@
                      @postgood="postGoods(i)"
                      v-if="item.itemName ==='待发货'"></OrderCard>
         </ARow>
-      </van-list>
-    </van-tab>
-    <van-tab title="上架商品管理">
-      <van-list
+      </VanList>
+    </VanTab>
+    <VanTab title="上架商品管理">
+      <VanList
           v-model="goodloading"
           :finished="goodfinished"
           finished-text="没有更多了"
@@ -47,17 +47,17 @@
               <van-tag plain type="primary">评论数：{{item.commentCount}}</van-tag>
             </template>
             <template #footer>
-              <van-button @click="putOffShelf(index)">下架</van-button>
-              <van-button @click="getSub(index)">修改库存</van-button>
+              <VanButton @click="putOffShelf(index)">下架</VanButton>
+              <VanButton @click="getSub(index)">修改库存</VanButton>
             </template>
           </VanCard>
         </ARow>
-        <van-button icon="plus" type="primary" round style="position: fixed; bottom: 20px; margin-left: 80%"
+        <VanButton icon="plus" type="primary" round style="position: fixed; bottom: 20px; margin-left: 80%"
                     @click="toBuild"/>
-      </van-list>
-    </van-tab>
+      </VanList>
+    </VanTab>
     <VanTab title="下架商品">
-      <van-list
+      <VanList
           v-model="goodloading"
           :finished="goodfinished"
           finished-text="没有更多了"
@@ -74,21 +74,21 @@
               <van-tag plain type="primary">评论数：{{item.commentCount}}</van-tag>
             </template>
             <template #footer>
-              <van-button @click="putOnShelf(index)">上架</van-button>
+              <VanButton @click="putOnShelf(index)">上架</VanButton>
             </template>
           </VanCard>
         </ARow>
-        <van-button icon="plus" type="primary" round style="position: fixed; bottom: 20px; margin-left: 80%"
+        <VanButton icon="plus" type="primary" round style="position: fixed; bottom: 20px; margin-left: 80%"
                     @click="toBuild"/>
-      </van-list>
+      </VanList>
     </VanTab>
-    <van-popup v-model="show" position="bottom" style="height:70%" closeable>
+    <VanPopup v-model="show" position="bottom" style="height:70%" closeable>
       <div style="margin: 10px;padding:10px;font-weight: bold">
         修改库存
       </div>
       <inputStock :subList="this.subCommodity"/>
-    </van-popup>
-  </van-tabs>
+    </VanPopup>
+  </VanTabs>
 
 </template>
 
@@ -105,7 +105,6 @@ export default {
       this.page++;
       const result = await $.get(`/shopOrder?page=${this.page}&pageSize=${10}`);
       this.loading = false;
-      console.log(result)
       if(this.page*10 >= result.data.information.total){
         this.finished = true;
       }
@@ -120,7 +119,6 @@ export default {
       this.goodpage++;
       const result = await $.get(`/shop?page=${this.goodpage}&pageSize=${10}`);
       this.goodloading = false;
-      console.log(result);
       if(this.page*10 >= result.data.information.total){
         this.goodfinished = true;
       }
@@ -150,7 +148,6 @@ export default {
       formData.append("cid",this.goodList[i].cid);
       formData.append("commodityStatus",false);
       const result = await  $.put("/commodity/updateStatus",formData);
-      console.log(result.data.success);
       if(result.data.success){
         Toast("下架成功");
         this.reload();

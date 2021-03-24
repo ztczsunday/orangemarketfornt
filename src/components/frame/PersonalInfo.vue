@@ -10,13 +10,12 @@
     <VanGrid :border="false" :column-num="5" style="height: 70px">
       <VanGridItem icon="star-o" style="height: 70px" text="收藏" @click="$router.push('/Favorite')"/>
       <VanGridItem icon="clock-o" style="height: 70px" text="历史记录" @click="$router.push('/History')"/>
-      <VanGridItem icon="coupon-o" style="height: 70px" text="我的订单" @click="$router.push('/OrderManage?active=1')"/>
+      <VanGridItem icon="coupon-o" style="height: 70px" text="我的订单" @click="$router.push('/OrderManage')"/>
       <VanGridItem icon="logistics" style="height: 70px" text="待收货" @click="$router.push('/OrderManage?active=3')"/>
       <VanGridItem icon="comment-o" style="height: 70px" text="待评价" @click="$router.push('/OrderManage?active=4')"/>
     </VanGrid>
     <!-- 信息区域 -->
     <VanCellGroup>
-      <VanCell is-link title="用户反馈"/>
       <VanCell is-link title="我的商铺" @click="$router.push('/ShopManage')"/>
       <ARow style="border: 10px solid #F5F5F5;"/>
       <VanCell title="退出登录" style="text-align: center" @click="logOut"/>

@@ -13,10 +13,10 @@
         添加收货地址
       </div>
       <div style="margin: auto">
-        <van-field v-model="address" label="新地址" placeholder="请输入新地址" />
+        <van-field v-model="address" label="新地址" placeholder="请输入新地址"/>
         <van-cell center title="是否设为默认地址？">
           <template #right-icon>
-            <van-switch v-model="checked" size="24" />
+            <van-switch v-model="checked" size="24"/>
           </template>
         </van-cell>
         <div style="text-align: center">
@@ -29,10 +29,10 @@
         修改收货地址
       </div>
       <div style="margin: auto">
-        <van-field v-model="address" label="新地址" placeholder="请输入新地址" />
+        <van-field v-model="address" label="新地址" placeholder="请输入新地址"/>
         <van-cell center title="是否设为默认地址？">
           <template #right-icon>
-            <van-switch v-model="checked" size="24" />
+            <van-switch v-model="checked" size="24"/>
           </template>
         </van-cell>
         <div style="text-align: center">
@@ -46,19 +46,19 @@
 </template>
 
 <script>
-import {Toast} from "vant";
+import { Toast } from "vant";
+
 export default {
   async created() {
-    const {$} = await import('@/util/ajax');
+    const { $ } = await import('@/util/ajax');
     const result = await $.get("/address");
-    console.log(result);
-    if(result.data.information.length !== 0 ){
-      for(let i = 0; i < result.data.information.length; i++){
+    if (result.data.information.length !== 0) {
+      for (let i = 0; i < result.data.information.length; i++) {
         let address = {
-          id : result.data.information[i].receiveAddressId,
-          name : result.data.information[i].addressDetails,
-          tel : '',
-          isDefault : result.data.information[i].isDefault,
+          id: result.data.information[i].receiveAddressId,
+          name: result.data.information[i].addressDetails,
+          tel: '',
+          isDefault: result.data.information[i].isDefault,
         }
         this.list.push(address);
       }
@@ -69,31 +69,31 @@ export default {
     return {
       //地址id
       aid: Number,
-      checked : false,
-      address : "",
+      checked: false,
+      address: "",
       chosenContactId: '1',
       list: [],
-      showAdd : false,
-      showUpdate : false,
+      showAdd: false,
+      showUpdate: false,
     };
   },
   methods: {
-    async reload(){
+    async reload() {
       this.checked = false;
       this.address = "";
-      this.chosenContactId= '1';
-      this.list= [];
+      this.chosenContactId = '1';
+      this.list = [];
       this.showAdd = false;
       this.showUpdate = false;
-      const {$} = await import('@/util/ajax');
+      const { $ } = await import('@/util/ajax');
       const result = await $.get("/address");
-      if(result.data.information.length !== 0 ){
-        for(let i = 0; i < result.data.information.length; i++){
+      if (result.data.information.length !== 0) {
+        for (let i = 0; i < result.data.information.length; i++) {
           let address = {
-            id : result.data.information[i].receiveAddressId,
-            name : result.data.information[i].addressDetails,
-            tel : '',
-            isDefault : result.data.information[i].isDefault,
+            id: result.data.information[i].receiveAddressId,
+            name: result.data.information[i].addressDetails,
+            tel: '',
+            isDefault: result.data.information[i].isDefault,
           }
           this.list.push(address);
         }
@@ -105,52 +105,47 @@ export default {
       this.showAdd = true;
     },
     onEdit(contact) {
-      console.log(contact);
       this.aid = contact.id
       this.address = contact.name;
       this.checked = contact.isDefault;
-      this.showUpdate=true;
+      this.showUpdate = true;
     },
-    async updateAddress(){
-      const {$} = await import('@/util/ajax');
-      const address={
-        addressDetails : this.address,
-        isDefault : this.checked,
-        receiveAddressId : this.aid,
+    async updateAddress() {
+      const { $ } = await import('@/util/ajax');
+      const address = {
+        addressDetails: this.address,
+        isDefault: this.checked,
+        receiveAddressId: this.aid,
       }
-      const result = await $.put("/address",address);
-      console.log(result);
-      if(result.data.success){
+      const result = await $.put("/address", address);
+      if (result.data.success) {
         Toast("修改成功");
         this.reload();
-      }
-      else{
+      } else {
         Toast("修改失败");
       }
     },
-    async deleteAddress(){
-      const {$} = await import('@/util/ajax');
+    async deleteAddress() {
+      const { $ } = await import('@/util/ajax');
       const result = await $.delete(`/address?receiveAddressId=${this.aid}`);
-      if(result.data.success){
+      if (result.data.success) {
         Toast("删除成功");
         this.reload();
-      }
-      else{
+      } else {
         Toast("删除成功");
       }
     },
-    async addAddress(){
-      const {$} = await import('@/util/ajax');
-      const address={
-        addressDetails : this.address,
-        isDefault : this.checked,
+    async addAddress() {
+      const { $ } = await import('@/util/ajax');
+      const address = {
+        addressDetails: this.address,
+        isDefault: this.checked,
       }
-      const result = await $.post("/address",address);
-      if(result.data.success){
+      const result = await $.post("/address", address);
+      if (result.data.success) {
         Toast("创建成功");
         this.reload();
-      }
-      else{
+      } else {
         Toast("创建失败");
       }
     }

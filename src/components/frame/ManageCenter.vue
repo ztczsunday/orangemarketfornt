@@ -104,9 +104,8 @@ export default{
     }
   },
   mounted () {
-    const {name,xData,yData} = this
-    console.log(this.$refs)
-    this.$refs.chart_line_one.initChart(name,xData,yData)
+    const {name,xData,yData} = this;
+    this.$refs.chart_line_one.initChart(name,xData,yData);
   },
   components: {
     ChartLine,
@@ -114,7 +113,6 @@ export default{
   methods:{
     show(key){
       this.window = key;
-      console.log(key)
     }
   }
 }

@@ -127,13 +127,12 @@ export default {
     /* 处理表单提交的函数 */
     async handleSubmit() {
       const { $ } = await import("@/util/ajax");
-      const result = await $.post("/register", {
+      await $.post("/register", {
         userName: this.form.username.value,
         userTelephone: this.form.tel.value,
         userPassword: this.form.password.value,
         userGender: "未知"
       });
-      console.log(result);
     },
     /* 重置表单内容的函数，链接到template的一个button */
     reset() {
