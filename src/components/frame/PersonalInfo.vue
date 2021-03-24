@@ -16,6 +16,7 @@
     <!-- 信息区域 -->
     <VanCellGroup>
       <VanCell is-link title="用户反馈"/>
+      <VanCell is-link title="我的商铺" @click="$router.push('/ShopManage')"/>
       <ARow style="border: 10px solid #F5F5F5;"/>
       <VanCell title="退出登录" style="text-align: center" @click="logOut"/>
     </VanCellGroup>

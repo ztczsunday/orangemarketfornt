@@ -11,7 +11,7 @@
                    :key="index"
                    :thumb="item.mainIcon"
                    :title="item.commodityName"
-                   @click="$router.push(`/?cid=${item.cid}`)"
+                   @click="$router.push(`/ProductDetail?cid=${item.cid}`)"
           />
         </VanList>
       </VanTab>
@@ -25,7 +25,7 @@
                    :key="index"
                    :thumb="item.shopIcon"
                    :title="item.shopName"
-                   @click="$router.push(`/?sid=${item.cid}`)"
+                   @click="$router.push(`/Shop?sid=${item.cid}`)"
           />
         </VanList>
       </VanTab>

@@ -11,7 +11,7 @@
                 :desc="item.lastBrowserDate"
                 :thumb="item.thumb"
                 :title="item.title"
-                @click="$router.push(`/?cid=${item.cid}`)"
+                @click="$router.push(`/ProductDetail?cid=${item.cid}`)"
       />
     </van-list>
   </div>

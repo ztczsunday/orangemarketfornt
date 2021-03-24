@@ -6,7 +6,7 @@
                 :thumb="item.mainIcon"
                 :title="item.commodityName"
                 style="font-size: 15px; background: white; border: 1px solid #ebedf0;"
-                @click="$router.push(`/?cid=${item.cid}`)"
+                @click="$router.push(`/ProductDetail?cid=${item.cid}`)"
       />
     </van-cell>
   </div>
