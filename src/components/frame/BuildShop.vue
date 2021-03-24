@@ -37,7 +37,7 @@
         name="shopAddress"
         placeholder="店铺地址"
     />
-    <VanField label="种类图标上传" name="uploaderSub">
+    <VanField label="商店图标上传" name="uploaderSub">
       <template #input>
         <VanUploader v-model="shopIcon"
                      :before-read="beforeRead"

@@ -106,7 +106,6 @@ export default {
           this.list.push(result.data.information.records[i]);
         }
       }
-      console.log(this.list);
     },
 
   },
@@ -114,10 +113,4 @@ export default {
 </script>
 
 <style scoped>
-.goodsPicture {
-  width: auto;
-  height: auto;
-  max-height: 100%;
-  max-width: 100%;
-}
 </style>

@@ -35,7 +35,7 @@
                      name="Uploader"/>
       </template>
     </VanField>
-    <VanField label="商品默认小图标上传" name="uploaderSubDefault">
+    <VanField label="商品主图上传" name="uploaderSubDefault">
       <template #input>
         <VanUploader v-model="uploaderSubDefault" :after-read="afterReadGoods"
                      :before-delete="upLoaderDelete"
@@ -159,11 +159,13 @@ export default {
         value: result.data.information[i].recordId,
       })
     }
-    console.log(this.options)
-
   },
   data() {
     return {
+      //标记位，update为更新模式，add为新增模式
+      type : String,
+      //获取商品id
+      cid : Number,
       label: [],
       //存商品图片
       uploader: [],
@@ -194,10 +196,19 @@ export default {
   },
   methods: {
     async onSubmit() {
-      if (this.uploader.length === 0 || this.uploaderDetail.length === 0 || this.uploaderSubDefault.length === 0) {
-        Toast("缺少图片");
+      let searchSub = true;
+      for(let i = 0; i < this.typeList.length;i++){
+        if(this.typeList[i].subPic.length === 0){
+          searchSub = false;
+          break;
+        }
+      }
+      if (this.uploaderSubDefault.length === 0) {
+        Toast("缺少主图片");
       } else if (this.typeList.length === 0) {
         Toast("至少设置一个种类");
+      } else if(searchSub === false){
+        Toast("每个子种类都要有图片");
       } else {
         const config = {
           headers: { "Content-Type": "application/json;charset=UTF-8" }
@@ -230,7 +241,6 @@ export default {
           "mainIcons": this.uploaderName,
           "subCommodity": this.postList
         }
-        console.log(test)
         const result = await $.post('/commodity', test, config);
         console.log(result);
       }

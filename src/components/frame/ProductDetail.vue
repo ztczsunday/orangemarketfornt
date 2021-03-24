@@ -22,12 +22,17 @@ export default {
       goodsInfo : null,
       flag : false,
       sid : Number,
+      cid : Number,
     }
   },
   async created() {
+    this.cid = this.$route.query.cid
     const {$} = await import('@/util/ajax');
-    const result = await $.get(`/commodity?commodityId=${this.$route.query.cid}`);
-    console.log(result.data.information)
+    const result = await $.get(`/commodity?commodityId=${this.cid}`);
+    // const formData = new FormData;
+    // formData.append("cid",`${this.cid}`);
+    // const HResult = await $.post("/histories",formData);
+    // console.log(HResult.data)
     this.goodsInfo = result.data.information;
     this.flag = true;
   },

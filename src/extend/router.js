@@ -19,6 +19,7 @@ import SetOrder from "@/components/frame/SetOrder";
 import SearchResult from "@/components/frame/SearchResult";
 import RouterList from "@/components/frame/RouterList";
 import Favorite from "@/components/frame/Favorite";
+import ShopManage from "@/components/frame/ShopManage";
 
 /* 设定router的内容 */
 const routes = [
@@ -39,7 +40,8 @@ const routes = [
     { path: '/BuildShop', name: '新建商铺', component: BuildShop, meta: { title: '新建商铺' } },
     { path: '/SetOrder', name: '下单', component: SetOrder, meta: { title: '下单' } },
     { path: '/Favorite', name: '收藏夹', component: Favorite, meta: { title: '收藏夹' } },
-    { path: '/RouterList', name: '页面列表', component: RouterList, meta: { title: '页面列表' } }
+    { path: '/RouterList', name: '页面列表', component: RouterList, meta: { title: '页面列表' } },
+    { path: '/ShopManage', name: '店铺管理', component: ShopManage, meta: { title: '店铺管理' } }
 ];
 
 /* 设定MainRoutes，主页中的几个Router */

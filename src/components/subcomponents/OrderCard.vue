@@ -1,17 +1,21 @@
 <template>
   <div class="card">
     <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}"
-              is-link @click="toShop"
-              v-if="place !== 'SetOrder'">
+              v-if="place === 'SetOrder'">
       <van-icon name="shop-o"/>
       {{order.shopName}}
     </van-cell>
+    <div style="margin: 10px;padding-top: 10px; padding-left:10px; font-weight: bold;font-size: large" v-else-if="place === 'ShopManage'">
+      订单号：{{order.orderId}}
+    </div>
     <van-cell :style="{'font-weight':'bold','font-size': '120%','border-radius':'25px'}"
+              is-link @click="toShop"
               v-else>
       <van-icon name="shop-o"/>
       {{order.shopName}}
     </van-cell>
-    <ARow span="12" style="color: red;font-weight: bold;margin-left: 20px" v-if="place==='OrderManage'">
+    <ARow span="12" style="color: red;font-weight: bold;margin-left: 20px"
+          v-if="place==='OrderManage'||place === 'ShopManage'">
       订单{{order.itemName}}
     </ARow>
     <ARow type="flex" justify="end">
@@ -52,6 +56,14 @@
                     @click="toOrderDetail">查看详情</van-button>
       </ACol>
     </ARow>
+    <ARow justify="end" type="flex" v-if="place === 'ShopManage'&& order.itemName ==='待发货'">
+      <ACol>
+        <van-button :style="{height : '35px','margin-right':'5px','width':'25vw'}"
+                    round type="info"
+                    color="orange"
+                    @click="postGoods">我已发货</van-button>
+      </ACol>
+    </ARow>
   </div>
 
 </template>
@@ -80,6 +92,9 @@ export default {
       this.$store.state.orderId = this.order.orderId;
       this.$router.push({ path: '/OrderDetail' });
     },
+    postGoods() {
+      this.$emit('postgood');
+    }
   },
 
 }
