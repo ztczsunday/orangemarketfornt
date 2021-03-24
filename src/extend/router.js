@@ -135,7 +135,7 @@ Vue.use(VueRouter);
 
 /* 路由修改时，修改标题 */
 router.beforeEach((to, from, next) => {
-    if (state.state.loginstate === false && to.fullPath === '/PayReturn') {
+    if (state.state.loginstate === false && to.fullPath.includes('/PayReturn')) {
         state.dispatch('doLogin');
         document.title = to.meta.title;
         next();
