@@ -53,7 +53,7 @@ export default {
       }
       this.$store.state.orderId = result.data.information;
       await this.$router.push({
-        name:'订单详情',
+        name: '订单详情',
       })
     },
   }

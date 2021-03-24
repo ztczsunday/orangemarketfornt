@@ -81,6 +81,7 @@ export default {
       const result = await $.get('/user/aboutChats');
       const mails = result.data.information;
       Array.prototype.push.apply(this.mails, mails);
+      console.log(mails);
       this.finished = true;
     },
     async showPopup(index) {

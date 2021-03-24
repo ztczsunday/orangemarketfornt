@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VanTabs v-model="active" sticky offset-top="46px">
+    <VanTabs v-model="active" offset-top="46px" sticky>
       <VanTab title="全部">
         <van-list
             v-model="loading"
@@ -8,8 +8,8 @@
             finished-text="没有更多了"
             @load="onLoad"
         >
-          <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item" :value="item.countCommodity"></OrderCard>
+          <ARow v-for="(item,i) in list" :key="i">
+            <OrderCard :order="item" :place="'OrderManage'" :value="item.countCommodity"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -20,10 +20,10 @@
             finished-text="没有更多了"
             @load="onLoad"
         >
-          <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item"
-                       :value="item.countCommodity"
-                       v-if="item.itemName ==='待付款'"></OrderCard>
+          <ARow v-for="(item,i) in list" :key="i">
+            <OrderCard v-if="item.itemName ==='待付款'" :order="item"
+                       :place="'OrderManage'"
+                       :value="item.countCommodity"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -34,10 +34,10 @@
             finished-text="没有更多了"
             @load="onLoad"
         >
-          <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item"
-                       :value="item.countCommodity"
-                       v-if="item.itemName ==='待发货'"></OrderCard>
+          <ARow v-for="(item,i) in list" :key="i">
+            <OrderCard v-if="item.itemName ==='待发货'" :order="item"
+                       :place="'OrderManage'"
+                       :value="item.countCommodity"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -48,10 +48,10 @@
             finished-text="没有更多了"
             @load="onLoad"
         >
-          <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item"
-                       :value="item.countCommodity"
-                       v-if="item.itemName ==='待收货'"></OrderCard>
+          <ARow v-for="(item,i) in list" :key="i">
+            <OrderCard v-if="item.itemName ==='待收货'" :order="item"
+                       :place="'OrderManage'"
+                       :value="item.countCommodity"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -62,10 +62,10 @@
             finished-text="没有更多了"
             @load="onLoad"
         >
-          <ARow  v-for="(item,i) in list" :key="i">
-            <OrderCard :place="'OrderManage'" :order="item"
-                       :value="item.countCommodity"
-                       v-if="item.itemName ==='待评价'"></OrderCard>
+          <ARow v-for="(item,i) in list" :key="i">
+            <OrderCard v-if="item.itemName ==='待评价'" :order="item"
+                       :place="'OrderManage'"
+                       :value="item.countCommodity"></OrderCard>
           </ARow>
         </van-list>
       </VanTab>
@@ -91,28 +91,27 @@ export default {
       list: [],
       loading: false,
       finished: false,
-      page : 0,
+      page: 0,
       //激活的标签位置，默认为0
       active: 0,
     };
   },
   components: { OrderCard },
   methods: {
-    async onLoad(){
+    async onLoad() {
       const { $ } = await import("@/util/ajax");
       this.page++;
       const result = await $.get(`/order?page=${this.page}&pageSize=${10}`);
       this.loading = false;
-      if(this.page*10 >= result.data.information.total){
+      if (this.page * 10 >= result.data.information.total) {
         this.finished = true;
       }
-      if(result.data.information.records.length !== 0){
-        for(let i = 0; i <result.data.information.records.length; i++){
+      if (result.data.information.records.length !== 0) {
+        for (let i = 0; i < result.data.information.records.length; i++) {
           this.list.push(result.data.information.records[i]);
         }
       }
     },
-
   },
 }
 </script>

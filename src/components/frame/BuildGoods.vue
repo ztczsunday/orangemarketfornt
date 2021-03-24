@@ -163,9 +163,9 @@ export default {
   data() {
     return {
       //标记位，update为更新模式，add为新增模式
-      type : String,
+      type: String,
       //获取商品id
-      cid : Number,
+      cid: Number,
       label: [],
       //存商品图片
       uploader: [],
@@ -197,8 +197,8 @@ export default {
   methods: {
     async onSubmit() {
       let searchSub = true;
-      for(let i = 0; i < this.typeList.length;i++){
-        if(this.typeList[i].subPic.length === 0){
+      for (let i = 0; i < this.typeList.length; i++) {
+        if (this.typeList[i].subPic.length === 0) {
           searchSub = false;
           break;
         }
@@ -207,7 +207,7 @@ export default {
         Toast("缺少主图片");
       } else if (this.typeList.length === 0) {
         Toast("至少设置一个种类");
-      } else if(searchSub === false){
+      } else if (searchSub === false) {
         Toast("每个子种类都要有图片");
       } else {
         const config = {
@@ -242,15 +242,14 @@ export default {
           "subCommodity": this.postList
         }
         const result = await $.post('/commodity', test, config);
-        if(result.data.success){
+        if (result.data.success) {
           Toast("创建成功");
           await this.$router.push(
               {
-                name:'商铺管理',
+                name: '商铺管理',
               }
           )
-        }
-        else{
+        } else {
           Toast("创建失败");
         }
       }

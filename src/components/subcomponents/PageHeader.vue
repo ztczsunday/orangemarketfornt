@@ -2,8 +2,8 @@
   <VanSticky>
     <VanNavBar
         v-if="shouldNavbar"
-        :title="title"
         :left-arrow="checkShouldHeader"
+        :title="title"
         @click-left="$router.go(-1)"
         @click-right="() => {}"
     />
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {loginRoutes} from '@/extend/router';
+import { loginRoutes } from '@/extend/router';
 
 export default {
   name: "PageHeader",

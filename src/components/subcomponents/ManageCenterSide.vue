@@ -1,9 +1,9 @@
 <template>
   <div>
     <AMenu
-        class="mySide"
         :default-selected-keys="['1']"
         :open-keys.sync="openKeys"
+        class="mySide"
         mode="inline"
         @click="handleClick"
     >
@@ -41,9 +41,9 @@ export default {
 
 
 <style scoped>
-.mySide{
-  width : 20%;
-  height :100vw;
+.mySide {
+  width: 20%;
+  height: 100vw;
 }
 
 </style>

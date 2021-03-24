@@ -1,8 +1,8 @@
 <template>
   <a-result
+      :sub-title="`订单号：${$route.query.trade_no}`"
       status="success"
       title="支付成功!"
-      :sub-title="`订单号：${$route.query.trade_no}`"
   >
     <template #extra>
       <a-button key="console" type="primary" @click="$router.push('/')">

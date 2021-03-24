@@ -2,9 +2,9 @@
   <div>
     <!-- 个人信息区域 -->
     <VanCard
-        :title="userInfo.username"
         :desc="userInfo.userSignature"
         :thumb="userInfo.userSelfie"
+        :title="userInfo.username"
     />
     <!-- 收藏区域 -->
     <VanGrid :border="false" :column-num="5" style="height: 70px">
@@ -18,7 +18,7 @@
     <VanCellGroup>
       <VanCell is-link title="我的商铺" @click="$router.push('/ShopManage')"/>
       <ARow style="border: 10px solid #F5F5F5;"/>
-      <VanCell title="退出登录" style="text-align: center" @click="logOut"/>
+      <VanCell style="text-align: center" title="退出登录" @click="logOut"/>
     </VanCellGroup>
   </div>
 </template>

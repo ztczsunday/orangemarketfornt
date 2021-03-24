@@ -26,17 +26,17 @@
 <script>
 export default {
   name: "ProductDetailBuy",
-  props:{
+  props: {
     typeList: Array,
-    otherMessage : {
-      shopName : String,
-      commodityName : String,
-      shopId : Number,
+    otherMessage: {
+      shopName: String,
+      commodityName: String,
+      shopId: Number,
     }
   },
   async mounted() {
     this.sku.price = this.typeList[0].price;
-    for(let i = 0; i < this.typeList.length; i++){
+    for (let i = 0; i < this.typeList.length; i++) {
       this.sku.tree[0].v.push(
           {
             "id": String(i),
@@ -49,12 +49,12 @@ export default {
           {
             "id": this.typeList[i].subId,
             "s1": String(i),
-            "price": this.typeList[i].price*100,
+            "price": this.typeList[i].price * 100,
             "stock_num": this.typeList[i].stock
           }
       );
       this.sku.stock_num += this.typeList[i].stock;
-      if(this.typeList[i].price < this.sku.price){
+      if (this.typeList[i].price < this.sku.price) {
         this.sku.price = this.typeList[i].price;
       }
     }
@@ -103,17 +103,17 @@ export default {
 
 
       },
-      order : {
+      order: {
         shopName: String,
         subIcon: String,
-        commodityName:String,
-        subName : String,
-        price : Number,
-        countCommodity : Number,
+        commodityName: String,
+        subName: String,
+        price: Number,
+        countCommodity: Number,
         subId: Number,
         cid: Number,
-        shopId:Number,
-        stock:Number,
+        shopId: Number,
+        stock: Number,
       },
     };
   },
@@ -128,12 +128,12 @@ export default {
     showPopup() {
       this.show = true;
     },
-    onBuyClicked(skuData){
+    onBuyClicked(skuData) {
       let tag = 0;
       this.order.shopName = this.otherMessage.shopName;
       this.order.subId = skuData.selectedSkuComb.id;
-      for(let i = 0; i < this.typeList.length; i++){
-        if(this.typeList[i].subId === this.order.subId){
+      for (let i = 0; i < this.typeList.length; i++) {
+        if (this.typeList[i].subId === this.order.subId) {
           tag = i;
         }
       }
@@ -142,13 +142,13 @@ export default {
       this.order.subName = this.typeList[tag].subName;
       this.order.price = this.typeList[tag].price;
       this.order.countCommodity = skuData.selectedNum;
-      this.order.cid= this.typeList[tag].cid;
-      this.order.shopId =this.otherMessage.shopId;
-      this.order.stock =this.typeList[tag].stock;
+      this.order.cid = this.typeList[tag].cid;
+      this.order.shopId = this.otherMessage.shopId;
+      this.order.stock = this.typeList[tag].stock;
       this.$store.state.order = this.order;
       this.$router.push(
           {
-            name:'下单',
+            name: '下单',
           }
       )
     }

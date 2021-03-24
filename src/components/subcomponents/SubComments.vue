@@ -2,7 +2,7 @@
   <div>
     <div>
       <ARow style="margin-top: 10px">
-        <ACol style="height:5vw ; font-size: 4vw ; font-weight:bold" push="1">
+        <ACol push="1" style="height:5vw ; font-size: 4vw ; font-weight:bold">
           更多评论
         </ACol>
       </ARow>
@@ -15,7 +15,7 @@
       <ARow :style="{'height':'10px'}"></ARow>
     </div>
     <div v-else>
-      <ARow :style="{'margin-top':'10px'}" v-for="(item,index) in scl" :key="index">
+      <ARow v-for="(item,index) in scl" :key="index" :style="{'margin-top':'10px'}">
         <ARow :style="{'height':'10px'}"></ARow>
         <ARow>
           <ACol push="1" span="3">
@@ -39,21 +39,21 @@
       </ARow>
     </div>
     <div class=footerDiv>
-      <ARow class="footer" type="flex" justify="space-between">
+      <ARow class="footer" justify="space-between" type="flex">
         <ACol>
           <VanCellGroup>
             <VanField
                 v-model="message"
-                rows="1"
-                autosize=""
+                :autosize="{}"
                 label="评论"
-                type="textarea"
                 placeholder="也来说两句吧"
+                rows="1"
+                type="textarea"
             />
           </VanCellGroup>
         </ACol>
         <ACol>
-          <van-button type="primary" color="orange" @click="addComments">评论</van-button>
+          <van-button color="orange" type="primary" @click="addComments">评论</van-button>
         </ACol>
       </ARow>
     </div>

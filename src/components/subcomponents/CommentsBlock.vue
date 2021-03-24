@@ -24,7 +24,7 @@
                 <a-avatar :src="item.userSelfie"/>
               </ACol>
               <ACol :style="{'height':'8.3vw','font-size': '3vw'}" span="4">
-                {{item.userName}}
+                {{ item.userName }}
               </ACol>
             </ARow>
             <ARow :style="{'font-size':'4vw'}">
@@ -41,14 +41,14 @@
 
 <script>
 export default {
-  props : {
-    comments : Array
+  props: {
+    comments: Array
   },
   name: "CommentsBlock",
   data() {
     return {
       show: false,
-      showNo : true
+      showNo: true
     };
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted() {
-    if(this.comments.length !== 0){
+    if (this.comments.length !== 0) {
       this.showNo = false
     }
   }

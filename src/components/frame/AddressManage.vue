@@ -2,13 +2,13 @@
   <div>
     <van-contact-list
         v-model="chosenContactId"
-        :list="list"
         :add-text="'新建收货地址'"
+        :list="list"
         default-tag-text="默认"
         @add="onAdd"
         @edit="onEdit"
     />
-    <van-popup v-model="showAdd" position="bottom" style="height: 30%" closeable>
+    <van-popup v-model="showAdd" closeable position="bottom" style="height: 30%">
       <div style="margin: 10px;padding:10px;font-weight: bold">
         添加收货地址
       </div>
@@ -20,11 +20,11 @@
           </template>
         </van-cell>
         <div style="text-align: center">
-          <van-button round type="info" style="width:90%;" @click="addAddress">增加地址</van-button>
+          <van-button round style="width:90%;" type="info" @click="addAddress">增加地址</van-button>
         </div>
       </div>
     </van-popup>
-    <van-popup v-model="showUpdate" position="bottom" style="height: 40%" closeable>
+    <van-popup v-model="showUpdate" closeable position="bottom" style="height: 40%">
       <div style="margin: 10px;padding:10px;font-weight: bold">
         修改收货地址
       </div>
@@ -36,9 +36,9 @@
           </template>
         </van-cell>
         <div style="text-align: center">
-          <van-button round type="info" style="width:90%;" @click="updateAddress">修改地址</van-button>
+          <van-button round style="width:90%;" type="info" @click="updateAddress">修改地址</van-button>
           <div style="height:10px"/>
-          <van-button round type="danger" style="width:90%;" @click="deleteAddress">删除地址</van-button>
+          <van-button round style="width:90%;" type="danger" @click="deleteAddress">删除地址</van-button>
         </div>
       </div>
     </van-popup>

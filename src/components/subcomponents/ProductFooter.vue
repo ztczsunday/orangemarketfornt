@@ -14,8 +14,8 @@
 
 <script>
 export default {
-  props:{
-    sid:Number,
+  props: {
+    sid: Number,
     isCollected: Boolean,
   },
   name: "ProductDetail",
@@ -43,20 +43,20 @@ export default {
   created() {
   },
   methods: {
-    popup(){
+    popup() {
       this.$emit('clickbuy');
     },
     toShop() {
       this.$router.push({
-        path:"/shop",
-        query:{
-          sid:this.sid,
+        path: "/shop",
+        query: {
+          sid: this.sid,
         }
       })
     },
-    toMail(){
+    toMail() {
       this.$router.push({
-        path:"/Mails",
+        path: "/Mails",
       })
     }
   }

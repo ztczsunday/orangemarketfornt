@@ -2,7 +2,7 @@
   <div>
     <ARow style="margin-top: 10px">
       <ARow>
-        <ACol style="height:5vw; font-size: 4vw; font-weight: bold;" push="1" span="23">
+        <ACol push="1" span="23" style="height:5vw; font-size: 4vw; font-weight: bold;">
           {{ messages.oppName }}
         </ACol>
       </ARow>
@@ -12,7 +12,7 @@
           <ACol span="3">
             <a-avatar :src="item['senderId'] === $store.state.user.uid ? messages.oppSelfie : messages.mySelfie"/>
           </ACol>
-          <ACol style="height: 5vw; font-size: 4vw; font-weight: bold" span="21">
+          <ACol span="21" style="height: 5vw; font-size: 4vw; font-weight: bold">
             {{ item["senderId"] === $store.state.user.uid ? messages.oppName : "我" }}
           </ACol>
           <ACol>
@@ -21,14 +21,14 @@
           </ACol>
         </ARow>
         <ARow>
-          <ACol style="font-size: 4vw; height:5vw" push="1">
+          <ACol push="1" style="font-size: 4vw; height:5vw">
             {{ item["chatDetails"] }}
           </ACol>
         </ARow>
       </VanCell>
     </ARow>
     <div class=footerDiv>
-      <ARow class="footer" type="flex" justify="space-between">
+      <ARow class="footer" justify="space-between" type="flex">
         <ACol>
           <VanCellGroup>
             <van-field
@@ -42,7 +42,7 @@
           </VanCellGroup>
         </ACol>
         <ACol>
-          <van-button type="primary" color="orange" @click="handleChatPush">发送</van-button>
+          <van-button color="orange" type="primary" @click="handleChatPush">发送</van-button>
         </ACol>
       </ARow>
     </div>

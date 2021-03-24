@@ -1,13 +1,13 @@
 <template>
   <ARow>
     <ARow>
-      <ProductDetailMessage :goodsInfo="this.goodsInfo" v-if="flag === true" ref="ProductDetailMessage"/>
+      <ProductDetailMessage v-if="flag === true" ref="ProductDetailMessage" :goodsInfo="this.goodsInfo"/>
     </ARow>
-    <ProductFooter :isCollected="goodsInfo.isCollected"
+    <ProductFooter v-if="flag === true"
+                   :isCollected="goodsInfo.isCollected"
                    :sid="goodsInfo.shopId"
                    @clickbuy="showBuy"
-                   @collect="doFavorite"
-                   v-if="flag === true"></ProductFooter>
+                   @collect="doFavorite"></ProductFooter>
   </ARow>
 </template>
 
@@ -18,25 +18,25 @@ import ProductFooter from "@/components/subcomponents/ProductFooter";
 export default {
   name: "ProductDetail",
   components: { ProductFooter, ProductDetailMessage },
-  data(){
-    return{
-      goodsInfo : null,
-      flag : false,
-      cid : Number,
+  data() {
+    return {
+      goodsInfo: null,
+      flag: false,
+      cid: Number,
     }
   },
   async created() {
     this.cid = this.$route.query.cid
-    const {$} = await import('@/util/ajax');
+    const { $ } = await import('@/util/ajax');
     const result = await $.get(`/commodity?commodityId=${this.cid}`);
     const formData = new FormData;
-    formData.append("cid",`${this.cid}`);
-    await $.post("/histories",formData);
+    formData.append("cid", `${this.cid}`);
+    await $.post("/histories", formData);
     this.goodsInfo = result.data.information;
     this.flag = true;
   },
-  methods:{
-    showBuy(){
+  methods: {
+    showBuy() {
       this.$refs.ProductDetailMessage.showBuyBlock();
     },
     async doFavorite() {

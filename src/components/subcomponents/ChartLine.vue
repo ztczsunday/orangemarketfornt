@@ -1,27 +1,27 @@
 <template>
-  <div class="echart" ref="input1" :style="{float:'left',width: '100%', height: '500px'}"></div>
+  <div ref="input1" :style="{float:'left',width: '100%', height: '500px'}" class="echart"></div>
 </template>
 
 <script>
 
-export default{
+export default {
   name: "ChartLine",
-  methods:{
+  methods: {
 
-    initChart(name,xData,yData) {
+    initChart(name, xData, yData) {
 
       let getchart = this.$echarts.init(this.$refs.input1);
-      var  option = {
+      var option = {
 
         tooltip: {
           trigger: 'axis'
         },
         legend: {
           data: [name],
-          bottom:'0%'
+          bottom: '0%'
         },
         grid: { //调整图表上下左右位置
-          top:'10%',
+          top: '10%',
           left: '3%',
           right: '8%',
           bottom: '11%',

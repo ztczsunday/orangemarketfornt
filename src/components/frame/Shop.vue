@@ -1,12 +1,12 @@
 <template>
   <div>
-    <VanCard :thumb="shopDetails.shopIcon"
+    <VanCard :desc="shopDetails.shopDescription"
+             :thumb="shopDetails.shopIcon"
              :title="shopDetails.shopName"
-             :desc="shopDetails.shopDescription"
              style="font-size: 15px;"
     >
       <template #footer>
-        <van-button size="mini" :type="favoriteStyle" @click="doFavorite">{{ favoriteInfo }}</van-button>
+        <van-button :type="favoriteStyle" size="mini" @click="doFavorite">{{ favoriteInfo }}</van-button>
       </template>
     </VanCard>
     <VanTabs v-model="active">

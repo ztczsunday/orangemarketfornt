@@ -15,7 +15,7 @@
         <ARow></ARow>
         <ACol span="15">
           <div class="priceBlock">
-            ￥ {{priceLow}}
+            ￥ {{ priceLow }}
           </div>
         </ACol>
         <ACol class="grades" span="9">
@@ -27,24 +27,25 @@
       <ARow justify="center" type="flex">
         <ACol span="22">
           <div class="introduce">
-            {{ goodsInfo.commodityName}}
+            {{ goodsInfo.commodityName }}
           </div>
         </ACol>
       </ARow>
       <ARow :style="{'height' : '3vw'}"></ARow>
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
-    <ProductDetailBuy :typeList="goodsInfo.subCommodity" :otherMessage="otherMessage" v-if="flag" ref="ProductDetailBuy"></ProductDetailBuy>
+    <ProductDetailBuy v-if="flag" ref="ProductDetailBuy" :otherMessage="otherMessage"
+                      :typeList="goodsInfo.subCommodity"></ProductDetailBuy>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ARow class="buy">
-      <CommentsBlock :comments="goodsInfo.hotComments" v-if="flag"></CommentsBlock>
+      <CommentsBlock v-if="flag" :comments="goodsInfo.hotComments"></CommentsBlock>
     </ARow>
     <ARow :style="{'height' : '10px'}"></ARow>
     <ARow class="buy">
-      <ShopBlock :shopName="goodsInfo.shopName"
+      <ShopBlock v-if="flag"
                  :shopDescription="goodsInfo.shopDescription"
                  :shopId="goodsInfo.shopId"
-                 v-if="flag"></ShopBlock>
+                 :shopName="goodsInfo.shopName"></ShopBlock>
     </ARow>
     <ARow>
       <div :style="{'width':'100%','text-align':'center'}">
@@ -66,8 +67,8 @@ import ShopBlock from "@/components/subcomponents/ShopBlock";
 export default {
   name: "ProductDetailMessage",
   components: { ShopBlock, CommentsBlock, ProductDetailBuy },
-  props:{
-    goodsInfo : {
+  props: {
+    goodsInfo: {
       commentCount: Number,
       commodityDetails: Array,
       commodityName: String,
@@ -78,18 +79,18 @@ export default {
       shopDescription: String,
       shopName: String,
       subCommodity: Array,
-      shopId : Number,
+      shopId: Number,
     },
   },
   async mounted() {
     this.priceLow = this.goodsInfo.subCommodity[0].price;
-    for(let i = 1; i < this.goodsInfo.subCommodity.length; i++){
-      if(this.goodsInfo.subCommodity[i].price < this.priceLow){
+    for (let i = 1; i < this.goodsInfo.subCommodity.length; i++) {
+      if (this.goodsInfo.subCommodity[i].price < this.priceLow) {
         this.priceLow = this.goodsInfo;
       }
     }
-    if(this.goodsInfo.commentCount !== 0){
-      this.praiseRate = (this.goodsInfo.praiseCommentCount/this.goodsInfo.commentCount)*100;
+    if (this.goodsInfo.commentCount !== 0) {
+      this.praiseRate = (this.goodsInfo.praiseCommentCount / this.goodsInfo.commentCount) * 100;
     }
     this.otherMessage.shopName = this.goodsInfo.shopName;
     this.otherMessage.commodityName = this.goodsInfo.commodityName;
@@ -115,17 +116,17 @@ export default {
         //传给子组件生成订单的其他信息
       },
       otherMessage: {
-        shopName : String,
-        commodityName : String,
-        shopId : Number,
+        shopName: String,
+        commodityName: String,
+        shopId: Number,
       },
-      priceLow : 0,
+      priceLow: 0,
       praiseRate: 0,
-      flag : false
+      flag: false
     };
   },
   methods: {
-    showBuyBlock(){
+    showBuyBlock() {
       this.$refs.ProductDetailBuy.showPopup();
     }
   }

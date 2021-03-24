@@ -40,10 +40,10 @@
     <VanField label="商店图标上传" name="uploaderSub">
       <template #input>
         <VanUploader v-model="shopIcon"
-                     :before-read="beforeRead"
-                     :max-count="1"
                      :after-read="afterRead"
                      :before-delete="deleteImage"
+                     :before-read="beforeRead"
+                     :max-count="1"
                      multiple/>
       </template>
     </VanField>
@@ -56,7 +56,7 @@
 
 <script>
 import area from "@/util/area";
-import {Toast} from "vant";
+import { Toast } from "vant";
 
 export default {
   created() {
@@ -72,8 +72,8 @@ export default {
       shopIntroduction: '',
       shopAddress: null,
       shopIcon: [],
-      shopIconPost : "",
-      shop:{
+      shopIconPost: "",
+      shop: {
         shopAddress: String,
         shopDescription: String,
         shopIcon: String,
@@ -83,23 +83,21 @@ export default {
   },
   methods: {
     async onSubmit(values) {
-      if(this.shopIconPost === ""){
+      if (this.shopIconPost === "") {
         Toast("商店总得有图片吧。。。")
-      }
-      else{
+      } else {
         this.shop.shopName = values.shopName;
         this.shop.shopDescription = values.shopDescription;
         this.shop.shopAddress = values.area;
-        this.shop.shopIcon =this.shopIconPost;
-        const {$} = await import('@/util/ajax');
-        const result = await $.post("/shop",this.shop)
-        if(!result.data.success){
+        this.shop.shopIcon = this.shopIconPost;
+        const { $ } = await import('@/util/ajax');
+        const result = await $.post("/shop", this.shop)
+        if (!result.data.success) {
           Toast("你已经有一个商店了")
-        }
-        else{
+        } else {
           Toast("商店创建成功");
           await this.$router.push({
-            name:'个人信息'
+            name: '个人信息'
           });
         }
       }
@@ -118,7 +116,7 @@ export default {
       }
       return true;
     },
-    async afterRead(file){
+    async afterRead(file) {
       const config = {
         headers: { "Content-Type": "multipart/form-data;boundary=" + new Date().getTime() }
       };
@@ -128,7 +126,7 @@ export default {
       const result = await $.post('/upload', formData, config);
       this.shopIconPost = result.data.information;
     },
-    deleteImage(){
+    deleteImage() {
       this.shopIconPost = "";
       return Promise;
     }

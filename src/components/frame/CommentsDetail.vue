@@ -10,14 +10,14 @@
         <ARow>
           <ARow>
             <ACol span="3">
-              <a-avatar :src= "item.userSelfie"/>
+              <a-avatar :src="item.userSelfie"/>
             </ACol>
             <ACol :style="{'height':'5vw','font-weight':'bold'}" span="21">
-              {{item.userName}}
+              {{ item.userName }}
             </ACol>
             <ACol>
-              {{item.commentTime[0]}}/{{item.commentTime[1]}}/{{item.commentTime[2]}}
-              {{item.commentTime[3]}}:{{item.commentTime[4]}}:{{item.commentTime[5]}}
+              {{ item.commentTime[0] }}/{{ item.commentTime[1] }}/{{ item.commentTime[2] }}
+              {{ item.commentTime[3] }}:{{ item.commentTime[4] }}:{{ item.commentTime[5] }}
             </ACol>
           </ARow>
           <ARow v-if="item.praise === true" :style="{
@@ -33,7 +33,7 @@
             属实不行
           </ARow>
           <ARow :style="{'font-size':'4vw','height':'5vw'}">
-            {{item.commentDetails}}
+            {{ item.commentDetails }}
           </ARow>
           <ARow>
             <ACol push="21" span="3">
@@ -44,7 +44,7 @@
         </ARow>
       </van-cell>
       <van-popup v-model="show" :style="{'height':'70%'}" closeable position="bottom">
-        <SubComments :scl="subcomments" :fid="this.fid" @reload="reload"></SubComments>
+        <SubComments :fid="this.fid" :scl="subcomments" @reload="reload"></SubComments>
       </van-popup>
     </van-list>
   </ARow>
@@ -63,23 +63,23 @@ export default {
       allLoaded: false,
       //评论列表
       list: [],
-      subCommentList : [],
-      subShowList:[],
+      subCommentList: [],
+      subShowList: [],
       //是否在加载
       loading: false,
       //是否全部加载完毕
       finished: false,
-      pages : 0,
+      pages: 0,
       subcomments: [],
-      fid : 0,
+      fid: 0,
     }
   },
   methods: {
     async onLoad() {
-      const {$} = await import('@/util/ajax');
+      const { $ } = await import('@/util/ajax');
       this.pages++;
       const result = await $.get(`/commodity/comment?cid=${1}&page=${this.pages}&pageSize=${10}`);
-      for(let i = 0; i < result.data.information.records.length; i++){
+      for (let i = 0; i < result.data.information.records.length; i++) {
         this.list.push(result.data.information.records[i]);
         let subResult = await $.get(
             `/commodity/comment/subComments?commentId=${result.data.information.records[i].commentId}`)
@@ -87,13 +87,13 @@ export default {
         this.subShowList.push(subResult.data.information.length)
       }
       this.loading = false;
-      this.finished=true;
+      this.finished = true;
     },
-    reload(){
+    reload() {
       this.list = [];
       this.subCommentList = [];
       this.show = false;
-      this.allLoaded =false;
+      this.allLoaded = false;
       this.subShowList = [];
       this.loading = false;
       this.finished = false;

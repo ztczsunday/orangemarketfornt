@@ -14,9 +14,9 @@
       </template>
     </VanSearch>
     <div style="text-align: center; background: white; padding: 0 10px;">
-      <AInput v-model="minValue" placeholder="请输入最低价" style="width: 47%;" prefix="￥"/>
+      <AInput v-model="minValue" placeholder="请输入最低价" prefix="￥" style="width: 47%;"/>
       <span style="width: 6%">~</span>
-      <AInput v-model="maxValue" placeholder="请输入最高价" style="width: 47%;" prefix="￥"/>
+      <AInput v-model="maxValue" placeholder="请输入最高价" prefix="￥" style="width: 47%;"/>
     </div>
     <VanList
         v-model="loading"
@@ -26,12 +26,12 @@
     >
       <VanCell>
         <VanCard v-for="(item, index) in commodities"
-                  :key="index"
-                  :thumb="item.mainIcon"
-                  :title="item.commodityName"
-                  :price="computePrice(item['lowestPrice'])"
-                  style="font-size: 15px; background: white; border: 1px solid #ebedf0;"
-                  @click="$router.push(`/ProductDetail?cid=${item.cid}`)"
+                 :key="index"
+                 :price="computePrice(item['lowestPrice'])"
+                 :thumb="item.mainIcon"
+                 :title="item.commodityName"
+                 style="font-size: 15px; background: white; border: 1px solid #ebedf0;"
+                 @click="$router.push(`/ProductDetail?cid=${item.cid}`)"
         />
       </VanCell>
     </VanList>

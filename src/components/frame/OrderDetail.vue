@@ -8,10 +8,10 @@
       <VanStep>交易完成</VanStep>
     </VanSteps>
     <OrderCard
-        :place="'OrderDetail'"
+        v-if="flag"
         :order="order"
-        :value="order.countCommodity"
-        v-if="flag">
+        :place="'OrderDetail'"
+        :value="order.countCommodity">
     </OrderCard>
     <ARow class="messageBlock">
       <ARow :style="{'font-size' : '4vw','font-weight': 'bold'}">
@@ -22,7 +22,7 @@
           订单号：
         </ACol>
         <ACol>
-          {{information.orderId}}
+          {{ information.orderId }}
         </ACol>
       </ARow>
       <ARow :style="{'font-size' : '3vw'}">
@@ -30,16 +30,16 @@
           邮寄地址：
         </ACol>
         <ACol>
-          {{information.addressDetails}}
+          {{ information.addressDetails }}
         </ACol>
       </ARow>
-      <ARow :style="{'font-size' : '3vw'}" v-for="(item,i) in information.statusDate" :key="i">
+      <ARow v-for="(item,i) in information.statusDate" :key="i" :style="{'font-size' : '3vw'}">
         <ARow v-if="item.id === 1">
           <ACol span="8">
             创建时间：
           </ACol>
           <ACol>
-            {{item.date}}
+            {{ item.date }}
           </ACol>
         </ARow>
         <ARow v-if="item.id === 2">
@@ -47,7 +47,7 @@
             付款时间：
           </ACol>
           <ACol>
-            {{item.date}}
+            {{ item.date }}
           </ACol>
         </ARow>
         <ARow v-if="item.id === 3">
@@ -55,7 +55,7 @@
             发货时间：
           </ACol>
           <ACol>
-            {{item.date}}
+            {{ item.date }}
           </ACol>
         </ARow>
         <ARow v-if="item.id === 4">
@@ -63,7 +63,7 @@
             完成时间：
           </ACol>
           <ACol>
-            {{item.date}}
+            {{ item.date }}
           </ACol>
         </ARow>
         <ARow v-if="item.id === 5">
@@ -71,7 +71,7 @@
             评价时间：
           </ACol>
           <ACol>
-            {{item.date}}
+            {{ item.date }}
           </ACol>
         </ARow>
         <ARow v-if="item.id === 6">
@@ -79,12 +79,12 @@
             取消时间：
           </ACol>
           <ACol>
-            {{item.date}}
+            {{ item.date }}
           </ACol>
         </ARow>
       </ARow>
     </ARow>
-    <ARow :style="{'margin' : '10px'}" v-if="active === 1">
+    <ARow v-if="active === 1" :style="{'margin' : '10px'}">
       <ARow :style="{'font-size' : '4vw','font-weight':'bold'}">
         商品已下单，请尽快付款
       </ARow>
@@ -92,7 +92,7 @@
         立即付款
       </VanButton>
     </ARow>
-    <ARow :style="{'margin' : '10px'}" v-if="active === 2">
+    <ARow v-if="active === 2" :style="{'margin' : '10px'}">
       <ARow :style="{'font-size' : '4vw','font-weight':'bold'}">
         请耐心等待卖家发货...<br>
         等不及了？催促卖家试试
@@ -101,7 +101,7 @@
         催促卖家
       </VanButton>
     </ARow>
-    <ARow :style="{'margin' : '10px'}" v-if="active === 3">
+    <ARow v-if="active === 3" :style="{'margin' : '10px'}">
       <ARow :style="{'font-size' : '4vw','font-weight':'bold'}">
         请确认收到商品，再确认收货，切勿提前收货
       </ARow>
@@ -109,19 +109,19 @@
         确认收货
       </VanButton>
     </ARow>
-    <ARow :style="{'margin' : '10px'}" v-if="information.recordId === 4">
+    <ARow v-if="information.recordId === 4" :style="{'margin' : '10px'}">
       <ARow :style="{'font-size' : '4vw','font-weight':'bold'}">
         可以跟更多的人分享购物体验哦
       </ARow>
       <VanField
           v-model="message"
-          rows="2"
-          autosize
+          :autosize="{}"
           label="评论"
-          type="textarea"
           maxlength="100"
           placeholder="请输入留言"
+          rows="2"
           show-word-limit
+          type="textarea"
       />
       <VanButton :style="{width : '40%','margin-left':'9%'}" color="orange" round type="info"
                  @click="postComment(false)">
@@ -139,44 +139,44 @@
 
 <script>
 import OrderCard from "@/components/subcomponents/OrderCard";
-import {Toast} from "vant";
+import { Toast } from "vant";
 
 export default {
   name: "OrderDetail",
   data() {
     return {
-      flag : false,
+      flag: false,
       //进度条激活位置
       active: 1,
       //商品卡片放在订单详情里
-      place:"OrderDetail",
+      place: "OrderDetail",
       //评论区内容
       message: "",
       //传给子组件的订单对象
-      order : null,
+      order: null,
       //订单号
-      id:Number,
+      id: Number,
       information: {
         //订单号
-        orderId : Number,
+        orderId: Number,
         //店名
-        shopName : String,
+        shopName: String,
         //商品数目
-        countCommodity : Number,
+        countCommodity: Number,
         //商品名
-        commodityName : String,
+        commodityName: String,
         //种类名
-        subName : String,
+        subName: String,
         //单价
-        price : Number,
+        price: Number,
         //订单状态
-        itemName : String,
+        itemName: String,
         //商品图标
-        subIcon : String,
+        subIcon: String,
         //状态变化日期表，id对应状态
-        statusDate : [],
+        statusDate: [],
         //收货地址
-        addressDetails : String,
+        addressDetails: String,
         //状态代号
         recordId: Number,
         //商品id
@@ -186,24 +186,23 @@ export default {
       }
     };
   },
-  methods:{
-    async pay(){
-      window.location.href = `http://localhost:8081/Alipay?orderId=${this.id}`;
+  methods: {
+    async pay() {
+      window.location.href = `/Alipay?orderId=${this.id}`;
     },
-    async recieveConfirm(){
+    async recieveConfirm() {
       const { $ } = await import("@/util/ajax");
       const formData = new FormData;
-      formData.append("orderId",this.id);
-      formData.append("recordId",4);
-      const result = await  $.put("/orderStateflow",formData);
-      if(result.data.success){
+      formData.append("orderId", this.id);
+      formData.append("recordId", 4);
+      const result = await $.put("/orderStateflow", formData);
+      if (result.data.success) {
         await this.reload();
-      }
-      else{
+      } else {
         Toast("确认收货失败")
       }
     },
-    async sentMessage(){
+    async sentMessage() {
       const { $ } = await import("@/util/ajax");
       const formDataMessage = new FormData;
       formDataMessage.append("myType", "用户");
@@ -211,37 +210,35 @@ export default {
       formDataMessage.append("oppType", "商家");
       formDataMessage.append("chatContent", "gkd，发货！");
       await $.post(`/user/sendChat`, formDataMessage);
-      await  this.$router.push({
-        name:'私聊界面'
+      await this.$router.push({
+        name: '私聊界面'
       })
     },
-    async postComment(praise){
-      if(this.message === ""){
+    async postComment(praise) {
+      if (this.message === "") {
         Toast("请输入评论")
-      }
-      else{
+      } else {
         const { $ } = await import("@/util/ajax");
         const formData = new FormData;
-        formData.append("cid",this.information.cid);
-        formData.append("commentDetails",this.message);
-        formData.append("praise",praise);
-        const result = await  $.post("/user/comment",formData);
-        if(result.data.success){
+        formData.append("cid", this.information.cid);
+        formData.append("commentDetails", this.message);
+        formData.append("praise", praise);
+        const result = await $.post("/user/comment", formData);
+        if (result.data.success) {
           Toast("评论成功");
           const formDataComment = new FormData;
-          formDataComment.append("orderId",this.id);
-          formDataComment.append("recordId",5);
-          await $.put("/orderStateflow",formDataComment);
+          formDataComment.append("orderId", this.id);
+          formDataComment.append("recordId", 5);
+          await $.put("/orderStateflow", formDataComment);
           await this.reload();
-        }
-        else{
+        } else {
           Toast("评论失败");
         }
       }
     },
-    async reload(){
+    async reload() {
       this.id = this.$store.state.orderId;
-      const {$} = await import('@/util/ajax');
+      const { $ } = await import('@/util/ajax');
       const result = await $.get(`/orderDetail?orderId=${this.id}`);
       this.order = result.data.information.order;
       this.information.itemName = result.data.information.state[0].recordId;
@@ -249,18 +246,18 @@ export default {
       this.information.subIcon = result.data.information.order.subIcon;
       this.information.orderId = result.data.information.order.orderId;
       this.information.shopName = result.data.information.order.shopName;
-      this.information.countCommodity =result.data.information.order.countCommodity;
+      this.information.countCommodity = result.data.information.order.countCommodity;
       this.information.commodityName = result.data.information.order.commodityName;
-      this.information.subName =result.data.information.order.subName;
+      this.information.subName = result.data.information.order.subName;
       this.information.price = result.data.information.order.price;
-      for(let i = 0; i < result.data.information.state.length; i++){
+      for (let i = 0; i < result.data.information.state.length; i++) {
         this.information.statusDate.unshift(
             {
-              "id" : result.data.information.state[i].recordId,
+              "id": result.data.information.state[i].recordId,
               "date": result.data.information.state[i].statusDate[0] + "." +
-                  result.data.information.state[i].statusDate[1] + "."+
+                  result.data.information.state[i].statusDate[1] + "." +
                   result.data.information.state[i].statusDate[2] + " " +
-                  result.data.information.state[i].statusDate[3] + ":"+
+                  result.data.information.state[i].statusDate[3] + ":" +
                   result.data.information.state[i].statusDate[4] + ":" +
                   result.data.information.state[i].statusDate[5]
             }
@@ -269,10 +266,9 @@ export default {
       this.information.recordId = result.data.information.state[0].recordId;
       this.information.cid = result.data.information.order.cid;
       this.information.sid = result.data.information.order.sid;
-      if(this.information.recordId >=4){
+      if (this.information.recordId >= 4) {
         this.active = 4;
-      }
-      else{
+      } else {
         this.active = this.information.recordId;
       }
       this.flag = true;
@@ -280,9 +276,9 @@ export default {
 
   },
   components: { OrderCard },
-  async created(){
+  async created() {
     this.id = this.$store.state.orderId;
-    const {$} = await import('@/util/ajax');
+    const { $ } = await import('@/util/ajax');
     const result = await $.get(`/orderDetail?orderId=${this.id}`);
     this.order = result.data.information.order;
     this.information.itemName = result.data.information.state[0].recordId;
@@ -290,18 +286,18 @@ export default {
     this.information.subIcon = result.data.information.order.subIcon;
     this.information.orderId = result.data.information.order.orderId;
     this.information.shopName = result.data.information.order.shopName;
-    this.information.countCommodity =result.data.information.order.countCommodity;
+    this.information.countCommodity = result.data.information.order.countCommodity;
     this.information.commodityName = result.data.information.order.commodityName;
-    this.information.subName =result.data.information.order.subName;
+    this.information.subName = result.data.information.order.subName;
     this.information.price = result.data.information.order.price;
-    for(let i = 0; i < result.data.information.state.length; i++){
+    for (let i = 0; i < result.data.information.state.length; i++) {
       this.information.statusDate.unshift(
           {
-            "id" : result.data.information.state[i].recordId,
+            "id": result.data.information.state[i].recordId,
             "date": result.data.information.state[i].statusDate[0] + "." +
-                result.data.information.state[i].statusDate[1] + "."+
+                result.data.information.state[i].statusDate[1] + "." +
                 result.data.information.state[i].statusDate[2] + " " +
-                result.data.information.state[i].statusDate[3] + ":"+
+                result.data.information.state[i].statusDate[3] + ":" +
                 result.data.information.state[i].statusDate[4] + ":" +
                 result.data.information.state[i].statusDate[5]
           }
@@ -310,10 +306,9 @@ export default {
     this.information.recordId = result.data.information.state[0].recordId;
     this.information.cid = result.data.information.order.cid;
     this.information.sid = result.data.information.order.sid;
-    if(this.information.recordId >=4){
+    if (this.information.recordId >= 4) {
       this.active = 4;
-    }
-    else{
+    } else {
       this.active = this.information.recordId;
     }
     this.flag = true;
@@ -322,14 +317,14 @@ export default {
 </script>
 
 <style scoped>
-.messageBlock{
-  margin-top:5px;
+.messageBlock {
+  margin-top: 5px;
   background-color: #ffffff;
   padding-right: 10vw;
   padding-left: 10vw;
   padding-bottom: 5px;
 }
-.button{
-  width : 100%;
+.button {
+  width: 100%;
 }
 </style>

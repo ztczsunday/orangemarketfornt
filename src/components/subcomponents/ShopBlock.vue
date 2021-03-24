@@ -5,7 +5,7 @@
         店铺名
       </ACol>
       <ACol :style="{'font-size': '5vw','font-weight':'bold'}" span="12">
-        {{shopName}}
+        {{ shopName }}
       </ACol>
     </ARow>
     <ARow :style="{height : '5vw','margin-left':'10px','margin-top':'2px', color : 'grey',fontSize : '3vw'}">
@@ -13,7 +13,7 @@
         简介
       </ACol>
       <ACol :style="{'font-size': '4vw'}" span="18">
-        {{shopDescription}}
+        {{ shopDescription }}
       </ACol>
     </ARow>
     <van-cell :style="{'border-radius' : '25px'}" is-link @click="toShop">
@@ -27,18 +27,18 @@
 
 <script>
 export default {
-  props:{
-    shopName : String,
-    shopDescription : String,
-    shopId : Number,
+  props: {
+    shopName: String,
+    shopDescription: String,
+    shopId: Number,
   },
   name: "ShopBlock",
   methods: {
     toShop() {
       this.$router.push({
-        path:"/shop",//这个path就是你在router/index.js里边配置的路径
-        query:{
-          sid:this.shopId,
+        path: "/shop",//这个path就是你在router/index.js里边配置的路径
+        query: {
+          sid: this.shopId,
         }
       })
     }
