@@ -78,8 +78,13 @@ import OrderCard from "@/components/subcomponents/OrderCard";
 
 export default {
   name: "OrderManage",
-  async created() {
-
+  created() {
+    const activePage = this.$route.query.active;
+    if ((typeof activePage) === "string") {
+      this.active = parseInt(activePage);
+    } else {
+      this.active = 0;
+    }
   },
   data() {
     return {

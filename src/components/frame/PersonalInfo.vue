@@ -7,11 +7,12 @@
         :thumb="userInfo.userSelfie"
     />
     <!-- 收藏区域 -->
-    <VanGrid :border="false" :column-num="4" style="height: 70px">
+    <VanGrid :border="false" :column-num="5" style="height: 70px">
       <VanGridItem icon="star-o" style="height: 70px" text="收藏" @click="$router.push('/Favorite')"/>
       <VanGridItem icon="clock-o" style="height: 70px" text="历史记录" @click="$router.push('/History')"/>
-      <VanGridItem icon="logistics" style="height: 70px" text="待收货" @click="$router.push('')"/>
-      <VanGridItem icon="comment-o" style="height: 70px" text="待评价" @click="$router.push('')"/>
+      <VanGridItem icon="coupon-o" style="height: 70px" text="我的订单" @click="$router.push('/OrderManage?active=1')"/>
+      <VanGridItem icon="logistics" style="height: 70px" text="待收货" @click="$router.push('/OrderManage?active=3')"/>
+      <VanGridItem icon="comment-o" style="height: 70px" text="待评价" @click="$router.push('/OrderManage?active=4')"/>
     </VanGrid>
     <!-- 信息区域 -->
     <VanCellGroup>
