@@ -13,7 +13,7 @@ const state = new vuex.Store({
             tel: 15770742170,
             password: 114514
         },
-        order:{
+        order: {
             shopName: String,
             subIcon:String,
             commodityName:String,
@@ -32,8 +32,9 @@ const state = new vuex.Store({
         async doLogin() {
             const { $ } = await import("@/util/ajax");
             const params = new FormData();
-            params.append("username", this.state.user.tel);
-            params.append("password", this.state.user.password);
+            params.append("username", Vue.$cookies.get("username"));
+            params.append("password", Vue.$cookies.get("password"));
+            this.state.loginstate = true;
             return await $.post('/login', params);
         }
     },

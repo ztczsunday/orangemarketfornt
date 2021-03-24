@@ -2,9 +2,9 @@
 import axios from 'axios'
 
 const $ = axios.create({
-    baseURL: "/api",
+    baseURL: "/",
     timeout: 1000,
     withCredentials: false
 });
-
+axios.defaults.withCredentials = false;
 export { $ };

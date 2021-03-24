@@ -17,7 +17,7 @@
     <VanCellGroup>
       <VanCell is-link title="用户反馈"/>
       <ARow style="border: 10px solid #F5F5F5;"/>
-      <VanCell title="退出登录" style="text-align: center"/>
+      <VanCell title="退出登录" style="text-align: center" @click="logOut"/>
     </VanCellGroup>
   </div>
 </template>
@@ -41,11 +41,20 @@ export default {
         userEmail: "邮箱",
         userGender: "男",
         userLicense: "身份证",
-        userSelfie: "头像",
+        userSelfie: "",
         userSignature: "いいね！",
         userTelephone: "15770742170",
         username: "15770742170"
       }
+    }
+  },
+  methods: {
+    async logOut() {
+      const { $ } = await import("@/util/ajax");
+      this.$cookies.remove("username");
+      this.$cookies.remove("password");
+      await $.get("/logout");
+      await this.$router.push("/login");
     }
   }
 }
