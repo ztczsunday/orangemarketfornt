@@ -97,7 +97,10 @@ export default {
           Toast("你已经有一个商店了")
         }
         else{
-          Toast("商店创建成功")
+          Toast("商店创建成功");
+          await this.$router.push({
+            name:'个人信息'
+          });
         }
       }
     },

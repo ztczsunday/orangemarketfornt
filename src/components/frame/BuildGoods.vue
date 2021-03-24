@@ -242,7 +242,17 @@ export default {
           "subCommodity": this.postList
         }
         const result = await $.post('/commodity', test, config);
-        console.log(result);
+        if(result.data.success){
+          Toast("创建成功");
+          await this.$router.push(
+              {
+                name:'商铺管理',
+              }
+          )
+        }
+        else{
+          Toast("创建失败");
+        }
       }
     },
     onFinish({ selectedOptions }) {

@@ -52,6 +52,8 @@
             </template>
           </VanCard>
         </ARow>
+        <van-button icon="plus" type="primary" round style="position: fixed; bottom: 20px; margin-left: 80%"
+                    @click="toBuild"/>
       </van-list>
     </van-tab>
     <VanTab title="下架商品">
@@ -76,6 +78,8 @@
             </template>
           </VanCard>
         </ARow>
+        <van-button icon="plus" type="primary" round style="position: fixed; bottom: 20px; margin-left: 80%"
+                    @click="toBuild"/>
       </van-list>
     </VanTab>
     <van-popup v-model="show" position="bottom" style="height:70%" closeable>
@@ -168,6 +172,11 @@ export default {
         Toast("上架失败");
       }
 
+    },
+    toBuild(){
+      this.$router.push({
+        name:'新建商品',
+      })
     },
     reload(){
       this.list = [];
